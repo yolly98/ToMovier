@@ -1,17 +1,31 @@
 import logo from '../../images/logo.png'
+import search from '../../images/search.png'
+import filter from '../../images/filter.png'
+import exit from '../../images/exit.png'
+
 import '../style/Navbar.css'
 function Navbar(){
     return(
-        <nav className="navbar bg-dark">
-        <div className="container-fluid">
-          <p className="navbar-brand">
-            <img id="logo" src={logo} className="d-inline-block align-text-center"/>
-            <span style={{color: "white", paddingLeft: "1rem", fontSize: "1.8rem"}}>ToMovier</span>
-          </p>
+      <nav id="nav">
+        <div id="container1">
+          
           <div>
-            <label>Bentornato yolly98</label>
-            <img id="logo" src={logo} className="d-inline-block align-text-center"/>
+            <img id="img-logo" src={logo}/>
+            <label id="name">ToMovier</label>
           </div>
+
+          <div id="container2">
+            <div>
+              <label style={{color: "white"}}>Bentornato yolly98</label>
+              <img id="img-exit" src={exit} />
+            </div>
+            <div>
+              <input id="search-input" />
+              <img id="img-search" src={search} />
+              <img id="img-filter" src={filter} />
+            </div>
+          </div>
+
         </div>
       </nav>
     );
