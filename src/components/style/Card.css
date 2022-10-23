@@ -1,0 +1,92 @@
+.card-header{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+}
+
+.card-identifier{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-body{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    padding: 0.3rem;
+}
+
+.card-footer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    padding: 0.3rem;
+}
+
+.image-card{
+    max-width: 13rem;
+    max-height: 18rem;
+}
+
+.img-iswatched{
+    width: 2rem;
+}
+
+.img-delete{
+    width: 2rem;
+    cursor: pointer;
+}
+
+.img-isfilm{
+    width: 2rem;
+}
+
+.img-star{
+    width: 2rem;
+}
+
+.img-isfavorited{
+    width: 2rem;
+}
+
+.img-platform{
+    width: 1.5rem;
+}
+
+.card-rate{
+    color: white;
+    font-weight: bold;
+    font-size: 0.8rem;
+}
+
+.card-title{
+    color: white;
+    font-weight: bold;
+    margin-top: 0.2rem;
+    font-size: 1.2rem;
+}
+
+.button-open{
+
+    color: #2a5a76;
+    border: 0.2rem solid #2a5a76;
+    border-radius: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    background-color: #bdcbdd;
+    cursor: pointer;
+}
+
+.button-open:active{
+    border-color: #bdcbdd;
+    color: #bdcbdd;
+    background-color: #2a5a76;
+}
