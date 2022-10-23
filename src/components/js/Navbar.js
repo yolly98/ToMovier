@@ -15,12 +15,12 @@ function Navbar(){
           </div>
 
           <div id="container2">
-            <div>
+            <div style={{display: 'flex', flexWrap: 'nowrap', alignItems: 'center'}}>
               <label style={{color: "white"}}>Bentornato yolly98</label>
-              <img id="img-exit" src={exit} />
+             <img id="img-exit" src={exit} />
             </div>
-            <div>
-              <input id="search-input" />
+            <div style={{marginBottom: '0.5rem', display: 'flex', flexWrap: 'nowrap', alignItems: 'center'}}>
+              <input id="input-search" />
               <img id="img-search" src={search} />
               <img id="img-filter" src={filter} />
             </div>

@@ -4,6 +4,7 @@
 
 #nav{
     background-color: #2a5a76;
+    margin-bottom: 1rem;
 }
 
 #name{
@@ -26,4 +27,50 @@
     flex-direction: column;
     align-items: flex-end;
     justify-content: space-between;
+}
+
+#img-exit{
+    width: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    cursor: pointer;
+}
+
+#img-search{
+    width: 2.5rem;
+    margin-left: 0.5rem;
+    margin-right: 1rem;
+    cursor: pointer;
+}
+
+#img-filter{
+    width: 3rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    cursor: pointer;
+}
+
+#input-search{
+    background-color: #6b8ea2;
+    border-radius: 0.5rem;
+    border: 0 transparent;
+    height: 2rem;
+    width: 15rem;
+    z-index: 2;
+    color: white;
+}
+
+#input-search:active{
+    border: 0 transparent;
+}
+
+
+.botton-icon{
+    border-radius: 0.5rem;
+    background-color: #2a5a76;
+    z-index: 1;
+}
+
+.botton-icon:hover{
+    background-color: #6b8ea2;
 }
