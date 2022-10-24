@@ -8,7 +8,7 @@ class Card extends Component{
     render(){
         return(
             <div className="col">
-                <div className="card" style={{backgroundColor: '#2a5a76', width: '17rem', padding: '0.5rem', marginTop: '2rem'}}>
+                <div className="card" style={{backgroundColor: '#2a5a76', width: '15rem', padding: '0 0.5rem', marginTop: '2rem'}}>
                     <div className="card-header" style={{padding: '0.3rem', border: '0'}}>
                         <img className="img-iswatched" src={this.props.card.isWatched} alt="..."/>
                         <img className="img-delete" src={cross} alt="..." onClick={() => this.props.onDeleteCard(this.props.card.name)}/>

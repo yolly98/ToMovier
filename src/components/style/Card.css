@@ -1,8 +1,10 @@
 .card-header{
+    position:absolute;
     display: flex;
     justify-content: space-between;
     flex-direction: row;
     align-items: center;
+    width: 14rem;
 }
 
 .card-identifier{
@@ -32,8 +34,10 @@
 }
 
 .image-card{
+    margin-top: 1.5rem;
     max-width: 13rem;
-    max-height: 18rem;
+    height: 15rem;
+    border-radius: 0.5rem;
 }
 
 .img-iswatched{
@@ -70,8 +74,9 @@
 .card-title{
     color: white;
     font-weight: bold;
-    margin-top: 0.2rem;
-    font-size: 1.2rem;
+    margin: 0;
+    margin-top: 0.3rem;
+    font-size: 1.1rem;
 }
 
 .button-open{
