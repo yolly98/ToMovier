@@ -19,7 +19,7 @@ class Navbar extends Component{
 
           <div id="container2">
             <div style={{display: 'flex', flexWrap: 'nowrap', alignItems: 'center'}}>
-              <label style={{color: "white"}}>{this.props.user}</label>
+              <label style={{color: "white"}}>Bentornato {this.props.user}</label>
               <img id="img-exit" src={exit}  onClick={() => this.props.onExit()}/>
             </div>
             <div style={{marginBottom: '0.5rem', display: 'flex', flexWrap: 'nowrap', alignItems: 'center'}}>

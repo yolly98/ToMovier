@@ -3,6 +3,7 @@ import './App.css'
 
 import Navbar from './components/js/Navbar';
 import Card from './components/js/Card';
+import Login from './components/js/Login';
 
 import favorited from './images/favorited.png'
 import film from './images/film.png'
@@ -15,7 +16,8 @@ let coraline = 'http://1.bp.blogspot.com/-r4taLNcpLCc/TmyjQw8ZTfI/AAAAAAAAA04/DY
 class App extends Component{
 
   state = {
-    user: "Bentornato yolly98",
+    user: "yolly98",
+    password: "",
     cards: [
       {id:0, name: "Coraline", image: coraline, isFavorited: favorited, isFilm: film, isWatched: watched, platform: netflix, rate: '9/10'},
       {id:1, name: "Coraline", image: coraline, isFavorited: favorited, isFilm: film, isWatched: watched, platform: netflix, rate: '9/10'},
@@ -32,8 +34,22 @@ class App extends Component{
     ]
   }
 
+  handleLogin(user, password){
+    console.log("login (" + user + ", " + password + ")");
+    document.getElementById('login-page').style.display = 'none';
+    document.getElementsByTagName('body')[0].style.overflow = 'auto';
+  }
+
+  handleSignup(user, password){
+    console.log("login (" + user + ", " + password + ")");
+    document.getElementById('login-page').style.display = 'none';
+    document.getElementsByTagName('body')[0].style.overflow = 'auto';
+  }
+
   handleExit(){
     console.log("exit button pressed");
+    document.getElementById('login-page').style.display = 'flex';
+    document.getElementsByTagName('body')[0].style.overflow = 'hidden';
   }
 
   handlefilter(){
@@ -55,6 +71,10 @@ class App extends Component{
   render(){
     return (
       <>
+        <Login
+          onLogin = {this.handleLogin}
+          onSignup = {this.handleSignup}
+        />
         <Navbar 
           user = {this.state.user}
           onExit = {this.handleExit}
