@@ -1,0 +1,41 @@
+#filter-section{
+    background-color: #4283a9;
+    width:100%
+}
+
+label{
+    color:white;
+    margin-bottom: 0.5rem;
+
+}
+
+
+input{
+    background-color: #6b8ea2;
+    border-radius: 0.5rem;
+    border: 0 transparent;
+    height: 2rem;
+    width: 15rem;
+    color: white;
+    font-size: 1rem;
+}
+
+input:active{
+    border: 0 transparent;
+}
+
+button{
+    color: #2a5a76;
+    border: 0.2rem solid #2a5a76;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #bdcbdd;
+    cursor: pointer;
+}
+
+button:active{
+    border-color: #bdcbdd;
+    color: #bdcbdd;
+    background-color: #2a5a76;
+}

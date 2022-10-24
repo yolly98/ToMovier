@@ -4,6 +4,7 @@ import './App.css'
 import Navbar from './components/js/Navbar';
 import Card from './components/js/Card';
 import Login from './components/js/Login';
+import Filter from './components/js/Filter';
 
 import favorited from './images/favorited.png'
 import film from './images/film.png'
@@ -81,6 +82,7 @@ class App extends Component{
           onSearch = {this.handleSearch}
           onFilter = {this.handlefilter}
         />
+        <Filter />
         <div className='container'>
           <div className='row'>
             {
