@@ -1,0 +1,44 @@
+#item-section{
+    z-index: 3;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: fixed;
+    top: 8rem;
+    display: none;
+}
+
+.item-label{
+    margin: 0;
+}
+
+.item-text{
+    background-color: #bdcbdd;
+    border-radius: 0.5rem;
+    border: 0 transparent;
+    height: 2rem;
+    width: 15rem;
+    color: white;
+    font-size: 1rem;
+}
+
+.item-text:active{
+    border: 0 transparent;
+}
+
+.item-button{
+    color: #2a5a76;
+    border: 0.2rem solid #2a5a76;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #bdcbdd;
+    cursor: pointer;
+}
+
+.item-button:active{
+    border-color: #bdcbdd;
+    color: #bdcbdd;
+    background-color: #2a5a76;
+}

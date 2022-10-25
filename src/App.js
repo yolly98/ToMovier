@@ -5,6 +5,7 @@ import Navbar from './components/js/Navbar';
 import Card from './components/js/Card';
 import Login from './components/js/Login';
 import Filter from './components/js/Filter';
+import ItemMenu from './components/js/ItemMenu';
 
 import favorite from './images/favorite.png'
 import film from './images/film.png'
@@ -39,18 +40,21 @@ class App extends Component{
     console.log("login (" + user + ", " + password + ")");
     document.getElementById('login-page').style.display = 'none';
     document.getElementsByTagName('body')[0].style.overflow = 'auto';
+    document.getElementById('blocker').style.display = 'none';
   }
 
   handleSignup(user, password){
     console.log("login (" + user + ", " + password + ")");
     document.getElementById('login-page').style.display = 'none';
     document.getElementsByTagName('body')[0].style.overflow = 'auto';
+    document.getElementById('blocker').style.display = 'none';
   }
 
   handleExit(){
     console.log("exit button pressed");
     document.getElementById('login-page').style.display = 'flex';
     document.getElementsByTagName('body')[0].style.overflow = 'hidden';
+    document.getElementById('blocker').style.display = 'block';
   }
 
   handlefilter(){
@@ -68,6 +72,9 @@ class App extends Component{
 
   handleOpenCard = cardName => {
     console.log("open button pressed [" + cardName + "]");
+    document.getElementById('item-section').style.display = 'flex';
+    document.getElementsByTagName('body')[0].style.overflow = 'hidden';
+    document.getElementById('blocker').style.display = 'block';
   }
 
   handleDeleteCard = cardName => {
@@ -77,6 +84,7 @@ class App extends Component{
   render(){
     return (
       <>
+        <div id="blocker" style={{width: '100%', height: '100%', backgroundColor: 'black', opacity: '0.4', position: 'fixed', top: '0', zIndex: '2'}}></div>
         <Login
           onLogin = {this.handleLogin}
           onSignup = {this.handleSignup}
@@ -88,6 +96,7 @@ class App extends Component{
           onFilter = {this.handlefilter}
         />
         <Filter />
+        <ItemMenu />
         <div className='container'>
           <div className='row'>
             {
