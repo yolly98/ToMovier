@@ -38,7 +38,7 @@ class Card extends Component{
                         <img src={cross} style={{width: '1.5rem', cursor: 'pointer'}} onClick={()=>this.onCancel()}/>
                     </div>
                     <div style={{width: '100%', display: 'flex', flexDirection: 'row', alignItems: 'flex-start', marginTop: '1.5rem'}}>
-                        <img src={coraline} style={{height: '15rem', marginRight: '2rem'}}/>
+                        <img src={coraline} style={{height: '15rem', marginRight: '2rem', borderRadius: '0.5rem'}}/>
                         <div>
                             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: '1.5rem'}}>
                                 <label className="item-label" style={{marginRight: '1rem'}}>Titolo</label>
