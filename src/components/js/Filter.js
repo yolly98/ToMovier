@@ -27,52 +27,52 @@ class Login extends Component{
             <label>ORDINA PER</label>
             <div style={{display: 'flex', flexWrap: 'nowrap', flexDirection: 'row', alignItems: 'center'}}>
                 <div style={{display: 'flex', alignItems: 'center'}}>
-                    <label>Nome A-Z</label>
-                    <input type="radio" name="ordering" value="nameAZ"/>
+                    <label className="filter-label">Nome A-Z</label>
+                    <input className="filter-radio" type="radio" name="ordering" value="nameAZ"/>
                 </div>
                 <div style={{display: 'flex', alignItems: 'center'}}>
-                    <label>Nome Z-A</label>
-                    <input type="radio" name="ordering" value="nameZA"/>
+                    <label className="filter-label">Nome Z-A</label>
+                    <input className="filter-radio" type="radio" name="ordering" value="nameZA"/>
                 </div>
                 <div style={{display: 'flex', alignItems: 'center'}}>
-                    <label>Voto 10-0</label>
-                    <input type="radio" name="ordering" value="voto100"/>
+                    <label className="filter-label">Voto 10-0</label>
+                    <input className="filter-radio" type="radio" name="ordering" value="voto100"/>
                 </div>
                 <div style={{display: 'flex', alignItems: 'center'}}>
-                    <label>Voto 0-10</label>
-                    <input type="radio" name="ordering" value="voto010"/>
+                    <label className="filter-label">Voto 0-10</label>
+                    <input className="filter-radio" type="radio" name="ordering" value="voto010"/>
                 </div>
             </div>
             <label>GENERE</label>
-            <input type="text"/>
-            <div>
-                <div>
-                    <label>Preferito:</label>
-                    <img src={notfavorited}/>
+            <input className="filter-text" type="text"/>
+            <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+                <div style={{marginTop: '2rem'}}>
+                    <label className="filter-label">Preferito:</label>
+                    <img style={{width: '1.5rem', margin: '0 2rem 0 0.5rem'}} src={notfavorited}/>
                 </div>
-                <div>
-                    <label>Preferito:</label>
-                    <img src={watched}/>
-                    <img src={watching}/>
-                    <img src={towatch}/>
+                <div style={{marginTop: '2rem'}}>
+                    <label className="filter-label">Visto:</label>
+                    <img style={{width: '1.5rem', margin: '0 0.5rem 0 0.5rem'}} src={watched}/>
+                    <img style={{width: '1.5rem', margin: '0'}} src={watching}/>
+                    <img style={{width: '1.5rem', margin: '0 2rem 0 0.5rem'}} src={towatch}/>
                 </div>
-                <div>
-                    <label>Preferito:</label>
-                    <img src={series}/>
-                    <img src={film}/>
+                <div style={{marginTop: '2rem'}}>
+                    <label className="filter-label">Serie/Film:</label>
+                    <img style={{width: '1.5rem', margin: '0 0.5rem 0 0.5rem'}} src={series}/>
+                    <img style={{width: '1.5rem', margin: '0 2rem 0 0'}} src={film}/>
                 </div>
             </div>
+            <label style={{marginTop: '2rem'}}>Platforms:</label>
             <div>
-                <button>FILTRA</button>
-                <button>ANNULLA FILTRI</button>
+                <img style={{width: '1.5rem', margin: '0 0.5rem'}} src={netflix}/>
+                <img style={{width: '1.5rem', margin: '0 0.5rem'}} src={netflix}/>
+                <img style={{width: '1.5rem', margin: '0 0.5rem'}} src={netflix}/>
+                <img style={{width: '1.5rem', margin: '0 0.5rem'}} src={netflix}/>
+                <img style={{width: '1.5rem', margin: '0 0.5rem'}} src={netflix}/>
             </div>
-            <label>Platforms:</label>
-            <div>
-                <img src={netflix}/>
-                <img src={netflix}/>
-                <img src={netflix}/>
-                <img src={netflix}/>
-                <img src={netflix}/>
+            <div style={{marginTop: '2rem', marginBottom: '2rem', width: '30%', display: 'flex', justifyContent: 'space-between'}}>
+                <button className="filter-button">FILTRA</button>
+                <button className="filter-button">ANNULLA FILTRI</button>
             </div>
             
         </div>

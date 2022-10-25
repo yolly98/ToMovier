@@ -3,14 +3,19 @@
     width:100%
 }
 
-label{
+.filter-label{
     color:white;
-    margin-bottom: 0.5rem;
-
+    margin:0
 }
 
+.filter-radio{
+    cursor: pointer;
+    width: 1rem;
+    margin: 0 2rem 0 0.5rem;
+    cursor: pointer;
+}
 
-input{
+.filter-text{
     background-color: #6b8ea2;
     border-radius: 0.5rem;
     border: 0 transparent;
@@ -20,11 +25,11 @@ input{
     font-size: 1rem;
 }
 
-input:active{
+.filter-text:active{
     border: 0 transparent;
 }
 
-button{
+.filter-button{
     color: #2a5a76;
     border: 0.2rem solid #2a5a76;
     border-radius: 0.5rem;
@@ -34,7 +39,7 @@ button{
     cursor: pointer;
 }
 
-button:active{
+.filter-button:active{
     border-color: #bdcbdd;
     color: #bdcbdd;
     background-color: #2a5a76;
