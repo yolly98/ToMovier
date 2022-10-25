@@ -55,6 +55,11 @@ class App extends Component{
 
   handlefilter(){
     console.log("filter button pressed");
+    let filter = document.getElementById('filter-section');
+    if(filter.style.display == 'none')
+      filter.style.display = 'flex'
+    else
+      filter.style.display = 'none';
   }
 
   handleSearch = inputText => {
