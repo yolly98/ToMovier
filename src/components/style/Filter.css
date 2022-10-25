@@ -44,3 +44,22 @@
     color: #bdcbdd;
     background-color: #2a5a76;
 }
+
+#filter-favorite,#filter-notfavorite, #filter-watched, #filter-watcing, #filter-towatch{
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+#filter-series, #filter-watched{
+    background-color: #bdcbdd;
+    border-radius: 0.2rem;
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+.filter-platform{
+    background-color: #bdcbdd;
+    border-radius: 0.2rem;
+    opacity: 0.5;
+    cursor: pointer;
+}

@@ -6,7 +6,7 @@ import Card from './components/js/Card';
 import Login from './components/js/Login';
 import Filter from './components/js/Filter';
 
-import favorited from './images/favorited.png'
+import favorite from './images/favorite.png'
 import film from './images/film.png'
 import netflix from './images/netflix.png'
 import watched from './images/watched.png'
@@ -20,17 +20,17 @@ class App extends Component{
     user: "yolly98",
     password: "",
     cards: [
-      {id:0, name: "Coraline", image: coraline, isFavorited: favorited, isFilm: film, isWatched: watched, platform: netflix, rate: '9/10'},
-      {id:1, name: "Coraline", image: coraline, isFavorited: favorited, isFilm: film, isWatched: watched, platform: netflix, rate: '9/10'},
-      {id:2, name: "Coraline", image: coraline, isFavorited: favorited, isFilm: film, isWatched: watched, platform: netflix, rate: '9/10'},
-      {id:3, name: "Coraline", image: coraline, isFavorited: favorited, isFilm: film, isWatched: watched, platform: netflix, rate: '9/10'},
-      {id:4, name: "Coraline", image: coraline, isFavorited: favorited, isFilm: film, isWatched: watched, platform: netflix, rate: '9/10'},
-      {id:5, name: "Coraline", image: coraline, isFavorited: favorited, isFilm: film, isWatched: watched, platform: netflix, rate: '9/10'},
-      {id:6, name: "Coraline", image: coraline, isFavorited: favorited, isFilm: film, isWatched: watched, platform: netflix, rate: '9/10'},
-      {id:7, name: "Coraline", image: coraline, isFavorited: favorited, isFilm: film, isWatched: watched, platform: netflix, rate: '9/10'},
-      {id:8, name: "Coraline", image: coraline, isFavorited: favorited, isFilm: film, isWatched: watched, platform: netflix, rate: '9/10'},
-      {id:9, name: "Coraline", image: coraline, isFavorited: favorited, isFilm: film, isWatched: watched, platform: netflix, rate: '9/10'},
-      {id:10, name: "Coraline", image: coraline, isFavorited: favorited, isFilm: film, isWatched: watched, platform: netflix, rate: '9/10'},
+      {id:0, name: "Coraline", image: coraline, isFavorited: favorite, isFilm: film, isWatched: watched, platform: netflix, rate: '9/10'},
+      {id:1, name: "Coraline", image: coraline, isFavorited: favorite, isFilm: film, isWatched: watched, platform: netflix, rate: '9/10'},
+      {id:2, name: "Coraline", image: coraline, isFavorited: favorite, isFilm: film, isWatched: watched, platform: netflix, rate: '9/10'},
+      {id:3, name: "Coraline", image: coraline, isFavorited: favorite, isFilm: film, isWatched: watched, platform: netflix, rate: '9/10'},
+      {id:4, name: "Coraline", image: coraline, isFavorited: favorite, isFilm: film, isWatched: watched, platform: netflix, rate: '9/10'},
+      {id:5, name: "Coraline", image: coraline, isFavorited: favorite, isFilm: film, isWatched: watched, platform: netflix, rate: '9/10'},
+      {id:6, name: "Coraline", image: coraline, isFavorited: favorite, isFilm: film, isWatched: watched, platform: netflix, rate: '9/10'},
+      {id:7, name: "Coraline", image: coraline, isFavorited: favorite, isFilm: film, isWatched: watched, platform: netflix, rate: '9/10'},
+      {id:8, name: "Coraline", image: coraline, isFavorited: favorite, isFilm: film, isWatched: watched, platform: netflix, rate: '9/10'},
+      {id:9, name: "Coraline", image: coraline, isFavorited: favorite, isFilm: film, isWatched: watched, platform: netflix, rate: '9/10'},
+      {id:10, name: "Coraline", image: coraline, isFavorited: favorite, isFilm: film, isWatched: watched, platform: netflix, rate: '9/10'},
       
     ]
   }

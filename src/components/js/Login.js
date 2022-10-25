@@ -7,10 +7,6 @@ import '../style/Navbar.css'
 
 class Login extends Component{
 
-  login(){
-    
-    ;
-  }
   render(){
     return(
         <div id="login-page">
