@@ -4,7 +4,7 @@ session_start();
     
 
     $user = $_SESSION['user'];
-    $json_item = json_encode(test($_POST['newItem']));
+    $json_item = json_decode(test($_POST['newItem']));
     
     $name = test($json_item['name']);
     $genere = test($json_item['genre']);

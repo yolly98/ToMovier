@@ -15,7 +15,6 @@ import add from './images/add.png'
 
 let coraline = 'http://1.bp.blogspot.com/-r4taLNcpLCc/TmyjQw8ZTfI/AAAAAAAAA04/DYQe0dEgfKg/s1600/coraline.jpg';
 
-
 class App extends Component{
 
   state = {
@@ -38,52 +37,57 @@ class App extends Component{
 
   handleLogin = (user, password) =>{
     console.log("login (" + user + ", " + password + ")");
-
-    let ajax = new XMLHttpRequest();
-    let result;
-    ajax.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            
-            result=this.responseText;
-            
-            if(result==0){   
+    let json_msg = {"user": user, "passw": password, "type": "login"};
+    let url = "http://localhost:80/backend/login.php";
+    let msg = "body=" + JSON.stringify(json_msg);
+    console.log(msg);
+    fetch(url, {
+        method : "POST",
+        headers: {
+            'Content-type': 'application/x-www-form-urlencoded',
+            'Accept': 'application/json'
+        },
+        body : msg
+    }).then(
+        response => response.json()
+    ).then(
+        html => {
+            console.log(html);
+            if (html.status == "SUCCESS") {
                 this.setState({user});
-                //downloadDati();
+            } else {
+              alert(html.msg);
             }
-            else
-                alert(result);
         }
-        else
-          alert(this.status)
-    };
-    ajax.open("POST", "./php/login.php", true);
-    ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    ajax.send("tipo="+"login"+"&user="+user+"&passw="+password);
+    );
+
   }
 
   handleSignup = (user, password) =>{
     console.log("login (" + user + ", " + password + ")");
-
-    let ajax = new XMLHttpRequest();
-    let result;
-    ajax.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            
-            result=this.responseText;
-           
-            if(result==0){
-                alert("sugnup success");
-                this.setState({user});
+    let json_msg = {"user": user, "passw": password, "type": "signup"};
+    let url = "http://localhost:80/backend/login.php";
+    let msg = "body=" + JSON.stringify(json_msg);
+    fetch(url, {
+      method : "POST",
+      headers: {
+        'Content-type': 'application/x-www-form-urlencoded',
+        'Accept': 'application/json'
+      },
+      body : msg
+    }).then(
+        response => response.json()
+    ).then(
+        html => {
+            if (html.status == "SUCCESS") {
+              alert("signup success");
+              this.setState({user});
             }
-            else
-                alert(result);
+            else {
+              alert(html.msg);
+            }      
         }
-        else
-          alert(this.status)
-    };
-    ajax.open("POST", "./php/login.php", true);
-    ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    ajax.send("tipo="+"signup"+"&user="+user+"&passw="+password);
+    );
   }
 
   handleExit = () =>{

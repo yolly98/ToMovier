@@ -1,21 +1,29 @@
 <?php
 
     session_start();
-    
-if($_POST['type']=='login'){
+    header("Access-Control-Allow-Origin: http://localhost:3000");
 
-    $user = test($_POST['user']);
-    $passw = test($_POST['passw']);
+    $body = json_decode($_POST['body']);
+
+if($body->type =='login'){
+
+    $user = test($body->user);
+    $passw = test($body->passw);
+    
+    if($user == "" || $passw == ""){
+        echo '{"status": "ERROR", "msg": "empty values"}';
+        return;
+    }
 
     $conn = mysqli_connect('localhost','toMovier_db','');
     if(!$conn){
-        echo "connection failed to mysql:".$conn->connect_error;
+        echo '{"status": "ERROR", "msg": "connection failed to mysql:'.$conn->connect_error.'"}';
         return;
     }
 
     $sql = "USE toMovier_db;";
     if(!$conn->query($sql)){
-        echo "connection failed to db";
+        echo '{"status": "ERROR", "msg": "connection failed to db"}';
         return;
     }
 
@@ -29,30 +37,34 @@ if($_POST['type']=='login'){
 
     if($result->num_rows>0){
         $_SESSION['user']=$user;
-        echo 0;
+        echo '{"status": "SUCCESS"}';
     }
     else{
-        echo "user name or password not correct";
+        echo '{"status": "ERROR", "msg": "user name or password not correct"}';
     }
 
     $conn->close();
 
 }
 
-if($_POST['type']=='reg'){
+if($body->type=='signup'){
 
-    $user = test($_POST['user']);
-    $passw = test($_POST['passw']);
+    $user = test($body->user);
+    $passw = test($body->passw);
 
+    if($user == "" || $passw == ""){
+        echo '{"status": "ERROR", "msg": "empty values"}';
+        return;
+    }
 
     $conn = mysqli_connect('localhost','toMovier_db','');
     if(!$conn){
-            echo "connection failed to mysql:".$conn->connect_error;
+        echo '{"status": "ERROR", "msg": "connection failed to mysql:'.$conn->connect_error.'"}';
     }
 
     $sql = "USE toMovier_db;";
     if(!$conn->query($sql)){
-        echo "connection failed to db";
+        echo '{"status": "ERROR", "msg": "connection failed to db"}';
     }
 
     $sql = "SELECT*from USER WHERE user LIKE BINARY ?";
@@ -69,10 +81,10 @@ if($_POST['type']=='reg'){
         $stmt->bind_param("ss",$user,$passw);
         $stmt->execute();
 
-        echo 0;
+        echo '{"status": "SUCCESS"}';
     }
     else{
-        echo "Username already exists";
+        echo '{"status": "ERROR", "msg": "Username already exists"}';
     }
 
     $conn->close();
