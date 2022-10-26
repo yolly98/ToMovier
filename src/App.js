@@ -48,11 +48,13 @@ class App extends Component{
             
             if(result==0){   
                 this.setState({user});
-                downloadDati();
+                //downloadDati();
             }
             else
                 alert(result);
         }
+        else
+          alert(this.status)
     };
     ajax.open("POST", "./php/login.php", true);
     ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -61,7 +63,7 @@ class App extends Component{
 
   handleSignup = (user, password) =>{
     console.log("login (" + user + ", " + password + ")");
-    
+
     let ajax = new XMLHttpRequest();
     let result;
     ajax.onreadystatechange = function() {
@@ -76,6 +78,8 @@ class App extends Component{
             else
                 alert(result);
         }
+        else
+          alert(this.status)
     };
     ajax.open("POST", "./php/login.php", true);
     ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
