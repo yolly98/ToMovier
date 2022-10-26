@@ -11,6 +11,7 @@ import favorite from './images/favorite.png'
 import film from './images/film.png'
 import netflix from './images/netflix.png'
 import watched from './images/watched.png'
+import add from './images/add.png'
 
 let coraline = 'http://1.bp.blogspot.com/-r4taLNcpLCc/TmyjQw8ZTfI/AAAAAAAAA04/DYQe0dEgfKg/s1600/coraline.jpg';
 
@@ -71,6 +72,13 @@ class App extends Component{
     document.getElementById('blocker').style.display = 'block';
   }
 
+  handleAddCard(){
+    console.log("add card pressed");
+    document.getElementById('item-section').style.display = 'flex';
+    document.getElementsByTagName('body')[0].style.overflow = 'hidden';
+    document.getElementById('blocker').style.display = 'block';
+  }
+
   handleDeleteCard = cardName => {
     console.log("delete button pressed [" + cardName + "]");
   }
@@ -84,7 +92,7 @@ class App extends Component{
     else{
       document.getElementsByTagName('body')[0].style.backgroundColor = "white";
       page = <>
-                <div id="blocker" style={{width: '100%', height: '100%', backgroundColor: 'black', opacity: '0.4', position: 'fixed', top: '0', zIndex: '2', display: "none"}}></div>
+                <div id="blocker" style={{width: '100%', height: '100%', backgroundColor: 'black', opacity: '0.4', position: 'fixed', top: '0', zIndex: '3', display: "none"}}></div>
                 <Navbar 
                   user = {this.state.user}
                   onExit = {this.handleExit}
@@ -92,6 +100,7 @@ class App extends Component{
                   onFilter = {this.handlefilter}
                 />
                 <Filter />
+                <img id="add-item" src={add} onClick={() => this.handleAddCard()} style={{position: "fixed", right: '1rem', width: '4rem', top: '15rem', cursor: 'pointer', zIndex: '2'}}/>
                 <ItemMenu />
                 <div className='container'>
                   <div className='row'>
