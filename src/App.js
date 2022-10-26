@@ -20,7 +20,6 @@ class App extends Component{
 
   state = {
     user: "",
-    password: "",
     cards: [
       {id:0, name: "Coraline", image: coraline, isFavorited: favorite, isFilm: film, isWatched: watched, platform: netflix, rate: '9/10'},
       {id:1, name: "Coraline", image: coraline, isFavorited: favorite, isFilm: film, isWatched: watched, platform: netflix, rate: '9/10'},
@@ -39,12 +38,48 @@ class App extends Component{
 
   handleLogin = (user, password) =>{
     console.log("login (" + user + ", " + password + ")");
-    this.setState({user});
+
+    let ajax = new XMLHttpRequest();
+    let result;
+    ajax.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            
+            result=this.responseText;
+            
+            if(result==0){   
+                this.setState({user});
+                downloadDati();
+            }
+            else
+                alert(result);
+        }
+    };
+    ajax.open("POST", "./php/login.php", true);
+    ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    ajax.send("tipo="+"login"+"&user="+user+"&passw="+password);
   }
 
   handleSignup = (user, password) =>{
     console.log("login (" + user + ", " + password + ")");
-    this.setState({user});
+    
+    let ajax = new XMLHttpRequest();
+    let result;
+    ajax.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            
+            result=this.responseText;
+           
+            if(result==0){
+                alert("sugnup success");
+                this.setState({user});
+            }
+            else
+                alert(result);
+        }
+    };
+    ajax.open("POST", "./php/login.php", true);
+    ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    ajax.send("tipo="+"signup"+"&user="+user+"&passw="+password);
   }
 
   handleExit = () =>{
