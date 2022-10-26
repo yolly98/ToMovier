@@ -1,18 +1,48 @@
 <?php
 
-    session_start();
-    $user = $_SESSION['user'];  
+    //session_start();
+    header("Access-Control-Allow-Origin: http://localhost:3000");
 
-    $conn = new mysqli('localhost','toMovier_db','');
-    if(!$conn){
-        echo("connection failed to mysql:".$conn->connect_error);
-    }    
-    $sql = "USE toMovier_db;";
-    if(!$conn->query($sql)){
-        echo "connection failed to db";
+    $IP_ADDR = '172.20.0.11';
+    $USER_DB = 'root';
+    $PASSW_DB = 'password';
+    $NAME_DB = 'toMovier_db';
+
+    /*if(!isset($_SESSION['user'])){
+        echo '{"status": "ERROR", "msg": "session not setted"}';
+        return;
+    }*/
+    //$user = $_SESSION['user'];  
+
+    $body = json_decode($_POST['body']);
+    $user = $body->user;
+    $passw = $body->passw;
+
+    if($body->type != "get-items"){
+        echo '{"status": "ERROR", "msg": "something went wrong"}';
         return;
     }
-    
+
+    $conn = new mysqli($IP_ADDR, $USER_DB, $PASSW_DB);
+    if(!$conn){
+        echo '{"status": "ERROR", "msg": "connection failed to mysql:'.$conn->connect_error.'"}';
+    }    
+    $sql = "USE ".$NAME_DB.";";
+    if(!$conn->query($sql)){
+        echo '{"status": "ERROR", "msg": "connection failed to db"}';
+        return;
+    }
+
+    $sql = "SELECT*from USER WHERE user LIKE BINARY ? and passw LIKE BINARY ?;";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ss",$user,$passw);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if($result->num_rows<=0){
+        echo '{"status": "ERROR", "msg": "something went wrong"}';
+        return;
+    }
 
     $sql = "SELECT*
         from FILM
@@ -23,26 +53,26 @@
     $stmt->execute();
     $result = $stmt->get_result();
 
-    $array_dati = array();
+    $array_data = array();
     if($result->num_rows>0){
         while($row = $result->fetch_assoc()){
             
-            array_push($array_dati,array());
-            array_push($array_dati[count($array_dati)-1],
-                $row['name'],
-                $row['genre'],
-                $row['rating'],
-                $row['favorite'],
-                $row['platform'],
-                $row['watched'],
-                $row['isFilm'],
-                $row['urlImage']
+            $newItem = array(
+                "name" => $row['name'],
+                "genre" => $row['genre'],
+                "rating" => $row['rating'],
+                "favorite" => $row['favorite'],
+                "platform" => $row['platform'],
+                "watched" => $row['watched'],
+                "isFilm" => $row['isFilm'],
+                "urlImage" => $row['urlImage']
             );
+            array_push($array_data,$newItem);
         }
-        echo json_encode($array_dati);
+        echo '{"status": "SUCCESS", "msg": '.json_encode($array_data).'}';
     }
     else
-        echo -1;
+        echo '{"status": "ERROR", "msg": "no elements saved"}';
 
     $conn->close(); 
 

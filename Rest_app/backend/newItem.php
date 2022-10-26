@@ -1,46 +1,54 @@
 <?php
 
+$IP_ADDR = '172.20.0.11';
+$USER_DB = 'root';
+$PASSW_DB = 'password';
+
 session_start();
-    
+header("Access-Control-Allow-Origin: http://localhost:3000");
 
-    $user = $_SESSION['user'];
-    $json_item = json_decode(test($_POST['newItem']));
-    
-    $name = test($json_item['name']);
-    $genere = test($json_item['genre']);
-    $platform = test($json_item['platform']);
-    $watched = test($json_item['watched']);
-    $isFilm = test($json_item['isFilm']);
-    $favorite = test($json_item['favorite']);
-    $rating = test($json_item['rating']);
-    $url = test($json_item['urlImage']);
+$body = json_decode($_POST['body']);
 
-    $conn = mysqli_connect('localhost','toMovier_db','');
-    if(!$conn){
-        echo "connection failed to mysql:".$conn->connect_error;
-        return;
-    }
+/*
+$user = $_SESSION['user'];
+$json_item = json_decode(test($_POST['newItem']));
 
-    $sql = "USE toMovier_db;";
-    if(!$conn->query($sql)){
-        echo "connection failed to db";
-        return;
-    }
+$name = test($json_item['name']);
+$genere = test($json_item['genre']);
+$platform = test($json_item['platform']);
+$watched = test($json_item['watched']);
+$isFilm = test($json_item['isFilm']);
+$favorite = test($json_item['favorite']);
+$rating = test($json_item['rating']);
+$url = test($json_item['urlImage']);
 
-    $sql = "INSERT INTO FILM VALUES(?,?,?,?,?,?,?,?,?,?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssssssssss", 0, $name, $genre, $rating, $favorite, $platform, $watched, $isFilm, $user, $urlImage);
-    $stmt->execute();
-    echo 'ok';
+$conn = mysqli_connect('localhost','toMovier_db','');
+if(!$conn){
+    echo "connection failed to mysql:".$conn->connect_error;
+    return;
+}
 
-    $conn->close();
+$sql = "USE toMovier_db;";
+if(!$conn->query($sql)){
+    echo "connection failed to db";
+    return;
+}
 
-    function test($data){
+$sql = "INSERT INTO FILM VALUES(?,?,?,?,?,?,?,?,?,?)";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("ssssssssss", 0, $name, $genre, $rating, $favorite, $platform, $watched, $isFilm, $user, $urlImage);
+$stmt->execute();
+echo 'ok';
 
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
-    }
+$conn->close();
 
+function test($data){
+
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
+
+*/
 ?>
