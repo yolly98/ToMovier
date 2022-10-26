@@ -18,7 +18,7 @@ let coraline = 'http://1.bp.blogspot.com/-r4taLNcpLCc/TmyjQw8ZTfI/AAAAAAAAA04/DY
 class App extends Component{
 
   state = {
-    user: "yolly98",
+    user: "",
     password: "",
     cards: [
       {id:0, name: "Coraline", image: coraline, isFavorited: favorite, isFilm: film, isWatched: watched, platform: netflix, rate: '9/10'},
@@ -36,25 +36,19 @@ class App extends Component{
     ]
   }
 
-  handleLogin(user, password){
+  handleLogin = (user, password) =>{
     console.log("login (" + user + ", " + password + ")");
-    document.getElementById('login-page').style.display = 'none';
-    document.getElementsByTagName('body')[0].style.overflow = 'auto';
-    document.getElementById('blocker').style.display = 'none';
+    this.setState({user});
   }
 
-  handleSignup(user, password){
+  handleSignup = (user, password) =>{
     console.log("login (" + user + ", " + password + ")");
-    document.getElementById('login-page').style.display = 'none';
-    document.getElementsByTagName('body')[0].style.overflow = 'auto';
-    document.getElementById('blocker').style.display = 'none';
+    this.setState({user});
   }
 
-  handleExit(){
+  handleExit = () =>{
     console.log("exit button pressed");
-    document.getElementById('login-page').style.display = 'flex';
-    document.getElementsByTagName('body')[0].style.overflow = 'hidden';
-    document.getElementById('blocker').style.display = 'block';
+    this.setState({user: ""});
   }
 
   handlefilter(){
@@ -82,36 +76,43 @@ class App extends Component{
   }
 
   render(){
-    return (
-      <>
-        <div id="blocker" style={{width: '100%', height: '100%', backgroundColor: 'black', opacity: '0.4', position: 'fixed', top: '0', zIndex: '2'}}></div>
-        <Login
-          onLogin = {this.handleLogin}
-          onSignup = {this.handleSignup}
-        />
-        <Navbar 
-          user = {this.state.user}
-          onExit = {this.handleExit}
-          onSearch = {this.handleSearch}
-          onFilter = {this.handlefilter}
-        />
-        <Filter />
-        <ItemMenu />
-        <div className='container'>
-          <div className='row'>
-            {
-              this.state.cards.map(card => (
-                <Card
-                  key = {card.id}
-                  onOpenCard = {this.handleOpenCard}
-                  onDeleteCard = {this.handleDeleteCard}
-                  card = {card}
+    let page;
+    if(this.state.user == ""){
+      page = <Login onLogin = {this.handleLogin} onSignup = {this.handleSignup} />
+      document.getElementsByTagName('body')[0].style.backgroundColor = "#2a5a76";
+    }
+    else{
+      document.getElementsByTagName('body')[0].style.backgroundColor = "white";
+      page = <>
+                <div id="blocker" style={{width: '100%', height: '100%', backgroundColor: 'black', opacity: '0.4', position: 'fixed', top: '0', zIndex: '2', display: "none"}}></div>
+                <Navbar 
+                  user = {this.state.user}
+                  onExit = {this.handleExit}
+                  onSearch = {this.handleSearch}
+                  onFilter = {this.handlefilter}
                 />
-              ))
-            }
-          </div>
-        </div>
-      </>
+                <Filter />
+                <ItemMenu />
+                <div className='container'>
+                  <div className='row'>
+                    {
+                      this.state.cards.map(card => (
+                        <Card
+                          key = {card.id}
+                          onOpenCard = {this.handleOpenCard}
+                          onDeleteCard = {this.handleDeleteCard}
+                          card = {card}
+                        />
+                      ))
+                    }
+                  </div>
+                </div>
+              </>
+    }
+    return (
+      <div id="main-page">
+        {page}
+      </div>
     );
   }
 }
