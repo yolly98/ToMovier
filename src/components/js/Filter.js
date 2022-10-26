@@ -15,7 +15,7 @@ import netflix from '../../images/netflix.png'
 
 import '../style/Navbar.css'
 
-class Login extends Component{
+class Filter extends Component{
 
   state = {
     favorite: false,
@@ -186,7 +186,7 @@ class Login extends Component{
                 </div>
             </div>
             <label style={{marginTop: '2rem'}}>Platforms:</label>
-            <div>
+            <div style={{overflow: "auto"}}>
                 {
                     this.state.platforms.map(plat => (
                         <img 
@@ -211,4 +211,4 @@ class Login extends Component{
   }
 }
 
-export default Login;
+export default Filter;

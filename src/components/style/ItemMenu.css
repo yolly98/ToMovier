@@ -21,6 +21,7 @@
     width: 15rem;
     color: white;
     font-size: 1rem;
+    color: #2a5a76;
 }
 
 .item-text:active{
@@ -41,4 +42,22 @@
     border-color: #bdcbdd;
     color: #bdcbdd;
     background-color: #2a5a76;
+}
+
+.item-star{
+    cursor: pointer;
+}
+
+#item-favorite, #item-watched, #item-watching, #item-towatch, #item-series, #item-film{
+    cursor: pointer;
+}
+
+#item-watched, #item-watching, #item-towatch, #item-series, #item-film{
+    cursor: pointer;
+    opacity: 0.5;
+}
+
+#item-series, #item-film{
+    background-color: #bdcbdd;
+    border-radius: 0.2rem;
 }
