@@ -1,26 +1,31 @@
 <?php
 
+    $IP_ADDR = '172.20.0.11';
+    $USER_DB = 'root';
+    $PASSW_DB = 'password';
+
     session_start();
     header("Access-Control-Allow-Origin: http://localhost:3000");
 
     $body = json_decode($_POST['body']);
 
 if($body->type =='login'){
-
+    
     $user = test($body->user);
     $passw = test($body->passw);
+    
     
     if($user == "" || $passw == ""){
         echo '{"status": "ERROR", "msg": "empty values"}';
         return;
     }
-
-    $conn = mysqli_connect('localhost','toMovier_db','');
+    
+    $conn = mysqli_connect($IP_ADDR, $USER_DB, $PASSW_DB);
     if(!$conn){
-        echo '{"status": "ERROR", "msg": "connection failed to mysql:'.$conn->connect_error.'"}';
+        echo '{"status": "ERROR", "msg": "connection failed to mysql '.$conn->connect_error.'"}';
         return;
     }
-
+    
     $sql = "USE toMovier_db;";
     if(!$conn->query($sql)){
         echo '{"status": "ERROR", "msg": "connection failed to db"}';
@@ -42,9 +47,9 @@ if($body->type =='login'){
     else{
         echo '{"status": "ERROR", "msg": "user name or password not correct"}';
     }
-
+    
     $conn->close();
-
+    
 }
 
 if($body->type=='signup'){
@@ -57,7 +62,7 @@ if($body->type=='signup'){
         return;
     }
 
-    $conn = mysqli_connect('localhost','toMovier_db','');
+    $conn = mysqli_connect($IP_ADDR, $USER_DB, $PASSW_DB);
     if(!$conn){
         echo '{"status": "ERROR", "msg": "connection failed to mysql:'.$conn->connect_error.'"}';
     }

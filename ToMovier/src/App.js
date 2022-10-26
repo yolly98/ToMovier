@@ -76,7 +76,7 @@ class App extends Component{
       },
       body : msg
     }).then(
-        response => response.json()
+      response => response.json()
     ).then(
         html => {
             if (html.status == "SUCCESS") {
