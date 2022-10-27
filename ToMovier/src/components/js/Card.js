@@ -12,7 +12,7 @@ class Card extends Component{
                 <div className="card" style={{backgroundColor: '#2a5a76', width: '15rem', padding: '0 0.5rem', marginTop: '2rem'}}>
                     <div className="card-header" style={{padding: '0.3rem', border: '0'}}>
                         <img className="img-iswatched" src={this.props.card.isWatched} alt="..."/>
-                        <img className="img-delete" src={cross} alt="..." onClick={() => this.props.onDeleteCard(this.props.card.name)}/>
+                        <img className="img-delete" src={cross} alt="..." onClick={() => this.props.onDeleteCard(this.props.card)}/>
                     </div>
                     <div className="card-identifier" style={{padding: '0.3rem', border: '0'}}>
                         <img className="image-card" src={this.props.card.image} alt="..." />

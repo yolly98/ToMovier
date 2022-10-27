@@ -81,7 +81,7 @@
         $stmt->execute();
         $result = $stmt->get_result();
         if($result->num_rows<=0){
-            echo '{"status": "ERROR", "msg": "something went wrong 2"}';
+            echo '{"status": "ERROR", "msg": "something went wrong"}';
             $conn->close();
             return;
         }
@@ -95,7 +95,7 @@
     else{
         //update the item
         $sql="UPDATE FILM SET 
-            name=?,genre=?,rating=?,favorite=?,platform=?,watched=?,isFilm=?, urlImage=? where id LIKE BINARY ?";
+            name=?,genre=?,rating=?,favorite=?,platform=?,watched=?,isFilm=?, urlImage=? WHERE id LIKE BINARY ?";
         $stmt=$conn->prepare($sql);
         $stmt->bind_param("ssssssssi",$name, $genre, $rating, $favorite, $platform, $watched, $isFilm, $urlImage, $id);
         $stmt->execute();

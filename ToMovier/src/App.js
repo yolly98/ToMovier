@@ -208,8 +208,36 @@ class App extends Component{
     document.getElementById('blocker').style.display = 'block';
   }
 
-  handleDeleteCard = cardName => {
-    console.log("delete button pressed [" + cardName + "]");
+  handleDeleteCard = card => {
+    console.log("delete button pressed [" + card.name + "]");
+    //html request
+    let json_msg = {};
+    json_msg.user = this.state.user;
+    json_msg.passw = this.state.password;
+    json_msg.id = card.id;
+    //console.log(json_msg);
+    let url = "http://localhost:80/backend/removeItem.php";
+    let msg = "body=" + JSON.stringify(json_msg);
+    fetch(url, {
+        method : "POST",
+        headers: {
+            'Content-type': 'application/x-www-form-urlencoded',
+            'Accept': 'application/json'
+        },
+        body : msg
+    }).then(
+        response => response.json()
+    ).then(
+        html => {
+            if (html.status == "SUCCESS") {
+              let cards = [...this.state.cards];
+              cards.splice(cards.indexOf(card),1);
+              this.setState({cards});
+            } else {
+              alert(html.msg);
+            }
+        }
+    );
   }
 
   handleItemCancel = () => {
