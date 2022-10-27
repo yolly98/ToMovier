@@ -11,8 +11,6 @@ import favorite from '../../images/favorite.png'
 import notfavorite from '../../images/notfavorite.png'
 import film from '../../images/film.png'
 import series from '../../images/series.png'
-import netflix from '../../images/netflix.png'
-import noPlat from '../../images/noPlat.png'
 import emptyFilm from '../../images/emptyFilm.jpg'
 
 class ItemMenu extends Component{
@@ -26,13 +24,12 @@ class ItemMenu extends Component{
         watch: "towatch",
         type: "series",
         url: "none",
-        platforms: [
-            {id: 0, name: "item-plat-netflix", image: netflix, state: false},
-            {id: 1, name: "item-plat-noplat", image: noPlat, state: false}
-        ]
+        platforms: this.props.platforms
     }
 
     componentDidMount(){
+
+        let platforms = this.state.platforms;
         let item = this.props.card;
         if(!item.hasOwnProperty("name"))
             return;
@@ -90,8 +87,7 @@ class ItemMenu extends Component{
             document.getElementById('item-film').style.opacity = 0.5;
         }
 
-        const platforms = [...this.state.platforms];
-        for(let i = 0; i < this.state.platforms.length; i++){
+        for(let i = 0; i < platforms.length; i++){
             if(platforms[i].image == item.platform){
                 platforms[i].state = true;
                 document.getElementById(platforms[i].name).style.opacity = 1;
@@ -108,10 +104,10 @@ class ItemMenu extends Component{
             genre: genre_, 
             rating: rate_, 
             favorite: favorite_,
-             watch: watch_, 
-             type: type_, 
-             url: url_, 
-             platforms
+            watch: watch_, 
+            type: type_, 
+            url: url_, 
+            platforms
         });
 
     }
@@ -248,14 +244,14 @@ class ItemMenu extends Component{
                         <label className="item-label">URL image</label>
                         <input id="item-url" className='item-text' type="text" style={{marginBottom: '1.5rem'}}/>
                         <label className="item-label">Piattaforma</label>
-                        <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', backgroundColor: '#bdcbdd', borderRadius: '0.5rem', padding: '0.5rem', width: '90%', overflow: 'auto'}}>
+                        <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', backgroundColor: '#bdcbdd', borderRadius: '0.5rem', padding: '0.5rem', width: '90%', overflow: 'auto', alignItems: 'center'}}>
                             {
                                 this.state.platforms.map(plat => (
                                     <img 
                                         key = {plat.id}
                                         id = {plat.name}
                                         className="item-platform" 
-                                        style={{width: '1.5rem', margin: '0 0.5rem', opacity: '0.5', cursor: 'pointer'}} 
+                                        style={{height: '2.8rem', margin: '0 0.5rem', opacity: '0.5', cursor: 'pointer'}} 
                                         src={plat.image}
                                         onClick = {()=> this.onPlatform(plat)}
                                     />

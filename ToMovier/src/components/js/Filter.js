@@ -25,17 +25,7 @@ class Filter extends Component{
     towatch: false,
     series: false,
     film: false,
-    platforms: [
-        {id: 0, name: "plat-netflix0", image: netflix, state: false},
-        {id: 1, name: "plat-netflix1", image: netflix, state: false},
-        {id: 2, name: "plat-netflix2", image: netflix, state: false},
-        {id: 3, name: "plat-netflix3", image: netflix, state: false},
-        {id: 4, name: "plat-netflix4", image: netflix, state: false},
-        {id: 5, name: "plat-netflix5", image: netflix, state: false},
-        {id: 6, name: "plat-netflix6", image: netflix, state: false},
-        {id: 7, name: "plat-netflix7", image: netflix, state: false},
-        {id: 8, name: "plat-netflix8", image: netflix, state: false}
-    ]
+    platforms: this.props.platforms
   }
 
   onFavoriteClick(id){
@@ -193,7 +183,7 @@ class Filter extends Component{
                             key = {plat.id}
                             id = {plat.name}
                             className="filter-platform" 
-                            style={{width: '1.5rem', margin: '0 0.5rem'}} 
+                            style={{height: '2.7rem', margin: '0 0.5rem'}} 
                             src={plat.image}
                             onClick = {()=> this.onPlatform(plat)}
                         />

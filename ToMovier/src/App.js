@@ -26,15 +26,6 @@ let PLATFORMS = {
   "amazon": amazon
 };
 
-function getPlatform(platform){
-
-    if (platform in PLATFORMS){
-      return PLATFORMS[platform];
-    }
-    else 
-      return noPlat
-}
-
 class App extends Component{
 
   state = {
@@ -46,7 +37,23 @@ class App extends Component{
       {id:1, name: "EmptyFilm", genre: "cartoon", image: emptyFilm, isFavorite: favorite, isFilm: film, isWatched: watched, platform: netflix, rating: '9/10'},
       {id:2, name: "EmptyFilm", genre: "cartoon", image: emptyFilm, isFavorite: favorite, isFilm: film, isWatched: watched, platform: netflix, rating: '9/10'},
       {id:3, name: "EmptyFilm", genre: "cartoon", image: emptyFilm, isFavorite: favorite, isFilm: film, isWatched: watched, platform: netflix, rating: '9/10'}      
-    ]
+    ],
+    platforms: [
+      {id: 0, name: "Netflix", image: netflix, state: false},
+      {id: 1, name: "Amazon", image: amazon, state: false},
+      {id: 2, name: "Unknown", image: noPlat, state: false}
+    ] 
+  }
+
+  getPlatform(platform){
+
+    let platforms = this.state.platforms;
+    for(let i = 0; i < platforms.length; i++){
+      if(platforms[i].name == platform)
+        return platforms[i].image;
+      if(i == platforms.length - 1)
+        return noPlat;
+    }
   }
 
   getItems(user, password){
@@ -78,7 +85,7 @@ class App extends Component{
                     case "watching": isWatched = watching; break;
                     case "towatch" : isWatched = towatch; break
                   } 
-                  let platform = getPlatform(items[i].platform);
+                  let platform = this.getPlatform(items[i].platform);
                   let rating;
                   if(items[i].rating == "non visto")
                     rating = "non visto";
@@ -275,9 +282,9 @@ class App extends Component{
     else{
       document.getElementsByTagName('body')[0].style.backgroundColor = "white";
       if(this.state.itemMenu >= 0){
-        itemMenu = <ItemMenu onCancel = {this.handleItemCancel} onSave = {this.handleItemSave} card = {this.state.cards[this.state.itemMenu]}/>
+        itemMenu = <ItemMenu onCancel = {this.handleItemCancel} onSave = {this.handleItemSave} card = {this.state.cards[this.state.itemMenu]} platforms = {this.state.platforms}/>
       }else if(this.state.itemMenu == -2){
-        itemMenu = <ItemMenu onCancel = {this.handleItemCancel} onSave = {this.handleItemSave} card = {{}}/>
+        itemMenu = <ItemMenu onCancel = {this.handleItemCancel} onSave = {this.handleItemSave} card = {{}} platforms = {this.state.platforms}/>
       }
       else
         itemMenu = <></>
@@ -289,7 +296,7 @@ class App extends Component{
                   onSearch = {this.handleSearch}
                   onFilter = {this.handlefilter}
                 />
-                <Filter />
+                <Filter platforms = {this.state.platforms}/>
                 <img id="add-item" src={add} onClick={() => this.handleAddCard()} style={{position: "fixed", right: '1rem', width: '4rem', top: '15rem', cursor: 'pointer', zIndex: '2'}}/>
                 {itemMenu}
                 <div className='container'>
