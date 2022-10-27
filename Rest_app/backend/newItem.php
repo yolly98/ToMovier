@@ -65,31 +65,44 @@
         return;
     }
 
-    //save new item
-    $sql = "INSERT INTO FILM VALUES(0,?,?,?,?,?,?,?,?,?);";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sssssssss", $name, $genre, $rating, $favorite, $platform, $watched, $isFilm, $user, $urlImage);
-    $stmt->execute();
+    if($type == "new"){
+        //save new item
+        $sql = "INSERT INTO FILM VALUES(0,?,?,?,?,?,?,?,?,?);";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("sssssssss", $name, $genre, $rating, $favorite, $platform, $watched, $isFilm, $user, $urlImage);
+        $stmt->execute();
 
-    //echo '{"status": "ERROR", "msg": "'.$name.','.$genre.','.$rating.','.$favorite.','.$platform.','.$watched.','.$isFilm.','.$user.','.$urlImage.'"}';
+        //echo '{"status": "ERROR", "msg": "'.$name.','.$genre.','.$rating.','.$favorite.','.$platform.','.$watched.','.$isFilm.','.$user.','.$urlImage.'"}';
 
-    //get the id assigned to the item
-    $sql = "SELECT * from FILM WHERE user LIKE BINARY ? and name LIKE BINARY ?;";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ss",$user,$name);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    if($result->num_rows<=0){
-        echo '{"status": "ERROR", "msg": "something went wrong 2"}';
-        $conn->close();
-        return;
-    }
-    else
-        while($row = $result->fetch_assoc()){
-            $id = $row['id'];
+        //get the id assigned to the item
+        $sql = "SELECT * from FILM WHERE user LIKE BINARY ? and name LIKE BINARY ?;";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ss",$user,$name);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if($result->num_rows<=0){
+            echo '{"status": "ERROR", "msg": "something went wrong 2"}';
+            $conn->close();
+            return;
         }
+        else
+            while($row = $result->fetch_assoc()){
+                $id = $row['id'];
+            }
 
-    echo '{"status": "SUCCESS", "id": '.$id.'}';
+        echo '{"status": "SUCCESS", "id": '.$id.'}';
+    }
+    else{
+        //update the item
+        $sql="UPDATE FILM SET 
+            name=?,genre=?,rating=?,favorite=?,platform=?,watched=?,isFilm=?, urlImage=? where id LIKE BINARY ?";
+        $stmt=$conn->prepare($sql);
+        $stmt->bind_param("ssssssssi",$name, $genre, $rating, $favorite, $platform, $watched, $isFilm, $urlImage, $id);
+        $stmt->execute();
+        
+        echo '{"status": "SUCCESS"}';
+    }
+
 
     $conn->close();
 

@@ -59,16 +59,6 @@ class App extends Component{
     }
   }
 
-  getPlatformName(platform){
-    let platforms = this.state.platforms;
-    for(let i = 0; i < platforms.length; i++){
-      if(platforms[i] == platform)
-        return platforms[i].name;
-      if(i == platforms.length - 1)
-        return "Unknown";
-    }
-  }
-
   getItems(user, password){
     let json_msg = {"user": user, "passw": password, "type": "get-items"};
     let url = "http://localhost:80/backend/getItems.php";
@@ -88,6 +78,7 @@ class App extends Component{
                 let items = html.msg;
                 let cards = [];
                 for(let i = 0; i < items.length; i++){
+                  let id = items[i].id;
                   let name = items[i].name;
                   let image = items[i].urlImage;
                   let isFavorite = (items[i].favorite == "true")?favorite:notfavorite;
@@ -107,7 +98,7 @@ class App extends Component{
                   let genre = items[i].genre;
                   cards.push(
                     {
-                      id: i, 
+                      id: id, 
                       name: name, 
                       genre: genre,
                       image: image, 
@@ -120,6 +111,7 @@ class App extends Component{
                   );
                 }
                 this.setState({cards});
+                console.log(cards);
             } else {
               alert(html.msg);
             }
@@ -203,7 +195,7 @@ class App extends Component{
 
   handleOpenCard = card => {
     console.log("open button pressed [" + card.name + "]");
-    this.setState({itemMenu: card.id});
+    this.setState({itemMenu: this.state.cards.indexOf(card)});
     document.getElementsByTagName('body')[0].style.overflow = 'hidden';
     document.getElementById('blocker').style.display = 'block';
 
@@ -305,14 +297,14 @@ class App extends Component{
     //document.getElementById('blocker').style.display = 'none';
 
     //html request
-    let json_msg = item_db;//{"user": this.state.user, "passw": this.state.password, "item": item_db};
+    let json_msg = item_db;
     json_msg.user = this.state.user;
     json_msg.passw = this.state.password;
     if(isNewItem)
       json_msg.type = "new";
     else
       json_msg.type = "update";
-    console.log(json_msg);
+    //console.log(json_msg);
     let url = "http://localhost:80/backend/newItem.php";
     let msg = "body=" + JSON.stringify(json_msg);
     fetch(url, {
@@ -329,7 +321,7 @@ class App extends Component{
             if (html.status == "SUCCESS") {
               if(isNewItem)
                 cards[cards.length-1].id = Number(html.id);
-              console.log(cards);
+              //console.log(cards);
               this.setState({itemMenu: -1, cards});
               document.getElementsByTagName('body')[0].style.overflow = 'auto';
               document.getElementById('blocker').style.display = 'none'; 

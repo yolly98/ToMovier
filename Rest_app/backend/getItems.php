@@ -53,6 +53,7 @@
         while($row = $result->fetch_assoc()){
             
             $newItem = array(
+                "id" => $row['id'],
                 "name" => $row['name'],
                 "genre" => $row['genre'],
                 "rating" => $row['rating'],

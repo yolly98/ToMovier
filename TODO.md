@@ -1,3 +1,5 @@
 # TO MOVIER TODO
 
-* dopo aver creato una nuova carta, se premo apri mi da undefined (ERROR)
+* mettere bottone di refresh
+* fare filtri e ricerca
+* fare eliminazione
