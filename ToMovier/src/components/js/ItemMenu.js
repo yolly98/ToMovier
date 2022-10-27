@@ -12,47 +12,117 @@ import notfavorite from '../../images/notfavorite.png'
 import film from '../../images/film.png'
 import series from '../../images/series.png'
 import netflix from '../../images/netflix.png'
+import noPlat from '../../images/noPlat.png'
 
 let coraline = 'http://1.bp.blogspot.com/-r4taLNcpLCc/TmyjQw8ZTfI/AAAAAAAAA04/DYQe0dEgfKg/s1600/coraline.jpg'
 
 class ItemMenu extends Component{
 
     state = {
+        card: {},
         title: "",
         genre: "",
-        rate: 0,
+        rating: 0,
         fovorite: false,
         watch: "towatch",
         type: "series",
         url: "none",
         platforms: [
-            {id: 0, name: "item-plat-netflix0", image: netflix, state: false},
-            {id: 1, name: "item-plat-netflix1", image: netflix, state: false},
-            {id: 2, name: "item-plat-netflix2", image: netflix, state: false},
-            {id: 3, name: "item-plat-netflix3", image: netflix, state: false},
-            {id: 4, name: "item-plat-netflix4", image: netflix, state: false},
-            {id: 5, name: "item-plat-netflix5", image: netflix, state: false},
-            {id: 6, name: "item-plat-netflix6", image: netflix, state: false},
-            {id: 7, name: "item-plat-netflix7", image: netflix, state: false},
-            {id: 8, name: "item-plat-netflix8", image: netflix, state: false}
+            {id: 0, name: "item-plat-netflix", image: netflix, state: false},
+            {id: 1, name: "item-plat-noplat", image: noPlat, state: false}
         ]
     }
 
-    onCancel(){
-        document.getElementById('item-section').style.display = 'none';
-        document.getElementsByTagName('body')[0].style.overflow = 'auto';
-        document.getElementById('blocker').style.display = 'none';
-    }
+    componentDidMount(){
+        let item = this.props.card;
+        console.log(item);
+        if(!("name" in item))
+            return;
+        let title_ = item.name;
+        let genre_ = item.genre;
+        let rate_ = Number(item.rating.replace("/10",""));
+        let favorite_;
+        let watch_;
+        let type_ ;
+        let url_ = item.image;
 
-    onSave(){
-        document.getElementById('item-section').style.display = 'none';
-        document.getElementsByTagName('body')[0].style.overflow = 'auto';
-        document.getElementById('blocker').style.display = 'none';
+        document.getElementById("item-title").value = title_;
+        document.getElementById("item-genre").value = genre_;
+        for(let i = 0; i < 10; i++){
+            if(i <= rate_)
+                document.getElementsByClassName('item-star')[i].src = fullstar;
+            else
+                document.getElementsByClassName('item-star')[i].src = emptystar; 
+        }
+        document.getElementById('item-favorite').src = item.isFavorite;
+        document.getElementById("item-image").src = url_;
+        document.getElementById("item-url").value = url_;
+
+        if (item.isFavorite == favorite)
+            favorite_ = true;
+        else
+            favorite_ = false;
+        if(item.isWatched == watched){
+            watch_ = "watched";
+            document.getElementById('item-watched').style.opacity = 1;
+            document.getElementById('item-watching').style.opacity = 0.5;
+            document.getElementById('item-towatch').style.opacity = 0.5;
+        }
+        else if(item.isWatched == watching){
+            watch_ = "watching";
+            document.getElementById('item-watched').style.opacity = 0.5;
+            document.getElementById('item-watching').style.opacity = 1;
+            document.getElementById('item-towatch').style.opacity = 0.5;
+        }
+        else{
+            watch_ = "towatch";
+            document.getElementById('item-watched').style.opacity = 0.5;
+            document.getElementById('item-watching').style.opacity = 0.5;
+            document.getElementById('item-towatch').style.opacity = 1;
+        }
+
+        if(item.isFilm == film){
+            type_ = "film";
+            document.getElementById('item-series').style.opacity = 0.5;
+            document.getElementById('item-film').style.opacity = 1;
+        }
+        else{
+            type_ = "series";
+            document.getElementById('item-series').style.opacity = 1;
+            document.getElementById('item-film').style.opacity = 0.5;
+        }
+
+        const platforms = [...this.state.platforms];
+        for(let i = 0; i < this.state.platforms.length; i++){
+            if(platforms[i].image == item.platform){
+                console.log("ciao");
+                platforms[i].state = true;
+                document.getElementById(platforms[i].name).style.opacity = 1;
+            }
+            else{
+                console.log("boh");
+                platforms[i].state = false;
+                document.getElementById(platforms[i].name).style.opacity = 0.5;
+            }
+        }
+
+        this.setState({ 
+            card: item,
+            title: title_, 
+            genre: genre_, 
+            rating: rate_, 
+            favorite: favorite_,
+             watch: watch_, 
+             type: type_, 
+             url: url_, 
+             platforms
+        });
+
     }
     
     onStar(key){
-        let rate = key + 1;
-        this.setState({rate});
+        let rating = key + 1;
+        this.setState({rating});
         for(let i = 0; i < 10; i++){
             if(i <= key)
                 document.getElementsByClassName('item-star')[i].src = fullstar;
@@ -123,8 +193,7 @@ class ItemMenu extends Component{
                     document.getElementById(platforms[i].name).style.opacity = 0.5;
                 }        
         this.setState({platforms});     
-        
-                
+              
     }
     
 
@@ -134,10 +203,10 @@ class ItemMenu extends Component{
                 <div style={{backgroundColor: '#6b8ea2', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '1rem', borderRadius: '1rem'}}>
                     <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%'}}>
                         <label className="item-label" style={{fontWeight: 'bold'}}>Aggiorna elemento</label>
-                        <img src={cross} style={{width: '1.5rem', cursor: 'pointer'}} onClick={()=>this.onCancel()}/>
+                        <img src={cross} style={{width: '1.5rem', cursor: 'pointer'}} onClick={()=>this.props.onCancel()}/>
                     </div>
                     <div style={{width: '100%', display: 'flex', flexDirection: 'row', alignItems: 'flex-start', marginTop: '1.5rem'}}>
-                        <img src={coraline} style={{height: '15rem', marginRight: '2rem', borderRadius: '0.5rem'}}/>
+                        <img id="item-image" src={coraline} style={{height: '15rem', marginRight: '2rem', borderRadius: '0.5rem'}}/>
                         <div>
                             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: '1.5rem'}}>
                                 <label className="item-label" style={{marginRight: '1rem'}}>Titolo</label>
@@ -181,7 +250,7 @@ class ItemMenu extends Component{
                     </div>
                     <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '1.5rem'}}>
                         <label className="item-label">URL image</label>
-                        <input className='item-text' type="text" style={{marginBottom: '1.5rem'}}/>
+                        <input id="item-url" className='item-text' type="text" style={{marginBottom: '1.5rem'}}/>
                         <label className="item-label">Piattaforma</label>
                         <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', backgroundColor: '#bdcbdd', borderRadius: '0.5rem', padding: '0.5rem', width: '90%', overflow: 'auto'}}>
                             {
@@ -199,7 +268,7 @@ class ItemMenu extends Component{
                             }
                         </div>
                     </div>
-                    <button style={{borderRadius: '0.5rem'}} onClick={()=>this.onSave()}>SALVA</button>
+                    <button style={{borderRadius: '0.5rem'}} onClick={()=>this.props.onSave()}>SALVA</button>
                 </div>
             </div>
         );

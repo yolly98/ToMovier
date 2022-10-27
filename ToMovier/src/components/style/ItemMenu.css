@@ -6,7 +6,6 @@
     flex-direction: column;
     position: fixed;
     top: 2rem;
-    display: none;
 }
 
 .item-label{

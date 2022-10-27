@@ -20,7 +20,8 @@ create table FILM(
     isFilm varchar(100) not null,
     user varchar(100) not null,
     urlImage varchar(100) not null,
-    primary key(user,id)
+    unique(user, name),
+    primary key(id)
 )engine=InnoDB default charset=latin1;
 
 

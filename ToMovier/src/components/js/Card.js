@@ -5,6 +5,7 @@ import cross from '../../images/delete.png'
 import star from '../../images/fullstar.png'
 
 class Card extends Component{
+
     render(){
         return(
             <div className="col" style={{zIndex: 1}}>
@@ -20,13 +21,13 @@ class Card extends Component{
                     <div className="card-body" style={{padding: '0.3rem', border: '0'}}>
                         <img className="img-isfilm" src={this.props.card.isFilm} alt="..."/>
                         <div>
-                            <label className='card-rate'>{this.props.card.rate}</label>
+                            <label className='card-rate'>{this.props.card.rating}</label>
                             <img className="img-star" src={star} alt="..."/>
                         </div>
                     </div>
                     <div className="card-footer" style={{padding: '0.3rem', border: '0'}}>
-                        <img className="img-isfavorited" src={this.props.card.isFavorited} alt="..."/>
-                        <button className="button-open" onClick={() => this.props.onOpenCard(this.props.card.name)}>APRI</button>
+                        <img className="img-isfavorited" src={this.props.card.isFavorite} alt="..."/>
+                        <button className="button-open" onClick={() => this.props.onOpenCard(this.props.card)}>APRI</button>
                         <img className="img-platform" src={this.props.card.platform} alt="..."/>
                     </div>
                 </div>

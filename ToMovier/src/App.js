@@ -39,21 +39,14 @@ function getPlatform(platform){
 class App extends Component{
 
   state = {
+    itemMenu: -1,
     user: "",
     password: "",
     cards: [
-      {id:0, name: "Coraline", genre: "cartoon", image: coraline, isFavorited: favorite, isFilm: film, isWatched: watched, platform: netflix, rate: '9/10'},
-      {id:1, name: "Coraline", genre: "cartoon", image: coraline, isFavorited: favorite, isFilm: film, isWatched: watched, platform: netflix, rate: '9/10'},
-      {id:2, name: "Coraline", genre: "cartoon", image: coraline, isFavorited: favorite, isFilm: film, isWatched: watched, platform: netflix, rate: '9/10'},
-      {id:3, name: "Coraline", genre: "cartoon", image: coraline, isFavorited: favorite, isFilm: film, isWatched: watched, platform: netflix, rate: '9/10'},
-      {id:4, name: "Coraline", genre: "cartoon", image: coraline, isFavorited: favorite, isFilm: film, isWatched: watched, platform: netflix, rate: '9/10'},
-      {id:5, name: "Coraline", genre: "cartoon", image: coraline, isFavorited: favorite, isFilm: film, isWatched: watched, platform: netflix, rate: '9/10'},
-      {id:6, name: "Coraline", genre: "cartoon", image: coraline, isFavorited: favorite, isFilm: film, isWatched: watched, platform: netflix, rate: '9/10'},
-      {id:7, name: "Coraline", genre: "cartoon", image: coraline, isFavorited: favorite, isFilm: film, isWatched: watched, platform: netflix, rate: '9/10'},
-      {id:8, name: "Coraline", genre: "cartoon", image: coraline, isFavorited: favorite, isFilm: film, isWatched: watched, platform: netflix, rate: '9/10'},
-      {id:9, name: "Coraline", genre: "cartoon", image: coraline, isFavorited: favorite, isFilm: film, isWatched: watched, platform: netflix, rate: '9/10'},
-      {id:10, name: "Coraline", genre: "cartoon", image: coraline, isFavorited: favorite, isFilm: film, isWatched: watched, platform: netflix, rate: '9/10'},
-      
+      {id:0, name: "Coraline", genre: "cartoon", image: coraline, isFavorite: favorite, isFilm: film, isWatched: watched, platform: netflix, rating: '9/10'},
+      {id:1, name: "Coraline", genre: "cartoon", image: coraline, isFavorite: favorite, isFilm: film, isWatched: watched, platform: netflix, rating: '9/10'},
+      {id:2, name: "Coraline", genre: "cartoon", image: coraline, isFavorite: favorite, isFilm: film, isWatched: watched, platform: netflix, rating: '9/10'},
+      {id:3, name: "Coraline", genre: "cartoon", image: coraline, isFavorite: favorite, isFilm: film, isWatched: watched, platform: netflix, rating: '9/10'}      
     ]
   }
 
@@ -78,7 +71,7 @@ class App extends Component{
                 for(let i = 0; i < items.length; i++){
                   let name = items[i].name;
                   let image = items[i].urlImage;
-                  let isFavorited = (items[i].favorite == "true")?favorite:notfavorite;
+                  let isFavorite = (items[i].favorite == "true")?favorite:notfavorite;
                   let isFilm = (items[i].isFilm == "true")?film:series;
                   let isWatched;
                   switch (items[i].watched){
@@ -87,11 +80,11 @@ class App extends Component{
                     case "towatch" : isWatched = towatch; break
                   } 
                   let platform = getPlatform(items[i].platform);
-                  let rate;
+                  let rating;
                   if(items[i].rating == "non visto")
-                    rate = "non visto";
+                    rating = "non visto";
                   else
-                    rate = items[i].rating + "/10";
+                    rating = items[i].rating + "/10";
                   let genre = items[i].genre;
                   cards.push(
                     {
@@ -99,11 +92,11 @@ class App extends Component{
                       name: name, 
                       genre: genre,
                       image: image, 
-                      isFavorited: isFavorited, 
+                      isFavorite: isFavorite, 
                       isFilm: isFilm, 
                       isWatched: isWatched, 
                       platform: platform,
-                      rate: rate
+                      rating: rating
                     }
                   );
                 }
@@ -173,7 +166,6 @@ class App extends Component{
   handleExit = () =>{
     console.log("exit button pressed");
     this.setState({user: "", password: ""});
-    //TODO: clean the session
   }
 
   handlefilter(){
@@ -189,16 +181,17 @@ class App extends Component{
     console.log("search text pressed [" + inputText + "]")
   }
 
-  handleOpenCard = cardName => {
-    console.log("open button pressed [" + cardName + "]");
-    document.getElementById('item-section').style.display = 'flex';
+  handleOpenCard = card => {
+    console.log("open button pressed [" + card.name + "]");
+    this.setState({itemMenu: card.id});
     document.getElementsByTagName('body')[0].style.overflow = 'hidden';
     document.getElementById('blocker').style.display = 'block';
+
   }
 
   handleAddCard(){
     console.log("add card pressed");
-    document.getElementById('item-section').style.display = 'flex';
+    this.setState({itemMenu: -2});
     document.getElementsByTagName('body')[0].style.overflow = 'hidden';
     document.getElementById('blocker').style.display = 'block';
   }
@@ -207,14 +200,34 @@ class App extends Component{
     console.log("delete button pressed [" + cardName + "]");
   }
 
+  handleItemCancel = () => {
+    this.setState({itemMenu: -1});
+    document.getElementsByTagName('body')[0].style.overflow = 'auto';
+    document.getElementById('blocker').style.display = 'none';
+  }
+
+  handleItemSave = () =>{
+      this.setState({itemMenu: -1});
+      document.getElementsByTagName('body')[0].style.overflow = 'auto';
+      document.getElementById('blocker').style.display = 'none';
+  }
+
   render(){
     let page;
+    let itemMenu;
     if(this.state.user == ""){
       page = <Login onLogin = {this.handleLogin} onSignup = {this.handleSignup} />
       document.getElementsByTagName('body')[0].style.backgroundColor = "#2a5a76";
     }
     else{
       document.getElementsByTagName('body')[0].style.backgroundColor = "white";
+      if(this.state.itemMenu >= 0){
+        itemMenu = <ItemMenu onCancel = {this.handleItemCancel} onSave = {this.handleItemSave} card = {this.state.cards[this.state.itemMenu]}/>
+      }else if(this.state.itemMenu == -2){
+        itemMenu = <ItemMenu onCancel = {this.handleItemCancel} onSave = {this.handleItemSave} card = {{}}/>
+      }
+      else
+        itemMenu = <></>
       page = <>
                 <div id="blocker" style={{width: '100%', height: '100%', backgroundColor: 'black', opacity: '0.4', position: 'fixed', top: '0', zIndex: '3', display: "none"}}></div>
                 <Navbar 
@@ -225,7 +238,7 @@ class App extends Component{
                 />
                 <Filter />
                 <img id="add-item" src={add} onClick={() => this.handleAddCard()} style={{position: "fixed", right: '1rem', width: '4rem', top: '15rem', cursor: 'pointer', zIndex: '2'}}/>
-                <ItemMenu />
+                {itemMenu}
                 <div className='container'>
                   <div className='row'>
                     {
