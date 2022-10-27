@@ -206,10 +206,42 @@ class App extends Component{
     document.getElementById('blocker').style.display = 'none';
   }
 
-  handleItemSave = () =>{
-      this.setState({itemMenu: -1});
-      document.getElementsByTagName('body')[0].style.overflow = 'auto';
-      document.getElementById('blocker').style.display = 'none';
+  handleItemSave = state =>{
+
+    let card = state.card;
+    card.name = document.getElementById("item-title").value;
+    card.genre = document.getElementById("item-genre").value;
+    card.image = document.getElementById("item-url").value;
+    card.rating = String(state.rating) + "/10";
+    switch(state.favorite){
+      case true: card.isFavorite = favorite; break;
+      case false: card.isFavorite = notfavorite; break;
+    }
+    switch(state.watch){
+      case "watched": card.isWatched = watched; break;
+      case "watching": card.isWatched = watching; break;
+      case "towatch": card.isWatched = towatch; break;
+    }
+    switch(state.type){
+      case "series": card.isFilm = series; break;
+      case "film": card.isFilm = film; break;
+    }
+    for(let i = 0; i < state.platforms.length; i++)
+      if(state.platforms[i].state){
+        card.platform = state.platforms[i].image;
+        break;
+      }
+
+    let cards = this.state.cards;
+    for(let i = 0; cards.length; i++){
+      if(cards[i].id == card.id){
+        cards[i] = card;
+        break;
+      }
+    }
+    this.setState({itemMenu: -1, cards});
+    document.getElementsByTagName('body')[0].style.overflow = 'auto';
+    document.getElementById('blocker').style.display = 'none';
   }
 
   render(){

@@ -43,7 +43,7 @@ class ItemMenu extends Component{
         let rate_ = Number(item.rating.replace("/10",""));
         let favorite_;
         let watch_;
-        let type_ ;
+        let type_;
         let url_ = item.image;
 
         document.getElementById("item-title").value = title_;
@@ -268,7 +268,7 @@ class ItemMenu extends Component{
                             }
                         </div>
                     </div>
-                    <button style={{borderRadius: '0.5rem'}} onClick={()=>this.props.onSave()}>SALVA</button>
+                    <button style={{borderRadius: '0.5rem'}} onClick={()=>this.props.onSave(this.state)}>SALVA</button>
                 </div>
             </div>
         );
