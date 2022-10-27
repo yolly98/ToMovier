@@ -20,12 +20,6 @@ import emptyFilm from './images/emptyFilm.jpg'
 import noPlat from './images/noPlat.png'
 import netflix from './images/netflix.png'
 import amazon from './images/amazon.png'
-import { ThemeConsumer } from 'react-bootstrap/esm/ThemeProvider';
-
-let PLATFORMS = {
-  "netflix": netflix,
-  "amazon": amazon
-};
 
 class App extends Component{
 
@@ -40,7 +34,7 @@ class App extends Component{
       {id:3, name: "EmptyFilm", genre: "cartoon", image: emptyFilm, isFavorite: favorite, isFilm: film, isWatched: watched, platform: netflix, rating: '9/10'}      
     ],
     platforms: [
-      {id: 0, name: "Netflix", image: netflix, state: false},
+      {id: 0, name: "Netflix", image: netflix , state: false},
       {id: 1, name: "Amazon", image: amazon, state: false},
       {id: 2, name: "Unknown", image: noPlat, state: false}
     ],
@@ -54,14 +48,24 @@ class App extends Component{
     ]
   }
 
-  getPlatform(platform){
+  getPlatform(platformName){
 
     let platforms = this.state.platforms;
     for(let i = 0; i < platforms.length; i++){
-      if(platforms[i].name == platform)
+      if(platforms[i].name == platformName)
         return platforms[i].image;
       if(i == platforms.length - 1)
         return noPlat;
+    }
+  }
+
+  getPlatformName(platform){
+    let platforms = this.state.platforms;
+    for(let i = 0; i < platforms.length; i++){
+      if(platforms[i] == platform)
+        return platforms[i].name;
+      if(i == platforms.length - 1)
+        return "Unknown";
     }
   }
 
@@ -180,7 +184,8 @@ class App extends Component{
 
   handleExit = () =>{
     console.log("exit button pressed");
-    this.setState({user: "", password: ""});
+    let cards = [];
+    this.setState({user: "", password: "", cards});
   }
 
   handlefilter(){
@@ -224,48 +229,67 @@ class App extends Component{
   handleItemSave = state =>{
 
     let card = state.card;
+    let item_db = {};
+    let isNewItem = false;
+
     if(!card.hasOwnProperty("id")){
-      console.log("new card");
+      isNewItem = true;
       card.id = -3; //TODO: setted it with the id obtained from mysql
     }
+    item_db.id = card.id;
+    
     card.name = document.getElementById("item-title").value;
+    item_db.name = document.getElementById("item-title").value;
     if(card.name == ""){
       alert("Il titolo non può essere vuoto");
       return;
     }
+    
     card.genre = document.getElementById("item-genre").value;
     if(card.genre == "")
-      card.genre = "Sconosciuto";
+      card.genre = "Other";
+    item_db.genre = card.genre;
+
     card.image = document.getElementById("item-url").value;
     if(card.image == "")
       card.image = emptyFilm;
+    item_db.urlImage = card.image;
+    
     card.rating = String(state.rating) + "/10";
+    item_db.rating = String(state.rating);
+    
     switch(state.favorite){
-      case true: card.isFavorite = favorite; break;
-      case false: card.isFavorite = notfavorite; break;
-      default: card.isFavorite = notfavorite; 
+      case true: card.isFavorite = favorite; item_db.favorite = "true"; break;
+      case false: card.isFavorite = notfavorite; item_db.favorite = "false"; break;
+      default: card.isFavorite = notfavorite; item_db.favorite = "false"; 
     }
+
     switch(state.watch){
-      case "watched": card.isWatched = watched; break;
-      case "watching": card.isWatched = watching; break;
-      case "towatch": card.isWatched = towatch; break;
-      default: card.isWatched = towatch; break;
+      case "watched": card.isWatched = watched; item_db.watched = "watched"; break;
+      case "watching": card.isWatched = watching; item_db.watched = "watching"; break;
+      case "towatch": card.isWatched = towatch; item_db.watched = "towatch"; break;
+      default: card.isWatched = towatch; item_db.watched = "towatch"; break;
     }
+
     switch(state.type){
-      case "series": card.isFilm = series; break;
-      case "film": card.isFilm = film; break;
-      default: card.isFilm = film; break;
+      case "series": card.isFilm = series; item_db.isFilm = "false"; break;
+      case "film": card.isFilm = film; item_db.isFilm = "true"; break;
+      default: card.isFilm = film; item_db.isFilm = "true"; break;
     }
+
     for(let i = 0; i < state.platforms.length; i++){
       if(state.platforms[i].state){
         card.platform = state.platforms[i].image;
+        item_db.platform = state.platforms[i].name;
         break;
       }
-      if(i == state.platforms.length - 1)
+      if(i == state.platforms.length - 1){
         card.platform = noPlat;
+        item_db.platform = "Unknow";
+      }
     }
  
-    let cards = this.state.cards;
+    let cards = [...this.state.cards];
     for(let i = 0; i < cards.length; i++){
       if(cards[i].id == card.id){
         cards[i] = card;
@@ -275,10 +299,45 @@ class App extends Component{
         cards.push(card);
     }
       
-    console.log(card);
-    this.setState({itemMenu: -1, cards});
-    document.getElementsByTagName('body')[0].style.overflow = 'auto';
-    document.getElementById('blocker').style.display = 'none';
+    //console.log(card);
+    //this.setState({itemMenu: -1, cards});
+    //document.getElementsByTagName('body')[0].style.overflow = 'auto';
+    //document.getElementById('blocker').style.display = 'none';
+
+    //html request
+    let json_msg = item_db;//{"user": this.state.user, "passw": this.state.password, "item": item_db};
+    json_msg.user = this.state.user;
+    json_msg.passw = this.state.password;
+    if(isNewItem)
+      json_msg.type = "new";
+    else
+      json_msg.type = "update";
+    console.log(json_msg);
+    let url = "http://localhost:80/backend/newItem.php";
+    let msg = "body=" + JSON.stringify(json_msg);
+    fetch(url, {
+        method : "POST",
+        headers: {
+            'Content-type': 'application/x-www-form-urlencoded',
+            'Accept': 'application/json'
+        },
+        body : msg
+    }).then(
+        response => response.json()
+    ).then(
+        html => {
+            if (html.status == "SUCCESS") {
+              if(isNewItem)
+                cards[cards.length-1].id = Number(html.id);
+              console.log(cards);
+              this.setState({itemMenu: -1, cards});
+              document.getElementsByTagName('body')[0].style.overflow = 'auto';
+              document.getElementById('blocker').style.display = 'none'; 
+            } else {
+              alert(html.msg);
+            }
+        }
+    );
   }
 
   render(){

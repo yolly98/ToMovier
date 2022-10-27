@@ -4,7 +4,7 @@ use toMovier_db;
 drop table if exists USER;
 create table USER(
     user varchar(100) not null,
-    passw varchar(100) not null,
+    passw varchar not null,
     primary key(user)
 )engine=InnoDB default charset=latin1;
 
@@ -19,7 +19,7 @@ create table FILM(
     watched varchar(100) not null,
     isFilm varchar(100) not null,
     user varchar(100) not null,
-    urlImage varchar(100) not null,
+    urlImage varchar not null,
     unique(user, name),
     primary key(id)
 )engine=InnoDB default charset=latin1;

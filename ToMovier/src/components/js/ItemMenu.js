@@ -16,7 +16,7 @@ import emptyFilm from '../../images/emptyFilm.jpg'
 class ItemMenu extends Component{
 
     state = {
-        card: {},
+        card: this.props.card,
         title: "",
         genre: "",
         rating: 0,
@@ -31,7 +31,7 @@ class ItemMenu extends Component{
     componentDidMount(){
 
         let platforms = this.state.platforms;
-        let item = this.props.card;
+        let item = this.state.card;
         if(!item.hasOwnProperty("name"))
             return;
         let title_ = item.name;
@@ -45,7 +45,7 @@ class ItemMenu extends Component{
         document.getElementById("item-title").value = title_;
         document.getElementById("item-genre").value = genre_;
         for(let i = 0; i < 10; i++){
-            if(i <= rate_)
+            if(i + 1 <= rate_)
                 document.getElementsByClassName('item-star')[i].src = fullstar;
             else
                 document.getElementsByClassName('item-star')[i].src = emptystar; 
@@ -100,7 +100,6 @@ class ItemMenu extends Component{
         }
 
         this.setState({ 
-            card: item,
             title: title_, 
             genre: genre_, 
             rating: rate_, 
@@ -167,26 +166,26 @@ class ItemMenu extends Component{
     }
 
     onPlatform(plat){
-        console.log("select plat")
+        //console.log(plat);
         const platforms = [...this.state.platforms];
         const id = platforms.indexOf(plat);     
         platforms[id] = {...plat};  
         let state = plat.state;
         if(!state)
-            document.getElementById(plat.name).style.opacity = 1;
+            document.getElementById("item-plat-" + plat.name).style.opacity = 1;
         else
-            document.getElementById(plat.name).style.opacity = 0.5;
+            document.getElementById("item-plat-" + plat.name).style.opacity = 0.5;
     
         state = !state;       
         platforms[id].state = state;       
         if(state)
             for(let i = 0; i < platforms.length; i++)
-                if(platforms[i].name != plat.name && platforms[i].state){
+                if( (platforms[i].name != plat.name) && platforms[i].state){
                     platforms[i].state = false;
-                    document.getElementById(platforms[i].name).style.opacity = 0.5;
+                    document.getElementById("item-plat-" + platforms[i].name).style.opacity = 0.5;
                 }        
         this.setState({platforms});     
-              
+        //console.log(platforms);      
     }
     
 
@@ -261,7 +260,7 @@ class ItemMenu extends Component{
                                 this.state.platforms.map(plat => (
                                     <img 
                                         key = {plat.id}
-                                        id = {plat.name}
+                                        id = {"item-plat-" + plat.name}
                                         className="item-platform" 
                                         style={{height: '2.8rem', margin: '0 0.5rem', opacity: '0.5', cursor: 'pointer'}} 
                                         src={plat.image}
