@@ -15,12 +15,11 @@ import watched from './images/watched.png'
 import watching from './images/watching.png'
 import towatch from './images/towatch.png'
 import add from './images/add.png'
+import emptyFilm from './images/emptyFilm.jpg'
 
 import noPlat from './images/noPlat.png'
 import netflix from './images/netflix.png'
 import amazon from './images/amazon.png'
-
-let coraline = 'http://1.bp.blogspot.com/-r4taLNcpLCc/TmyjQw8ZTfI/AAAAAAAAA04/DYQe0dEgfKg/s1600/coraline.jpg';
 
 let PLATFORMS = {
   "netflix": netflix,
@@ -43,10 +42,10 @@ class App extends Component{
     user: "",
     password: "",
     cards: [
-      {id:0, name: "Coraline", genre: "cartoon", image: coraline, isFavorite: favorite, isFilm: film, isWatched: watched, platform: netflix, rating: '9/10'},
-      {id:1, name: "Coraline", genre: "cartoon", image: coraline, isFavorite: favorite, isFilm: film, isWatched: watched, platform: netflix, rating: '9/10'},
-      {id:2, name: "Coraline", genre: "cartoon", image: coraline, isFavorite: favorite, isFilm: film, isWatched: watched, platform: netflix, rating: '9/10'},
-      {id:3, name: "Coraline", genre: "cartoon", image: coraline, isFavorite: favorite, isFilm: film, isWatched: watched, platform: netflix, rating: '9/10'}      
+      {id:0, name: "EmptyFilm", genre: "cartoon", image: emptyFilm, isFavorite: favorite, isFilm: film, isWatched: watched, platform: netflix, rating: '9/10'},
+      {id:1, name: "EmptyFilm", genre: "cartoon", image: emptyFilm, isFavorite: favorite, isFilm: film, isWatched: watched, platform: netflix, rating: '9/10'},
+      {id:2, name: "EmptyFilm", genre: "cartoon", image: emptyFilm, isFavorite: favorite, isFilm: film, isWatched: watched, platform: netflix, rating: '9/10'},
+      {id:3, name: "EmptyFilm", genre: "cartoon", image: emptyFilm, isFavorite: favorite, isFilm: film, isWatched: watched, platform: netflix, rating: '9/10'}      
     ]
   }
 
@@ -209,36 +208,58 @@ class App extends Component{
   handleItemSave = state =>{
 
     let card = state.card;
+    if(!card.hasOwnProperty("id")){
+      console.log("new card");
+      card.id = -3; //TODO: setted it with the id obtained from mysql
+    }
     card.name = document.getElementById("item-title").value;
+    if(card.name == ""){
+      alert("Il titolo non può essere vuoto");
+      return;
+    }
     card.genre = document.getElementById("item-genre").value;
+    if(card.genre == "")
+      card.genre = "Sconosciuto";
     card.image = document.getElementById("item-url").value;
+    if(card.image == "")
+      card.image = emptyFilm;
     card.rating = String(state.rating) + "/10";
     switch(state.favorite){
       case true: card.isFavorite = favorite; break;
       case false: card.isFavorite = notfavorite; break;
+      default: card.isFavorite = notfavorite; 
     }
     switch(state.watch){
       case "watched": card.isWatched = watched; break;
       case "watching": card.isWatched = watching; break;
       case "towatch": card.isWatched = towatch; break;
+      default: card.isWatched = towatch; break;
     }
     switch(state.type){
       case "series": card.isFilm = series; break;
       case "film": card.isFilm = film; break;
+      default: card.isFilm = film; break;
     }
-    for(let i = 0; i < state.platforms.length; i++)
+    for(let i = 0; i < state.platforms.length; i++){
       if(state.platforms[i].state){
         card.platform = state.platforms[i].image;
         break;
       }
-
+      if(i == state.platforms.length - 1)
+        card.platform = noPlat;
+    }
+ 
     let cards = this.state.cards;
-    for(let i = 0; cards.length; i++){
+    for(let i = 0; i < cards.length; i++){
       if(cards[i].id == card.id){
         cards[i] = card;
         break;
       }
+      if(i == cards.length - 1)
+        cards.push(card);
     }
+      
+    console.log(card);
     this.setState({itemMenu: -1, cards});
     document.getElementsByTagName('body')[0].style.overflow = 'auto';
     document.getElementById('blocker').style.display = 'none';

@@ -13,8 +13,7 @@ import film from '../../images/film.png'
 import series from '../../images/series.png'
 import netflix from '../../images/netflix.png'
 import noPlat from '../../images/noPlat.png'
-
-let coraline = 'http://1.bp.blogspot.com/-r4taLNcpLCc/TmyjQw8ZTfI/AAAAAAAAA04/DYQe0dEgfKg/s1600/coraline.jpg'
+import emptyFilm from '../../images/emptyFilm.jpg'
 
 class ItemMenu extends Component{
 
@@ -35,8 +34,7 @@ class ItemMenu extends Component{
 
     componentDidMount(){
         let item = this.props.card;
-        console.log(item);
-        if(!("name" in item))
+        if(!item.hasOwnProperty("name"))
             return;
         let title_ = item.name;
         let genre_ = item.genre;
@@ -95,12 +93,10 @@ class ItemMenu extends Component{
         const platforms = [...this.state.platforms];
         for(let i = 0; i < this.state.platforms.length; i++){
             if(platforms[i].image == item.platform){
-                console.log("ciao");
                 platforms[i].state = true;
                 document.getElementById(platforms[i].name).style.opacity = 1;
             }
             else{
-                console.log("boh");
                 platforms[i].state = false;
                 document.getElementById(platforms[i].name).style.opacity = 0.5;
             }
@@ -206,7 +202,7 @@ class ItemMenu extends Component{
                         <img src={cross} style={{width: '1.5rem', cursor: 'pointer'}} onClick={()=>this.props.onCancel()}/>
                     </div>
                     <div style={{width: '100%', display: 'flex', flexDirection: 'row', alignItems: 'flex-start', marginTop: '1.5rem'}}>
-                        <img id="item-image" src={coraline} style={{height: '15rem', marginRight: '2rem', borderRadius: '0.5rem'}}/>
+                        <img id="item-image" src={emptyFilm} style={{height: '15rem', marginRight: '2rem', borderRadius: '0.5rem'}}/>
                         <div>
                             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: '1.5rem'}}>
                                 <label className="item-label" style={{marginRight: '1rem'}}>Titolo</label>
