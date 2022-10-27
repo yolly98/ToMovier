@@ -23,6 +23,7 @@
     $sql = "USE ".$NAME_DB.";";
     if(!$conn->query($sql)){
         echo '{"status": "ERROR", "msg": "connection failed to db"}';
+        $conn->close();
         return;
     }
 
@@ -34,6 +35,7 @@
 
     if($result->num_rows<=0){
         echo '{"status": "ERROR", "msg": "something went wrong"}';
+        $conn->close();
         return;
     }
 

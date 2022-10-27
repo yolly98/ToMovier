@@ -28,12 +28,13 @@
         $sql = "USE ".$NAME_DB.";";
         if(!$conn->query($sql)){
             echo '{"status": "ERROR", "msg": "connection failed to db"}';
+            $conn->close();
             return;
         }
 
         $passwSHA256=hash('sha256', $passw);
 
-        $sql = "SELECT*from USER WHERE user LIKE BINARY ? and passw LIKE BINARY ?;";
+        $sql = "SELECT*FROM USER WHERE user LIKE BINARY ? and passw LIKE BINARY ?;";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("ss",$user,$passwSHA256);
         $stmt->execute();
@@ -68,9 +69,11 @@
         $sql = "USE ".$NAME_DB.";";
         if(!$conn->query($sql)){
             echo '{"status": "ERROR", "msg": "connection failed to db"}';
+            $conn->close();
+            return;
         }
 
-        $sql = "SELECT*from USER WHERE user LIKE BINARY ?";
+        $sql = "SELECT*FROM USER WHERE user LIKE BINARY ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("s",$user);
         $stmt->execute();
@@ -78,7 +81,7 @@
     
         if($result->num_rows==0){
 
-            $sql="INSERT into USER values(?,?)";
+            $sql="INSERT INTO USER VALUES(?,?)";
             $stmt = $conn->prepare($sql);
             $passw = hash('sha256', $passw);
             $stmt->bind_param("ss",$user,$passw);

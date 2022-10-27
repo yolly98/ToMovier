@@ -15,31 +15,32 @@
         {
             user: "user",
             passw: "password",
-            item: {
-                name: "name",
-                genre: "genre",
-                rating: "rating,
-                favorite: "true",
-                platform: "platform",
-                watched: "watched",
-                isFilm: "true",
-                urlImage: "url"
-            }
+            type: "new",
+            id: 0,
+            name: "name",
+            genre: "genre",
+            rating: "rating,
+            favorite: "true",
+            platform: "platform",
+            watched: "watched",
+            isFilm: "true",
+            urlImage: "url"
         }
 
     */
-
+    
     $user = test($body->user);
-    $password = test($body->passw);
-    $id = 0;
-    $name = test($body->item->name);
-    $genere = test($body->item->genre);
-    $platform = test($body->item->platform);
-    $watched = test($body->item->watched);
-    $isFilm = test($body->item->isFilm);
-    $favorite = test($body->item->favorite);
-    $rating = test($body->item->rating);
-    $url = test($body->item->urlImage);
+    $passw = test($body->passw);
+    $type = test($body->type);
+    $id = test($body->id);
+    $name = test($body->name);
+    $genre = test($body->genre);
+    $platform = test($body->platform);
+    $watched = test($body->watched);
+    $isFilm = test($body->isFilm);
+    $favorite = test($body->favorite);
+    $rating = test($body->rating);
+    $urlImage = test($body->urlImage);
 
     $conn = new mysqli($IP_ADDR, $USER_DB, $PASSW_DB);
     if(!$conn){
@@ -48,6 +49,7 @@
     $sql = "USE ".$NAME_DB.";";
     if(!$conn->query($sql)){
         echo '{"status": "ERROR", "msg": "connection failed to db"}';
+        $conn->close();
         return;
     }
 
@@ -59,23 +61,27 @@
     $result = $stmt->get_result();
     if($result->num_rows<=0){
         echo '{"status": "ERROR", "msg": "something went wrong"}';
+        $conn->close();
         return;
     }
 
     //save new item
-    $sql = "INSERT INTO FILM VALUES(?,?,?,?,?,?,?,?,?,?)";
+    $sql = "INSERT INTO FILM VALUES(0,?,?,?,?,?,?,?,?,?);";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssssssssss", $id, $name, $genre, $rating, $favorite, $platform, $watched, $isFilm, $user, $urlImage);
+    $stmt->bind_param("sssssssss", $name, $genre, $rating, $favorite, $platform, $watched, $isFilm, $user, $urlImage);
     $stmt->execute();
 
+    //echo '{"status": "ERROR", "msg": "'.$name.','.$genre.','.$rating.','.$favorite.','.$platform.','.$watched.','.$isFilm.','.$user.','.$urlImage.'"}';
+
     //get the id assigned to the item
-    $sql = "SELECT id from FILM WHERE user LIKE BINARY ? and name LIKE BINARY ?;";
+    $sql = "SELECT * from FILM WHERE user LIKE BINARY ? and name LIKE BINARY ?;";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ss",$user,$passw);
+    $stmt->bind_param("ss",$user,$name);
     $stmt->execute();
     $result = $stmt->get_result();
     if($result->num_rows<=0){
-        echo '{"status": "ERROR", "msg": "something went wrong"}';
+        echo '{"status": "ERROR", "msg": "something went wrong 2"}';
+        $conn->close();
         return;
     }
     else
@@ -94,6 +100,5 @@
         $data = htmlspecialchars($data);
         return $data;
     }
-
 
 ?>
