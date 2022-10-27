@@ -1,18 +1,11 @@
 <?php
 
-    //session_start();
     header("Access-Control-Allow-Origin: http://localhost:3000");
 
     $IP_ADDR = '172.20.0.11';
     $USER_DB = 'root';
     $PASSW_DB = 'password';
-    $NAME_DB = 'toMovier_db';
-
-    /*if(!isset($_SESSION['user'])){
-        echo '{"status": "ERROR", "msg": "session not setted"}';
-        return;
-    }*/
-    //$user = $_SESSION['user'];  
+    $NAME_DB = 'toMovier_db'; 
 
     $body = json_decode($_POST['body']);
     $user = $body->user;

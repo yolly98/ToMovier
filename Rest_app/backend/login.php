@@ -1,6 +1,5 @@
 <?php
 
-    //session_start();
     header("Access-Control-Allow-Origin: http://localhost:3000");
 
     $IP_ADDR = '172.20.0.11';
@@ -41,7 +40,6 @@
         $result = $stmt->get_result();
 
         if($result->num_rows>0){
-            //$_SESSION['user'] = $user;
             echo '{"status": "SUCCESS", "passw": "'.$passwSHA256.'"}';
         }
         else{

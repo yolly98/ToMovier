@@ -1,54 +1,99 @@
 <?php
 
-$IP_ADDR = '172.20.0.11';
-$USER_DB = 'root';
-$PASSW_DB = 'password';
+    header("Access-Control-Allow-Origin: http://localhost:3000");
 
-session_start();
-header("Access-Control-Allow-Origin: http://localhost:3000");
+    $IP_ADDR = '172.20.0.11';
+    $USER_DB = 'root';
+    $PASSW_DB = 'password';
+    $NAME_DB = 'toMovier_db';
 
-$body = json_decode($_POST['body']);
+    $body = json_decode($_POST['body']);
 
-/*
-$user = $_SESSION['user'];
-$json_item = json_decode(test($_POST['newItem']));
+    /*
+        json structure
 
-$name = test($json_item['name']);
-$genere = test($json_item['genre']);
-$platform = test($json_item['platform']);
-$watched = test($json_item['watched']);
-$isFilm = test($json_item['isFilm']);
-$favorite = test($json_item['favorite']);
-$rating = test($json_item['rating']);
-$url = test($json_item['urlImage']);
+        {
+            user: "user",
+            passw: "password",
+            item: {
+                name: "name",
+                genre: "genre",
+                rating: "rating,
+                favorite: "true",
+                platform: "platform",
+                watched: "watched",
+                isFilm: "true",
+                urlImage: "url"
+            }
+        }
 
-$conn = mysqli_connect('localhost','toMovier_db','');
-if(!$conn){
-    echo "connection failed to mysql:".$conn->connect_error;
-    return;
-}
+    */
 
-$sql = "USE toMovier_db;";
-if(!$conn->query($sql)){
-    echo "connection failed to db";
-    return;
-}
+    $user = test($body->user);
+    $password = test($body->passw);
+    $id = 0;
+    $name = test($body->item->name);
+    $genere = test($body->item->genre);
+    $platform = test($body->item->platform);
+    $watched = test($body->item->watched);
+    $isFilm = test($body->item->isFilm);
+    $favorite = test($body->item->favorite);
+    $rating = test($body->item->rating);
+    $url = test($body->item->urlImage);
 
-$sql = "INSERT INTO FILM VALUES(?,?,?,?,?,?,?,?,?,?)";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("ssssssssss", 0, $name, $genre, $rating, $favorite, $platform, $watched, $isFilm, $user, $urlImage);
-$stmt->execute();
-echo 'ok';
+    $conn = new mysqli($IP_ADDR, $USER_DB, $PASSW_DB);
+    if(!$conn){
+        echo '{"status": "ERROR", "msg": "connection failed to mysql:'.$conn->connect_error.'"}';
+    }    
+    $sql = "USE ".$NAME_DB.";";
+    if(!$conn->query($sql)){
+        echo '{"status": "ERROR", "msg": "connection failed to db"}';
+        return;
+    }
 
-$conn->close();
+    //authentication
+    $sql = "SELECT*from USER WHERE user LIKE BINARY ? and passw LIKE BINARY ?;";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ss",$user,$passw);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if($result->num_rows<=0){
+        echo '{"status": "ERROR", "msg": "something went wrong"}';
+        return;
+    }
 
-function test($data){
+    //save new item
+    $sql = "INSERT INTO FILM VALUES(?,?,?,?,?,?,?,?,?,?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ssssssssss", $id, $name, $genre, $rating, $favorite, $platform, $watched, $isFilm, $user, $urlImage);
+    $stmt->execute();
 
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-}
+    //get the id assigned to the item
+    $sql = "SELECT id from FILM WHERE user LIKE BINARY ? and name LIKE BINARY ?;";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ss",$user,$passw);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if($result->num_rows<=0){
+        echo '{"status": "ERROR", "msg": "something went wrong"}';
+        return;
+    }
+    else
+        while($row = $result->fetch_assoc()){
+            $id = $row['id'];
+        }
 
-*/
+    echo '{"status": "SUCCESS", "id": '.$id.'}';
+
+    $conn->close();
+
+    function test($data){
+
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+    }
+
+
 ?>
