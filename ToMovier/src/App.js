@@ -333,7 +333,7 @@ class App extends Component{
     else
       json_msg.type = "update";
     //console.log(json_msg);
-    let url = "http://localhost:80/backend/newItem.php";
+    let url = "http://localhost:80/backend/newUpdateItem.php";
     let msg = "body=" + JSON.stringify(json_msg);
     fetch(url, {
         method : "POST",

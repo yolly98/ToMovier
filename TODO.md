@@ -2,4 +2,4 @@
 
 * mettere bottone di refresh
 * fare filtri e ricerca
-* fare eliminazione
+* fare alert personalizzati
