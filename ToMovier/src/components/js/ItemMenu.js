@@ -24,7 +24,8 @@ class ItemMenu extends Component{
         watch: "towatch",
         type: "series",
         url: "none",
-        platforms: this.props.platforms
+        platforms: this.props.platforms,
+        genres: this.props.genres
     }
 
     componentDidMount(){
@@ -206,7 +207,18 @@ class ItemMenu extends Component{
                             </div>
                             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: '1.5rem'}}>
                                 <label className="item-label" style={{marginRight: '0.4rem'}}>Genere</label>
-                                <input id="item-genre" className='item-text' type="text" />
+                                <select id="item-genre" className='item-text'>
+                                    {
+                                        this.state.genres.map(genre => (
+                                            <option 
+                                                key = {genre.id}
+                                                value = {genre.name} 
+                                            >
+                                            {genre.name}
+                                            </option>
+                                        ))
+                                    }
+                                </select>
                             </div>
                             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', marginBottom: '1.5rem'}}>
                                 <label className="item-label">Voto</label>

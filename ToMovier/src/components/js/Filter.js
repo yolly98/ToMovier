@@ -25,7 +25,8 @@ class Filter extends Component{
     towatch: false,
     series: false,
     film: false,
-    platforms: this.props.platforms
+    platforms: this.props.platforms,
+    genres: this.props.genres
   }
 
   onFavoriteClick(id){
@@ -132,6 +133,14 @@ class Filter extends Component{
     document.getElementById('filter-section').style.display = 'none';
   }
 
+  onGenreClick(index){
+
+    let genres = document.getElementsByClassName("filter-genre");
+    if(genres[index].style.opacity == 1)
+        genres[index].style.opacity = 0.5;
+    else
+        genres[index].style.opacity = 1;
+  }
 
   render(){
     return(
@@ -156,7 +165,20 @@ class Filter extends Component{
                 </div>
             </div>
             <label>GENERE</label>
-            <input className="filter-text" type="text"/>
+            <div style={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center', alignContent: 'center'}}>
+                {
+                    this.state.genres.map(genre => (
+                        <label 
+                            key = {genre.id}
+                            className="filter-genre"
+                            value = {genre.name}
+                            onClick = {() => this.onGenreClick(genre.id)}
+                        >
+                        {genre.name}
+                        </label>
+                    ))
+                }
+            </div>
             <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
                 <div style={{marginTop: '2rem'}}>
                     <label className="filter-label">Preferito:</label>

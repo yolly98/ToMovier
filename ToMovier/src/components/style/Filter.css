@@ -16,7 +16,7 @@
     cursor: pointer;
     width: 1rem;
     margin: 0 2rem 0 0.5rem;
-    cursor: pointer;
+    accent-color: #2a5a76;
 }
 
 .filter-text{
@@ -66,4 +66,15 @@
     border-radius: 0.2rem;
     opacity: 0.5;
     cursor: pointer;
+}
+
+.filter-genre{
+    margin: 0.5rem;
+    padding: 0.2rem;
+    color: #2a5a76;
+    background-color: #bdcbdd;
+    border-radius: 0.2rem;
+    opacity: 0.5;
+    cursor: pointer;
+    font-weight: bold;
 }

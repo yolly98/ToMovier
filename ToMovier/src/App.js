@@ -20,6 +20,7 @@ import emptyFilm from './images/emptyFilm.jpg'
 import noPlat from './images/noPlat.png'
 import netflix from './images/netflix.png'
 import amazon from './images/amazon.png'
+import { ThemeConsumer } from 'react-bootstrap/esm/ThemeProvider';
 
 let PLATFORMS = {
   "netflix": netflix,
@@ -42,7 +43,15 @@ class App extends Component{
       {id: 0, name: "Netflix", image: netflix, state: false},
       {id: 1, name: "Amazon", image: amazon, state: false},
       {id: 2, name: "Unknown", image: noPlat, state: false}
-    ] 
+    ],
+    genres: [
+      {id: 0, name: "Action"},
+      {id: 1, name: "Thriller"},
+      {id: 2, name: "Anime"},
+      {id: 3, name: "Animation"},
+      {id: 4, name: "Horror"},
+      {id: 5, name: "Other"}
+    ]
   }
 
   getPlatform(platform){
@@ -282,9 +291,21 @@ class App extends Component{
     else{
       document.getElementsByTagName('body')[0].style.backgroundColor = "white";
       if(this.state.itemMenu >= 0){
-        itemMenu = <ItemMenu onCancel = {this.handleItemCancel} onSave = {this.handleItemSave} card = {this.state.cards[this.state.itemMenu]} platforms = {this.state.platforms}/>
+          itemMenu = <ItemMenu 
+                      onCancel = {this.handleItemCancel} 
+                      onSave = {this.handleItemSave} 
+                      card = {this.state.cards[this.state.itemMenu]} 
+                      platforms = {this.state.platforms} 
+                      genres = {this.state.genres}
+                    />
       }else if(this.state.itemMenu == -2){
-        itemMenu = <ItemMenu onCancel = {this.handleItemCancel} onSave = {this.handleItemSave} card = {{}} platforms = {this.state.platforms}/>
+        itemMenu = <ItemMenu
+                      onCancel = {this.handleItemCancel} 
+                      onSave = {this.handleItemSave} 
+                      card = {{}} 
+                      platforms = {this.state.platforms} 
+                      genres = {this.state.genres}
+                    />
       }
       else
         itemMenu = <></>
@@ -296,7 +317,7 @@ class App extends Component{
                   onSearch = {this.handleSearch}
                   onFilter = {this.handlefilter}
                 />
-                <Filter platforms = {this.state.platforms}/>
+                <Filter platforms = {this.state.platforms} genres = {this.state.genres}/>
                 <img id="add-item" src={add} onClick={() => this.handleAddCard()} style={{position: "fixed", right: '1rem', width: '4rem', top: '15rem', cursor: 'pointer', zIndex: '2'}}/>
                 {itemMenu}
                 <div className='container'>
