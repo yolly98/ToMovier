@@ -162,11 +162,11 @@ class Filter extends Component{
                 </div>
                 <div style={{display: 'flex', alignItems: 'center'}}>
                     <label className="filter-label">Voto 10-0</label>
-                    <input className="filter-radio" type="radio" name="ordering" value="voto100"/>
+                    <input className="filter-radio" type="radio" name="ordering" value="rate100"/>
                 </div>
                 <div style={{display: 'flex', alignItems: 'center'}}>
                     <label className="filter-label">Voto 0-10</label>
-                    <input className="filter-radio" type="radio" name="ordering" value="voto010"/>
+                    <input className="filter-radio" type="radio" name="ordering" value="rate010"/>
                 </div>
             </div>
             <label>GENERE</label>

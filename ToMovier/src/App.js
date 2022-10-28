@@ -364,81 +364,137 @@ class App extends Component{
   handleApplyFilters = state => {
 
     let cards = [...this.state.cards];
-    for(let i = 0; i < cards.length; i++){
-      let card = cards[i];
-      //favorite filters
-      if(!(
-        (!state.favorite  && !state.notfavorite) ||
-        (
-          (state.favorite && (card.isFavorite == favorite)) ||
-          (state.notfavorite && (card.isFavorite == notfavorite))
-        )
-      )){
-        document.getElementsByClassName("card")[i].style.display = "none";
-        continue;
-      }
-      // wacthing filters
-      if(!(
-        (
-          !state.watched && !state.watching && !state.towatch
-        ) ||
-        (
-          (state.watched && (card.isWatched == watched)) ||
-          (state.watching && (card.isWatched == watching)) ||
-          (state.towatch && (card.isWatched == towatch))
-        )
-      )){
-        document.getElementsByClassName("card")[i].style.display = "none";
-        continue;
-      }
-      //isfilm filters
-      if(!(
-        (!state.series  && !state.film) ||
-        (
-          (state.series && (card.isFilm == series)) ||
-          (state.film && (card.isFilm == film))
-        )
-      )){
-        document.getElementsByClassName("card")[i].style.display = "none";
-        continue;
-      }
-      //Platforms filter
-      let platforms = state.platforms;
-      let accepted = false;
-      let counter = 0;
-      for(let j = 0; j < platforms.length; j++){
-        if(platforms[j].state)
-          counter++;
-        if(platforms[j].state && platforms[j].image == card.platform){
-          accepted = true;
-          break;
-        }
-      }
-      if(!accepted && counter > 0){
-        document.getElementsByClassName("card")[i].style.display = "none";
-        continue;
-      }
-      //genre filter
-      let genres = state.genres;
-      accepted = false;
-      counter = 0;
-      for(let j = 0; j < genres.length; j++){
-        if(genres[j].state)
-          counter++;
-        if(genres[j].state && genres[j].name == card.genre){
-          accepted = true;
-          break;
-        }
-      }
-      if(!accepted && counter > 0){
-        document.getElementsByClassName("card")[i].style.display = "none";
-        continue;
-      }
 
-      document.getElementsByClassName("card")[i].style.display = "flex";
+    //apply sorting
+
+    let radio = document.getElementsByName("ordering");
+    let ordering;
+    for(let i = 0; i < radio.length; i++){
+      if(radio[i].checked){
+        ordering = radio[i].value;
+        break;
+      }
 
     }
-    document.getElementById('filter-section').style.display = 'none';
+    console.log(ordering);
+    cards.sort(
+      function(a,b){ 
+
+        if(ordering == "nameAZ"){
+          if(a.name > b.name)
+            return 1;
+          else
+            return -1;
+        }
+        else if(ordering == "nameZA"){
+          if(a.name < b.name)
+            return 1;
+          else
+            return -1;
+        }
+        else if(ordering == "rate100"){
+          let num_a = Number(a.rating.replace("/10", ""));
+          let num_b = Number(b.rating.replace("/10", ""));
+          if(num_a < num_b)
+            return 1;
+          else
+            return -1;  
+        }
+        else{
+          let num_a = Number(a.rating.replace("/10", ""));
+          let num_b = Number(b.rating.replace("/10", ""));
+          if(num_a > num_b)
+            return 1;
+          else
+            return -1;  
+        }
+      }
+    );
+
+    let filterState = state;
+    this.setState(
+      {cards},
+      function(state = filterState) {
+        //apply filters
+        for(let i = 0; i < cards.length; i++){
+          let card = cards[i];
+          //favorite filters
+          if(!(
+            (!state.favorite  && !state.notfavorite) ||
+            (
+              (state.favorite && (card.isFavorite == favorite)) ||
+              (state.notfavorite && (card.isFavorite == notfavorite))
+            )
+          )){
+            document.getElementsByClassName("card")[i].style.display = "none";
+            continue;
+          }
+          // wacthing filters
+          if(!(
+            (
+              !state.watched && !state.watching && !state.towatch
+            ) ||
+            (
+              (state.watched && (card.isWatched == watched)) ||
+              (state.watching && (card.isWatched == watching)) ||
+              (state.towatch && (card.isWatched == towatch))
+            )
+          )){
+            document.getElementsByClassName("card")[i].style.display = "none";
+            continue;
+          }
+          //isfilm filters
+          if(!(
+            (!state.series  && !state.film) ||
+            (
+              (state.series && (card.isFilm == series)) ||
+              (state.film && (card.isFilm == film))
+            )
+          )){
+            document.getElementsByClassName("card")[i].style.display = "none";
+            continue;
+          }
+          //Platforms filter
+          let platforms = state.platforms;
+          let accepted = false;
+          let counter = 0;
+          for(let j = 0; j < platforms.length; j++){
+            if(platforms[j].state)
+              counter++;
+            if(platforms[j].state && platforms[j].image == card.platform){
+              accepted = true;
+              break;
+            }
+          }
+          if(!accepted && counter > 0){
+            document.getElementsByClassName("card")[i].style.display = "none";
+            continue;
+          }
+          //genre filter
+          let genres = state.genres;
+          accepted = false;
+          counter = 0;
+          for(let j = 0; j < genres.length; j++){
+            if(genres[j].state)
+              counter++;
+            if(genres[j].state && genres[j].name == card.genre){
+              accepted = true;
+              break;
+            }
+          }
+          if(!accepted && counter > 0){
+            document.getElementsByClassName("card")[i].style.display = "none";
+            continue;
+          }
+
+          document.getElementsByClassName("card")[i].style.display = "flex";
+
+        }
+        document.getElementById('filter-section').style.display = 'none';
+      
+      }
+    );
+
   }
 
   render(){
