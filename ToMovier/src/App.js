@@ -39,12 +39,12 @@ class App extends Component{
       {id: 2, name: "Unknown", image: noPlat, state: false}
     ],
     genres: [
-      {id: 0, name: "Action"},
-      {id: 1, name: "Thriller"},
-      {id: 2, name: "Anime"},
-      {id: 3, name: "Animation"},
-      {id: 4, name: "Horror"},
-      {id: 5, name: "Other"}
+      {id: 0, state: false, name: "Action"},
+      {id: 1, state: false, name: "Thriller"},
+      {id: 2, state: false, name: "Anime"},
+      {id: 3, state: false, name: "Animation"},
+      {id: 4, state: false, name: "Horror"},
+      {id: 5, state: false, name: "Other"}
     ]
   }
 
@@ -60,6 +60,7 @@ class App extends Component{
   }
 
   getItems(user, password){
+
     let json_msg = {"user": user, "passw": password, "type": "get-items"};
     let url = "http://localhost:80/backend/getItems.php";
     let msg = "body=" + JSON.stringify(json_msg);
@@ -360,6 +361,86 @@ class App extends Component{
     );
   }
 
+  handleApplyFilters = state => {
+
+    let cards = [...this.state.cards];
+    for(let i = 0; i < cards.length; i++){
+      let card = cards[i];
+      //favorite filters
+      if(!(
+        (!state.favorite  && !state.notfavorite) ||
+        (
+          (state.favorite && (card.isFavorite == favorite)) ||
+          (state.notfavorite && (card.isFavorite == notfavorite))
+        )
+      )){
+        document.getElementsByClassName("card")[i].style.display = "none";
+        continue;
+      }
+      // wacthing filters
+      if(!(
+        (
+          !state.watched && !state.watching && !state.towatch
+        ) ||
+        (
+          (state.watched && (card.isWatched == watched)) ||
+          (state.watching && (card.isWatched == watching)) ||
+          (state.towatch && (card.isWatched == towatch))
+        )
+      )){
+        document.getElementsByClassName("card")[i].style.display = "none";
+        continue;
+      }
+      //isfilm filters
+      if(!(
+        (!state.series  && !state.film) ||
+        (
+          (state.series && (card.isFilm == series)) ||
+          (state.film && (card.isFilm == film))
+        )
+      )){
+        document.getElementsByClassName("card")[i].style.display = "none";
+        continue;
+      }
+      //Platforms filter
+      let platforms = state.platforms;
+      let accepted = false;
+      let counter = 0;
+      for(let j = 0; j < platforms.length; j++){
+        if(platforms[j].state)
+          counter++;
+        if(platforms[j].state && platforms[j].image == card.platform){
+          accepted = true;
+          break;
+        }
+      }
+      if(!accepted && counter > 0){
+        document.getElementsByClassName("card")[i].style.display = "none";
+        continue;
+      }
+      //genre filter
+      let genres = state.genres;
+      accepted = false;
+      counter = 0;
+      for(let j = 0; j < genres.length; j++){
+        if(genres[j].state)
+          counter++;
+        if(genres[j].state && genres[j].name == card.genre){
+          accepted = true;
+          break;
+        }
+      }
+      if(!accepted && counter > 0){
+        document.getElementsByClassName("card")[i].style.display = "none";
+        continue;
+      }
+
+      document.getElementsByClassName("card")[i].style.display = "flex";
+
+    }
+    document.getElementById('filter-section').style.display = 'none';
+  }
+
   render(){
     let page;
     let itemMenu;
@@ -396,7 +477,11 @@ class App extends Component{
                   onSearch = {this.handleSearch}
                   onFilter = {this.handlefilter}
                 />
-                <Filter platforms = {this.state.platforms} genres = {this.state.genres}/>
+                <Filter 
+                  platforms = {this.state.platforms} 
+                  genres = {this.state.genres}
+                  onApplyFilters = {this.handleApplyFilters}
+                />
                 <img id="add-item" src={add} onClick={() => this.handleAddCard()} style={{position: "fixed", right: '1rem', width: '4rem', top: '15rem', cursor: 'pointer', zIndex: '2'}}/>
                 {itemMenu}
                 <div className='container'>

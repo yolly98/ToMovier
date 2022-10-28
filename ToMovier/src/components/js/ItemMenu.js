@@ -24,8 +24,8 @@ class ItemMenu extends Component{
         watch: "towatch",
         type: "series",
         url: "none",
-        platforms: this.props.platforms,
-        genres: this.props.genres
+        platforms: [...this.props.platforms],
+        genres: [...this.props.genres]
     }
 
     componentDidMount(){
@@ -91,11 +91,11 @@ class ItemMenu extends Component{
         for(let i = 0; i < platforms.length; i++){
             if(platforms[i].image == item.platform){
                 platforms[i].state = true;
-                document.getElementById(platforms[i].name).style.opacity = 1;
+                document.getElementById("item-plat-" + platforms[i].name).style.opacity = 1;
             }
             else{
                 platforms[i].state = false;
-                document.getElementById(platforms[i].name).style.opacity = 0.5;
+                document.getElementById("item-plat-" + platforms[i].name).style.opacity = 0.5;
             }
         }
 

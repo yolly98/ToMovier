@@ -4,13 +4,10 @@ import '../style/Filter.css'
 import watched from '../../images/watched.png'
 import watching from '../../images/watching.png'
 import towatch from '../../images/towatch.png'
-import fullstar from '../../images/fullstar.png'
-import emptystar from '../../images/emptystar.png'
 import favorite from '../../images/favorite.png'
 import notfavorite from '../../images/notfavorite.png'
 import film from '../../images/film.png'
 import series from '../../images/series.png'
-import netflix from '../../images/netflix.png'
 
 
 import '../style/Navbar.css'
@@ -25,8 +22,8 @@ class Filter extends Component{
     towatch: false,
     series: false,
     film: false,
-    platforms: this.props.platforms,
-    genres: this.props.genres
+    platforms: [...this.props.platforms],
+    genres: [...this.props.genres]
   }
 
   onFavoriteClick(id){
@@ -46,6 +43,8 @@ class Filter extends Component{
        this.setState({favorite: state});
     else
         this.setState({notfavorite: state});
+
+    //console.log({"favorite": this.state.favorite, "notfavorite": this.state.notfavorite} );
   }
 
   onWatchClick(id){
@@ -108,11 +107,7 @@ class Filter extends Component{
     this.setState({platforms});             
   }
 
-  onApplyFilters(){
-    document.getElementById('filter-section').style.display = 'none';
-  }
-  
-  onRemoveFilters(){
+  onRemoveFilters() {
     let radio = document.getElementsByName('ordering');
     for(let i = 0; i < radio.length; i++)
         radio[i].checked = false;
@@ -131,15 +126,25 @@ class Filter extends Component{
     }
     this.setState(platforms);
     document.getElementById('filter-section').style.display = 'none';
+
+    let cards = document.getElementsByClassName("card");
+    for(let i = 0; i < cards.length; i++)
+      cards[i].style.display = "flex";
   }
 
   onGenreClick(index){
 
     let genres = document.getElementsByClassName("filter-genre");
-    if(genres[index].style.opacity == 1)
+    let genres_state = [...this.state.genres];
+    if(genres[index].style.opacity == 1){
         genres[index].style.opacity = 0.5;
-    else
+        genres_state[index].state = false;
+    }
+    else{
         genres[index].style.opacity = 1;
+        genres_state[index].state = true;
+    }
+    this.setState({genres: genres_state});
   }
 
   render(){
@@ -182,8 +187,8 @@ class Filter extends Component{
             <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
                 <div style={{marginTop: '2rem'}}>
                     <label className="filter-label">Preferito:</label>
-                    <img id="filter-favorite" onClick={() => this.onFavoriteClick("filter-favorite")} style={{width: '1.5rem', margin: '0 0.5rem 0 0.5rem'}} src={notfavorite}/>
-                    <img id="filter-notfavorite" onClick={() => this.onFavoriteClick("filter-notfavorite")} style={{width: '1.7rem', margin: '0 2rem 0 0'}} src={favorite}/>
+                    <img id="filter-notfavorite" onClick={() => this.onFavoriteClick("filter-notfavorite")} style={{width: '1.5rem', margin: '0 0.5rem 0 0.5rem'}} src={notfavorite}/>
+                    <img id="filter-favorite" onClick={() => this.onFavoriteClick("filter-favorite")} style={{width: '1.7rem', margin: '0 2rem 0 0'}} src={favorite}/>
                 </div>
                 <div style={{marginTop: '2rem'}}>
                     <label className="filter-label">Visto:</label>
@@ -214,7 +219,7 @@ class Filter extends Component{
                 }
             </div>
             <div style={{marginTop: '2rem', marginBottom: '2rem', width: '30%', display: 'flex', justifyContent: 'space-between'}}>
-                <button className="filter-button" onClick={() => this.onApplyFilters()}>FILTRA</button>
+                <button className="filter-button" onClick={() => this.props.onApplyFilters(this.state)}>FILTRA</button>
                 <button className="filter-button" onClick={() => this.onRemoveFilters()}>ANNULLA FILTRI</button>
             </div>
             
