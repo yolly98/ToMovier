@@ -6,6 +6,7 @@ import Card from './components/js/Card';
 import Login from './components/js/Login';
 import Filter from './components/js/Filter';
 import ItemMenu from './components/js/ItemMenu';
+import Alert from './components/js/Alert';
 
 import favorite from './images/favorite.png'
 import notfavorite from './images/notfavorite.png'
@@ -18,10 +19,13 @@ import add from './images/add.png'
 import emptyFilm from './images/emptyFilm.jpg'
 import random from './images/dice.png'
 
+import infoAlert from './images/dice.png'
+import warningAlert from './images/dice.png'
+import errorAlert from './images/dice.png'
+
 import noPlat from './images/noPlat.png'
 import netflix from './images/netflix.png'
 import amazon from './images/amazon.png'
-import { ThemeConsumer } from 'react-bootstrap/esm/ThemeProvider';
 
 class App extends Component{
 
@@ -47,7 +51,13 @@ class App extends Component{
       {id: 3, state: false, name: "Animation"},
       {id: 4, state: false, name: "Horror"},
       {id: 5, state: false, name: "Other"}
-    ]
+    ], 
+    alert: {
+      state: false,
+      title: "esempio",
+      text: "ciao a tutti come state? io bene",
+      image: infoAlert
+    }
   }
 
   getPlatform(platformName){
@@ -114,9 +124,10 @@ class App extends Component{
                   );
                 }
                 this.setState({cards});
-                console.log(cards);
+                //console.log(cards);
             } else {
-              alert(html.msg);
+              console.error(html.msg);
+              this.openAlert("ERROR", "Caricamento dei film e serie fallito", errorAlert);
             }
         }
     );
@@ -124,7 +135,13 @@ class App extends Component{
   }
 
   handleLogin = (user, password) =>{
+
     //console.log("login (" + user + ", " + password + ")");
+    if(user == "" || password == ""){
+      this.openAlert("ERROR", "Tutti i campi devono essere compilati", errorAlert);
+      return;
+    }
+
     let json_msg = {"user": user, "passw": password, "type": "login"};
     let url = "http://localhost:80/backend/login.php";
     let msg = "body=" + JSON.stringify(json_msg);
@@ -144,7 +161,13 @@ class App extends Component{
                 this.setState({user, password});
                 this.getItems(user, password);
             } else {
-              alert(html.msg);
+              console.error(html.msg);
+              let msg = "";
+              if(html.msg == "user name or password not correct")
+                msg = "Username o password non corretti";
+              else
+                msg = "Qualcosa è andato storto...";
+              this.openAlert("ERROR", msg, errorAlert);
             }
         }
     );
@@ -153,6 +176,11 @@ class App extends Component{
 
   handleSignup = (user, password) =>{
     //console.log("login (" + user + ", " + password + ")");
+    if(user == "" || password == ""){
+      this.openAlert("ERROR", "Tutti i campi devono essere compilati", errorAlert);
+      return;
+    }
+
     let json_msg = {"user": user, "passw": password, "type": "signup"};
     let url = "http://localhost:80/backend/login.php";
     let msg = "body=" + JSON.stringify(json_msg);
@@ -168,10 +196,18 @@ class App extends Component{
     ).then(
         html => {
             if (html.status == "SUCCESS") {
-              alert("signup success");
+              console.log("signup success");
+              this.openAlert("SUCCESS", "Registrazione avvenuta con successo", infoAlert);
             }
             else {
-              alert(html.msg);
+              console.error(html.msg);
+              let msg = "";
+              if(html.msg == "Username already exists")
+                msg = "Username già in uso";
+              else
+                msg = "Qualcosa è andato storto...";
+
+              this.openAlert("ERROR", msg, errorAlert);
             }      
         }
     );
@@ -247,9 +283,15 @@ class App extends Component{
             if (html.status == "SUCCESS") {
               let cards = [...this.state.cards];
               cards.splice(cards.indexOf(card),1);
-              this.setState({cards});
+              this.setState(
+                {cards},
+                function(){
+                  this.openAlert("SUCCESS", (card.name + " rimosso!"), infoAlert);
+                }
+              );
             } else {
-              alert(html.msg);
+              console.error(html.msg);
+              this.openAlert("ERROR", ("Rimozione di " + card.name + " fallita"), errorAlert);
             }
         }
     );
@@ -276,7 +318,8 @@ class App extends Component{
     card.name = document.getElementById("item-title").value;
     item_db.name = document.getElementById("item-title").value;
     if(card.name == ""){
-      alert("Il titolo non può essere vuoto");
+      this.openAlert("ERROR", "Il titolo non può essere vuoto!", errorAlert);
+      console.error("item title can't be empty");
       return;
     }
     
@@ -365,11 +408,17 @@ class App extends Component{
               if(isNewItem)
                 cards[cards.length-1].id = Number(html.id);
               //console.log(cards);
-              this.setState({itemMenu: -1, cards});
+              this.setState(
+                {itemMenu: -1, cards},
+                function(){
+                  this.openAlert("SUCCESS", "Salvataggio avveuto con successo", infoAlert);
+                }
+              );
               document.getElementsByTagName('body')[0].style.overflow = 'auto';
               document.getElementById('blocker').style.display = 'none'; 
             } else {
-              alert(html.msg);
+              console.error(html.msg);
+              this.openAlert("ERROR", "Salvataggio fallito", infoAlert);
             }
         }
     );
@@ -526,13 +575,42 @@ class App extends Component{
 
   }
 
+  handleCloseAlert = () => {
+    let alert = this.state.alert;
+    alert.state = false;
+    this.setState({alert});
+    
+  }
 
+  openAlert(title, text, image){
+    let alert = this.state.alert;
+    alert.state = true;
+    alert.title = title;
+    alert.text = text;
+    alert.image = image;
+    this.setState({alert});
+  }
 
   render(){
     let page;
     let itemMenu;
+    let alert;
+    //alert
+    if(this.state.alert.state){
+      alert = <Alert
+                alert = {this.state.alert}
+                closeAlert = {this.handleCloseAlert}
+              />
+    }
+    else
+      alert = <></>
+
+    //page
     if(this.state.user == ""){
-      page = <Login onLogin = {this.handleLogin} onSignup = {this.handleSignup} />
+      page = <>
+                <Login onLogin = {this.handleLogin} onSignup = {this.handleSignup} />
+                {alert}
+             </>
       document.getElementsByTagName('body')[0].style.backgroundColor = "#2a5a76";
     }
     else{
@@ -572,6 +650,7 @@ class App extends Component{
                 <img id="rand-item" src={random} onClick={() => this.handleRandomItem()} style={{position: "fixed", right: '1rem', width: '4rem', top: '10rem', cursor: 'pointer', zIndex: '2'}}/>
                 <img id="add-item" src={add} onClick={() => this.handleAddCard()} style={{position: "fixed", right: '1rem', width: '4rem', top: '15rem', cursor: 'pointer', zIndex: '2'}}/>
                 {itemMenu}
+                {alert}
                 <div className='cards-container'>
                   {
                     this.state.cards.map(card => (

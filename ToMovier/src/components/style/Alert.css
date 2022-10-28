@@ -1,0 +1,35 @@
+#alert-container{
+    position: fixed;
+    z-index: 4;
+    background-color: #6b8ea2;
+    padding: 1rem 2rem 2rem 2rem;
+    border-radius: 1rem;
+    border: 0.2rem solid #2a5a76;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#alert-title{
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #2a5a76;
+}
+
+#alert-cross{
+    width: 2rem;
+    cursor: pointer;
+}
+
+#alert-image{
+    height: 7rem;
+    margin-right: 2rem;
+}
+
+#alert-text{
+    color: white;
+    font-size: 1rem;
+}

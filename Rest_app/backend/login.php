@@ -44,7 +44,7 @@
             echo '{"status": "SUCCESS", "passw": "'.$passwSHA256.'"}';
         }
         else{
-            echo '{"status": "ERROR", "msg": "user name or password not correct"}';
+            echo '{"status": "ERROR", "msg": "username or password not correct"}';
         }
         
         $conn->close();
@@ -90,7 +90,7 @@
             echo '{"status": "SUCCESS"}';
         }
         else{
-            echo '{"status": "ERROR", "msg": "Username already exists"}';
+            echo '{"status": "ERROR", "msg": "username already exists"}';
         }
 
         $conn->close();
