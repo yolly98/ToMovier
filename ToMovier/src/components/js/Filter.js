@@ -127,7 +127,7 @@ class Filter extends Component{
     this.setState(platforms);
     document.getElementById('filter-section').style.display = 'none';
 
-    let cards = document.getElementsByClassName("card");
+    let cards = document.getElementsByClassName("card-col");
     for(let i = 0; i < cards.length; i++)
       cards[i].style.display = "flex";
   }

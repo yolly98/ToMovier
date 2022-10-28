@@ -426,7 +426,7 @@ class App extends Component{
               (state.notfavorite && (card.isFavorite == notfavorite))
             )
           )){
-            document.getElementsByClassName("card")[i].style.display = "none";
+            document.getElementsByClassName("card-col")[i].style.display = "none";
             continue;
           }
           // wacthing filters
@@ -440,7 +440,7 @@ class App extends Component{
               (state.towatch && (card.isWatched == towatch))
             )
           )){
-            document.getElementsByClassName("card")[i].style.display = "none";
+            document.getElementsByClassName("card-col")[i].style.display = "none";
             continue;
           }
           //isfilm filters
@@ -451,7 +451,7 @@ class App extends Component{
               (state.film && (card.isFilm == film))
             )
           )){
-            document.getElementsByClassName("card")[i].style.display = "none";
+            document.getElementsByClassName("card-col")[i].style.display = "none";
             continue;
           }
           //Platforms filter
@@ -467,7 +467,7 @@ class App extends Component{
             }
           }
           if(!accepted && counter > 0){
-            document.getElementsByClassName("card")[i].style.display = "none";
+            document.getElementsByClassName("card-col")[i].style.display = "none";
             continue;
           }
           //genre filter
@@ -483,11 +483,11 @@ class App extends Component{
             }
           }
           if(!accepted && counter > 0){
-            document.getElementsByClassName("card")[i].style.display = "none";
+            document.getElementsByClassName("card-col")[i].style.display = "none";
             continue;
           }
 
-          document.getElementsByClassName("card")[i].style.display = "flex";
+          document.getElementsByClassName("card-col")[i].style.display = "flex";
 
         }
         document.getElementById('filter-section').style.display = 'none';
@@ -540,19 +540,17 @@ class App extends Component{
                 />
                 <img id="add-item" src={add} onClick={() => this.handleAddCard()} style={{position: "fixed", right: '1rem', width: '4rem', top: '15rem', cursor: 'pointer', zIndex: '2'}}/>
                 {itemMenu}
-                <div className='container'>
-                  <div className='row'>
-                    {
-                      this.state.cards.map(card => (
-                        <Card
-                          key = {card.id}
-                          onOpenCard = {this.handleOpenCard}
-                          onDeleteCard = {this.handleDeleteCard}
-                          card = {card}
-                        />
-                      ))
-                    }
-                  </div>
+                <div className='cards-container'>
+                  {
+                    this.state.cards.map(card => (
+                      <Card
+                        key = {card.id}
+                        onOpenCard = {this.handleOpenCard}
+                        onDeleteCard = {this.handleDeleteCard}
+                        card = {card}
+                      />
+                    ))
+                  }
                 </div>
               </>
     }
