@@ -578,7 +578,13 @@ class App extends Component{
   handleCloseAlert = () => {
     let alert = this.state.alert;
     alert.state = false;
-    this.setState({alert});
+    this.setState(
+      {alert},
+      function(){
+        document.getElementsByTagName('body')[0].style.overflow = 'auto';
+        document.getElementById('blocker').style.display = 'none';
+      }
+    );
     
   }
 
@@ -588,7 +594,13 @@ class App extends Component{
     alert.title = title;
     alert.text = text;
     alert.image = image;
-    this.setState({alert});
+    this.setState(
+      {alert},
+      function(){
+        document.getElementsByTagName('body')[0].style.overflow = 'hidden';
+        document.getElementById('blocker').style.display = 'block';
+      }
+    );
   }
 
   render(){
@@ -607,7 +619,7 @@ class App extends Component{
 
     //page
     if(this.state.user == ""){
-      page = <>
+      page = <> <div id="blocker" style={{width: '100%', height: '100%', backgroundColor: 'black', opacity: '0.4', position: 'fixed', top: '0', zIndex: '3', display: "none"}}></div>
                 <Login onLogin = {this.handleLogin} onSignup = {this.handleSignup} />
                 {alert}
              </>
