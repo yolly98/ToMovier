@@ -192,6 +192,18 @@ class App extends Component{
 
   handleSearch = inputText => {
     console.log("search text pressed [" + inputText + "]")
+    let searchingText = document.getElementById("input-search").value;
+    let cards = document.getElementsByClassName("card-col");
+    let cardsState = [...this.state.cards];
+    for(let i = 0; i < cards.length; i++){
+      if(searchingText == "")
+        cards[i].style.display = "flex";
+      else if((cardsState[i].name.toLowerCase()).search(searchingText) == -1)
+        cards[i].style.display = "none";
+      else
+        cards[i].style.display = "flex";
+
+    }
   }
 
   handleOpenCard = card => {
