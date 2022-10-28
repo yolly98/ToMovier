@@ -16,10 +16,12 @@ import watching from './images/watching.png'
 import towatch from './images/towatch.png'
 import add from './images/add.png'
 import emptyFilm from './images/emptyFilm.jpg'
+import random from './images/dice.png'
 
 import noPlat from './images/noPlat.png'
 import netflix from './images/netflix.png'
 import amazon from './images/amazon.png'
+import { ThemeConsumer } from 'react-bootstrap/esm/ThemeProvider';
 
 class App extends Component{
 
@@ -509,6 +511,23 @@ class App extends Component{
 
   }
 
+  handleRandomItem(){
+
+    let filtredCards = [];
+    for(let i = 0; i < this.state.cards.length; i++){
+      if(document.getElementsByClassName('card-col')[i].style.display == "flex")
+        filtredCards.push(i);
+    }
+
+    let id = filtredCards[Math.floor(Math.random() * filtredCards.length)];
+    this.setState({itemMenu: id});
+    document.getElementsByTagName('body')[0].style.overflow = 'hidden';
+    document.getElementById('blocker').style.display = 'block';
+
+  }
+
+
+
   render(){
     let page;
     let itemMenu;
@@ -550,6 +569,7 @@ class App extends Component{
                   genres = {this.state.genres}
                   onApplyFilters = {this.handleApplyFilters}
                 />
+                <img id="rand-item" src={random} onClick={() => this.handleRandomItem()} style={{position: "fixed", right: '1rem', width: '4rem', top: '10rem', cursor: 'pointer', zIndex: '2'}}/>
                 <img id="add-item" src={add} onClick={() => this.handleAddCard()} style={{position: "fixed", right: '1rem', width: '4rem', top: '15rem', cursor: 'pointer', zIndex: '2'}}/>
                 {itemMenu}
                 <div className='cards-container'>
