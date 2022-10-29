@@ -1,7 +1,7 @@
 @media (min-width: 601px){
 
     #item-section{
-        z-index: 3;
+        z-index: 4;
         width: 100%;
         display: flex;
         align-items: center;
@@ -155,7 +155,7 @@
 
 @media (max-width: 600px){
     #item-section{
-        z-index: 3;
+        z-index: 4;
         width: 100%;
         display: flex;
         position: fixed;

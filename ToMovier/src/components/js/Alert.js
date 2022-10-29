@@ -13,7 +13,7 @@ class Alert extends Component{
 
     render(){
         return(
-            <div id="alert-container" style={{zIndex: '5'}}>
+            <div id="alert-container" style={{zIndex: '6'}}>
                 <div>
                     <div id="alert-container1">
                         <label id="alert-title">{this.state.title}</label>

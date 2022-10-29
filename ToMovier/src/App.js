@@ -277,7 +277,7 @@ class App extends Component{
     console.log("open button pressed [" + card.name + "]");
     this.setState({itemMenu: this.state.cards.indexOf(card)});
     document.getElementsByTagName('body')[0].style.overflow = 'hidden';
-    document.getElementById('blocker').style.display = 'block';
+    document.getElementById('blocker1').style.display = 'block';
 
   }
 
@@ -285,7 +285,7 @@ class App extends Component{
     console.log("add card pressed");
     this.setState({itemMenu: -2});
     document.getElementsByTagName('body')[0].style.overflow = 'hidden';
-    document.getElementById('blocker').style.display = 'block';
+    document.getElementById('blocker1').style.display = 'block';
   }
 
   handleDeleteCard = card => {
@@ -329,7 +329,7 @@ class App extends Component{
   handleItemCancel = () => {
     this.setState({itemMenu: -1});
     document.getElementsByTagName('body')[0].style.overflow = 'auto';
-    document.getElementById('blocker').style.display = 'none';
+    document.getElementById('blocker1').style.display = 'none';
   }
 
   handleItemSave = state =>{
@@ -406,11 +406,6 @@ class App extends Component{
         cards.push(card);
     }
       
-    //console.log(card);
-    //this.setState({itemMenu: -1, cards});
-    //document.getElementsByTagName('body')[0].style.overflow = 'auto';
-    //document.getElementById('blocker').style.display = 'none';
-
     //html request
     let json_msg = item_db;
     json_msg.user = this.state.user;
@@ -444,7 +439,7 @@ class App extends Component{
                 }
               );
               document.getElementsByTagName('body')[0].style.overflow = 'auto';
-              document.getElementById('blocker').style.display = 'none'; 
+              document.getElementById('blocker1').style.display = 'none'; 
             } else {
               console.error(html.msg);
               this.openAlert("ERROR", "Salvataggio fallito", infoAlert);
@@ -600,7 +595,7 @@ class App extends Component{
     let id = filtredCards[Math.floor(Math.random() * filtredCards.length)];
     this.setState({itemMenu: id});
     document.getElementsByTagName('body')[0].style.overflow = 'hidden';
-    document.getElementById('blocker').style.display = 'block';
+    document.getElementById('blocker1').style.display = 'block';
 
   }
 
@@ -611,7 +606,7 @@ class App extends Component{
       {alert},
       function(){
         document.getElementsByTagName('body')[0].style.overflow = 'auto';
-        document.getElementById('blocker').style.display = 'none';
+        document.getElementById('blocker2').style.display = 'none';
       }
     );
     
@@ -627,7 +622,7 @@ class App extends Component{
       {alert},
       function(){
         document.getElementsByTagName('body')[0].style.overflow = 'hidden';
-        document.getElementById('blocker').style.display = 'block';
+        document.getElementById('blocker2').style.display = 'block';
       }
     );
   }
@@ -648,7 +643,7 @@ class App extends Component{
 
     //page
     if(this.state.user == ""){
-      page = <> <div id="blocker" style={{width: '100%', height: '100%', backgroundColor: 'black', opacity: '0.4', position: 'fixed', top: '0', zIndex: '4', display: "none"}}></div>
+      page = <> <div id="blocker2" style={{width: '100%', height: '100%', backgroundColor: 'black', opacity: '0.4', position: 'fixed', top: '0', zIndex: '5', display: "none"}}></div>
                 <Login onLogin = {this.handleLogin} onSignup = {this.handleSignup} />
                 {alert}
              </>
@@ -676,7 +671,8 @@ class App extends Component{
       else
         itemMenu = <></>
       page = <>
-                <div id="blocker" style={{width: '100%', height: '100%', backgroundColor: 'black', opacity: '0.4', position: 'fixed', top: '0', zIndex: '3', display: "none"}}></div>
+                <div id="blocker1" style={{width: '100%', height: '100%', backgroundColor: 'black', opacity: '0.4', position: 'fixed', top: '0', zIndex: '3', display: "none"}}></div>
+                <div id="blocker2" style={{width: '100%', height: '100%', backgroundColor: 'black', opacity: '0.4', position: 'fixed', top: '0', zIndex: '5', display: "none"}}></div>
                 <Navbar 
                   user = {this.state.user}
                   onExit = {this.handleExit}
