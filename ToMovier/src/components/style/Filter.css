@@ -1,107 +1,239 @@
-#filter-section{
-    background-color: #4283a9;
-    width:100%;
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+@media (min-width: 601px){
 
-.filter-label{
-    color:white;
-    margin:0;
-}
+    #filter-section{
+        background-color: #4283a9;
+        width:100%;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 
-.filter-radio{
-    cursor: pointer;
-    width: 1rem;
-    margin: 0 2rem 0 0.5rem;
-    accent-color: #2a5a76;
-}
+    #filter-container1{
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
 
-.filter-text{
-    background-color: #6b8ea2;
-    border-radius: 0.5rem;
-    border: 0 transparent;
-    height: 2rem;
-    width: 15rem;
-    color: white;
-    font-size: 1rem;
-}
+    #filter-container2{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
 
-.filter-text:active{
-    border: 0 transparent;
-}
+    #filter-container3{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
 
-.filter-button{
-    color: #2a5a76;
-    border: 0.2rem solid #2a5a76;
-    border-radius: 0.5rem;
-    font-size: 1.3rem;
-    font-weight: bold;
-    background-color: #bdcbdd;
-    cursor: pointer;
-}
+    #filter-container3 div{
+        margin-top: 2rem;
+    }
 
-.filter-button:active{
-    border-color: #bdcbdd;
-    color: #bdcbdd;
-    background-color: #2a5a76;
-}
+    #filter-container4{
+        display: flex;
+        flex-wrap: wrap;
+        width: 60%;
+        justify-content: center;
+    }
 
-#filter-favorite,#filter-notfavorite, #filter-watched, #filter-watching, #filter-towatch{
-    opacity: 0.5;
-    cursor: pointer;
-}
+    #filter-container5{
+        margin-top: 2rem;
+        width: 30%;
+        display: flex;
+        justify-content: space-between;
+    }
 
-#filter-series, #filter-film{
-    background-color: #bdcbdd;
-    border-radius: 0.2rem;
-    opacity: 0.5;
-    cursor: pointer;
-}
+    .filter-title{
+        color:white;
+        margin:0;
+        font-size: 1rem;
+        font-weight: bold;
+    }
 
-.filter-platform{
-    border-radius: 0.2rem;
-    opacity: 0.5;
-    cursor: pointer;
-}
+    .filter-label{
+        color:white;
+        margin:0;
+        font-size: 1rem;
+    }
 
-.filter-genre{
-    margin: 0.5rem;
-    padding: 0.2rem;
-    color: #2a5a76;
-    background-color: #bdcbdd;
-    border-radius: 0.2rem;
-    opacity: 0.5;
-    cursor: pointer;
-    font-weight: bold;
-}
+    .filter-radio{
+        cursor: pointer;
+        width: 1rem;
+        margin: 0 2rem 0 0.5rem;
+        accent-color: #2a5a76;
+    }
 
-#item-platforms-container{
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    background-color: rgb(189, 203, 221);
-    border-radius: 0.5rem;
-    padding: 0.5rem;
-    width: 30rem;
-    overflow: auto;
-    align-items: center;
-    flex-wrap: nowrap;
-}
+    .filter-button{
+        color: #2a5a76;
+        border: 0.2rem solid #2a5a76;
+        border-radius: 0.5rem;
+        font-size: 1.3rem;
+        font-weight: bold;
+        background-color: #bdcbdd;
+        cursor: pointer;
+    }
 
-#item-platforms-container::-webkit-scrollbar {
-    height: 0.8rem;
-}
-  
-#item-platforms-container::-webkit-scrollbar-track {
-    background: transparent;        /* color of the tracking area */
-    opacity: 0.5;
-}
+    .filter-button:active{
+        border-color: #bdcbdd;
+        color: #bdcbdd;
+        background-color: #2a5a76;
+    }
 
-#item-platforms-container::-webkit-scrollbar-thumb {
-background-color: #2a5a76;    /* color of the scroll thumb */
-border-radius: 0.5rem;       /* roundness of the scroll thumb */
-border: 0 ;  /* creates padding around scroll thumb */
+    #filter-favorite,#filter-notfavorite, #filter-watched, #filter-watching, #filter-towatch{
+        opacity: 0.5;
+        cursor: pointer;
+    }
+
+    #filter-series, #filter-film{
+        background-color: #bdcbdd;
+        border-radius: 0.2rem;
+        opacity: 0.5;
+        cursor: pointer;
+    }
+
+    .filter-platform{
+        border-radius: 0.2rem;
+        opacity: 0.5;
+        cursor: pointer;
+        height: 2.7rem;
+        margin: 0.5rem;
+    }
+
+    .filter-genre{
+        margin: 0.5rem;
+        padding: 0.2rem;
+        color: #2a5a76;
+        background-color: #bdcbdd;
+        border-radius: 0.2rem;
+        opacity: 0.5;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+   
+}
+/***************** for mobile device *****************/
+
+@media (max-width: 600px){
+
+    #filter-section{
+        background-color: #4283a9;
+        width:100%;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #filter-container1{
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-bottom: 0.8rem;
+    }
+
+    #filter-container2{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    #filter-container3{
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 1rem;
+    }
+
+    #filter-container3 div{
+        margin-top: 1rem;
+    }
+
+    #filter-container4{
+        display: flex;
+        flex-wrap: wrap;
+        width: 90%;
+        justify-content: center;
+    }
+
+    #filter-container5{
+        margin-top: 1rem;
+        width: 80%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .filter-title{
+        color:white;
+        margin:0;
+        font-size: 0.8rem;
+        font-weight: bold;
+    }
+
+    .filter-label{
+        color:white;
+        margin:0;
+        font-size: 0.8rem;
+    }
+
+    .filter-radio{
+        cursor: pointer;
+        width: 1rem;
+        margin: 0 2rem 0 0.5rem;
+        accent-color: #2a5a76;
+    }
+
+    .filter-button{
+        color: #2a5a76;
+        border: 0.2rem solid #2a5a76;
+        border-radius: 0.5rem;
+        font-size: 0.8rem;
+        font-weight: bold;
+        background-color: #bdcbdd;
+        cursor: pointer;
+    }
+
+    .filter-button:active{
+        border-color: #bdcbdd;
+        color: #bdcbdd;
+        background-color: #2a5a76;
+    }
+
+    #filter-favorite,#filter-notfavorite, #filter-watched, #filter-watching, #filter-towatch{
+        opacity: 0.5;
+        cursor: pointer;
+    }
+
+    #filter-series, #filter-film{
+        background-color: #bdcbdd;
+        border-radius: 0.2rem;
+        opacity: 0.5;
+        cursor: pointer;
+    }
+
+    .filter-platform{
+        border-radius: 0.2rem;
+        opacity: 0.5;
+        cursor: pointer;
+        height: 2rem;
+        margin: 0.8rem;
+    }
+
+    .filter-genre{
+        margin: 0.5rem;
+        padding: 0.2rem;
+        color: #2a5a76;
+        background-color: #bdcbdd;
+        border-radius: 0.2rem;
+        opacity: 0.5;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 0.8rem;
+    }
+
 }

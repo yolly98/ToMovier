@@ -151,8 +151,8 @@ class Filter extends Component{
   render(){
     return(
         <div id="filter-section" style={{display: 'none'}}>
-            <label>ORDINA PER</label>
-            <div style={{display: 'flex', flexWrap: 'nowrap', flexDirection: 'row', alignItems: 'center'}}>
+            <label className="filter-title">ORDINA PER</label>
+            <div id="filter-container1">
                 <div style={{display: 'flex', alignItems: 'center'}}>
                     <label className="filter-label" >Nome A-Z</label>
                     <input className="filter-radio" type="radio" name="ordering" value="nameAZ"/>
@@ -170,8 +170,8 @@ class Filter extends Component{
                     <input className="filter-radio" type="radio" name="ordering" value="rate010"/>
                 </div>
             </div>
-            <label>GENERE</label>
-            <div style={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center', alignContent: 'center'}}>
+            <label className="filter-label">Generi:</label>
+            <div id="filter-container2">
                 {
                     this.state.genres.map(genre => (
                         <label 
@@ -185,33 +185,32 @@ class Filter extends Component{
                     ))
                 }
             </div>
-            <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
-                <div style={{marginTop: '2rem'}}>
+            <div id="filter-container3">
+                <div>
                     <label className="filter-label">Preferito:</label>
                     <img id="filter-notfavorite" onClick={() => this.onFavoriteClick("filter-notfavorite")} style={{width: '1.5rem', margin: '0 0.5rem 0 0.5rem'}} src={notfavorite}/>
                     <img id="filter-favorite" onClick={() => this.onFavoriteClick("filter-favorite")} style={{width: '1.7rem', margin: '0 2rem 0 0'}} src={favorite}/>
                 </div>
-                <div style={{marginTop: '2rem'}}>
+                <div>
                     <label className="filter-label">Visto:</label>
                     <img id="filter-watched"  onClick={() => this.onWatchClick("filter-watched")} style={{width: '1.5rem', margin: '0 0.5rem 0 0.5rem'}} src={watched}/>
                     <img id="filter-watching" onClick={() => this.onWatchClick("filter-watching")} style={{width: '1.7rem', margin: '0'}} src={watching}/>
                     <img id="filter-towatch"  onClick={() => this.onWatchClick("filter-towatch")} style={{width: '1.7rem', margin: '0 2rem 0 0.5rem'}} src={towatch}/>
                 </div>
-                <div style={{marginTop: '2rem'}}>
+                <div>
                     <label className="filter-label">Serie/Film:</label>
                     <img id="filter-series" onClick={() => this.onFilmClick("filter-series")} style={{width: '1.5rem', margin: '0 0.5rem 0 0.5rem'}} src={series}/>
                     <img id="filter-film"   onClick={() => this.onFilmClick("filter-film")} style={{width: '1.7rem', margin: '0 2rem 0 0'}} src={film}/>
                 </div>
             </div>
-            <label style={{marginTop: '2rem'}}>Platforms:</label>
-            <div style={{ display: 'flex', flexWrap: 'wrap', width: '50%', justifyContent: 'center'}}>
+            <label className="filter-label">Piattaforme:</label>
+            <div id="filter-container4">
                 {
                     this.state.platforms.map(plat => (
                         <img 
                             key = {plat.id}
                             id = {plat.name}
                             className="filter-platform" 
-                            style={{height: '2.7rem', margin: '0.5rem'}} 
                             src={plat.image}
                             onClick = {()=> this.onPlatform(plat)}
                         />
@@ -219,7 +218,7 @@ class Filter extends Component{
                     ))
                 }
             </div>
-            <div style={{marginTop: '2rem', width: '30%', display: 'flex', justifyContent: 'space-between'}}>
+            <div id="filter-container5">
                 <button className="filter-button" onClick={() => this.props.onApplyFilters(this.state)}>FILTRA</button>
                 <button className="filter-button" onClick={() => this.onRemoveFilters()}>ANNULLA FILTRI</button>
             </div>
