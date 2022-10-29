@@ -192,13 +192,13 @@ class ItemMenu extends Component{
     render(){
         return(
             <div id="item-section">
-                <div style={{backgroundColor: '#6b8ea2', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '1rem', borderRadius: '1rem'}}>
-                    <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%'}}>
+                <div id="item-container1">
+                    <div id="item-container2">
                         <label className="item-label" style={{fontWeight: 'bold'}}>Aggiorna elemento</label>
                         <img src={cross} style={{width: '1.5rem', cursor: 'pointer'}} onClick={()=>this.props.onCancel()}/>
                     </div>
-                    <div style={{width: '100%', display: 'flex', flexDirection: 'row', alignItems: 'flex-start', marginTop: '1.5rem'}}>
-                        <img id="item-image" src={emptyFilm} style={{height: '15rem', marginRight: '2rem', borderRadius: '0.5rem'}}/>
+                    <div id="item-container3">
+                        <img id="item-image" src={emptyFilm}/>
                         <div>
                             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: '1.5rem'}}>
                                 <label className="item-label" style={{marginRight: '1rem'}}>Titolo</label>
@@ -219,7 +219,7 @@ class ItemMenu extends Component{
                                     }
                                 </select>
                             </div>
-                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', marginBottom: '1.5rem'}}>
+                            <div id="item-rating-container">
                                 <label className="item-label">Voto</label>
                                 <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
                                     <img className="item-star" src={emptystar} style={{width: '1.5rem'}} onClick={() => this.onStar(0)}/>
@@ -234,17 +234,17 @@ class ItemMenu extends Component{
                                     <img className="item-star" src={emptystar} style={{width: '1.5rem'}} onClick={() => this.onStar(9)}/>
                                 </div>
                             </div>
-                            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: '1.5rem'}}>
+                            <div id="item-favorite-container" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: '1.5rem'}}>
                                 <label className="item-label"  style={{marginRight: '0.5rem'}}>Preferito</label>
                                 <img id="item-favorite" onClick={() => this.onFavorite()} src={notfavorite} style={{width: '1.5rem'}}/>
                             </div>
-                            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: '1.5rem'}}>
+                            <div id="item-watched-container" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: '1.5rem'}}>
                                 <label className="item-label"  style={{marginRight: '0.5rem'}}>Visto</label>
                                 <img id="item-watched"  onClick={() => this.onWatch('watched')} src={watched} style={{width: '1.5rem', marginRight: '0.5rem'}}/>
                                 <img id="item-watching" onClick={() => this.onWatch('watching')} src={watching} style={{width: '1.5rem', marginRight: '0.5rem'}}/>
                                 <img id="item-towatch"  onClick={() => this.onWatch('towatch')} src={towatch} style={{width: '1.5rem', marginRight: '0.5rem'}}/>
                             </div>
-                            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: '1.5rem'}}>
+                            <div id="item-isfilm-container" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: '1.5rem'}}>
                                 <label className="item-label" style={{marginRight: '0.5rem'}}>Tipo</label>
                                 <img id="item-series" onClick={() => this.onType('series')} src={series} style={{width: '1.5rem', marginRight: '0.5rem'}}/>
                                 <img id="item-film"   onClick={() => this.onType('film')} src={film} style={{width: '1.7rem', marginRight: '0.5rem'}}/>

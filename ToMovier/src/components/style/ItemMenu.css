@@ -1,91 +1,317 @@
-#item-section{
-    z-index: 4;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    position: fixed;
-    top: 2rem;
+@media (min-width: 601px){
+
+    #item-section{
+        z-index: 4;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        position: fixed;
+        top: 2rem;
+    }
+
+    #item-container1{
+        background-color: rgb(107, 142, 162);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem;
+        border-radius: 1rem;
+    }
+
+    #item-container2{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+
+    #item-container3{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        margin-top: 1.5rem;
+    }
+
+    #item-image{
+        height: 15rem;
+        margin-right: 2rem;
+        border-radius: 0.5rem;
+    }
+
+    #item-rating-container{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 1.5rem;
+    }
+
+    #item-favorite-container{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+
+    #item-watched-container{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+
+    #item-isfilm-container{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .item-label{
+        margin: 0;
+    }
+
+    .item-text{
+        background-color: #bdcbdd;
+        border-radius: 0.5rem;
+        border: 0 transparent;
+        height: 2rem;
+        width: 15rem;
+        color: white;
+        font-size: 1rem;
+        color: #2a5a76;
+        text-align: center;
+    }
+
+    .item-text:active{
+        border: 0 transparent;
+    }
+
+    .item-button{
+        color: #2a5a76;
+        border: 0.2rem solid #2a5a76;
+        border-radius: 0.5rem;
+        font-size: 1rem;
+        font-weight: bold;
+        background-color: #bdcbdd;
+        cursor: pointer;
+    }
+
+    .item-button:active{
+        border-color: #bdcbdd;
+        color: #bdcbdd;
+        background-color: #2a5a76;
+    }
+
+    .item-star{
+        cursor: pointer;
+    }
+
+    #item-favorite, #item-watched, #item-watching, #item-towatch, #item-series, #item-film{
+        cursor: pointer;
+    }
+
+    #item-watched, #item-watching, #item-towatch, #item-series, #item-film{
+        cursor: pointer;
+        opacity: 0.5;
+    }
+
+    #item-series, #item-film{
+        background-color: #bdcbdd;
+        border-radius: 0.2rem;
+    }
+
+    #item-platforms-container{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        background-color: rgb(189, 203, 221);
+        border-radius: 0.5rem;
+        padding: 0.5rem;
+        width: 30rem;
+        overflow: auto;
+        align-items: center;
+        flex-wrap: nowrap;
+    }
+
+    #item-platforms-container::-webkit-scrollbar {
+        height: 0.8rem;
+    }
+
+    #item-platforms-container::-webkit-scrollbar-track {
+        background: transparent;        /* color of the tracking area */
+        opacity: 0.5;
+    }
+
+    #item-platforms-container::-webkit-scrollbar-thumb {
+        background-color: #2a5a76;    /* color of the scroll thumb */
+        border-radius: 0.5rem;       /* roundness of the scroll thumb */
+        border: 0 ;  /* creates padding around scroll thumb */
+    }
 }
 
-.item-label{
-    margin: 0;
-}
+/***************** for mobile device *****************/
 
-.item-text{
-    background-color: #bdcbdd;
-    border-radius: 0.5rem;
-    border: 0 transparent;
-    height: 2rem;
-    width: 15rem;
-    color: white;
-    font-size: 1rem;
-    color: #2a5a76;
-    text-align: center;
-}
+@media (max-width: 600px){
+    #item-section{
+        z-index: 4;
+        width: 100%;
+        display: flex;
+        position: fixed;
+        height: 100%;
+        top: 0;
+        left: 0;
+    }
 
-.item-text:active{
-    border: 0 transparent;
-}
+    #item-container1{
+        position: absolute;
+        background-color: rgb(107, 142, 162);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem;
+        border-radius: 1rem;
+        max-height: 90%;
+        max-width: 90%;
+        overflow: auto;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
 
-.item-button{
-    color: #2a5a76;
-    border: 0.2rem solid #2a5a76;
-    border-radius: 0.5rem;
-    font-size: 1rem;
-    font-weight: bold;
-    background-color: #bdcbdd;
-    cursor: pointer;
-}
+    #item-container2{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
 
-.item-button:active{
-    border-color: #bdcbdd;
-    color: #bdcbdd;
-    background-color: #2a5a76;
-}
+    #item-container3{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 0.5rem;
+    }
 
-.item-star{
-    cursor: pointer;
-}
+    #item-rating-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
 
-#item-favorite, #item-watched, #item-watching, #item-towatch, #item-series, #item-film{
-    cursor: pointer;
-}
+    #item-favorite-container{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        justify-content: center;
+    }
 
-#item-watched, #item-watching, #item-towatch, #item-series, #item-film{
-    cursor: pointer;
-    opacity: 0.5;
-}
+    #item-watched-container{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        justify-content: center;
+    }
 
-#item-series, #item-film{
-    background-color: #bdcbdd;
-    border-radius: 0.2rem;
-}
+    #item-isfilm-container{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        justify-content: center;
+    }
 
-#item-platforms-container{
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    background-color: rgb(189, 203, 221);
-    border-radius: 0.5rem;
-    padding: 0.5rem;
-    width: 30rem;
-    overflow: auto;
-    align-items: center;
-    flex-wrap: nowrap;
-}
+    #item-image{
+        height: 10rem;
+        border-radius: 0.5rem;
+        margin-bottom: 2rem;
+    }
 
-#item-platforms-container::-webkit-scrollbar {
-    height: 0.8rem;
-}
+    .item-label{
+        margin: 0;
+        font-size: 0.8rem;
+    }
 
-#item-platforms-container::-webkit-scrollbar-track {
-    background: transparent;        /* color of the tracking area */
-    opacity: 0.5;
-}
+    .item-text{
+        background-color: #bdcbdd;
+        border-radius: 0.5rem;
+        border: 0 transparent;
+        height: 1.8rem;
+        width: 15rem;
+        color: white;
+        font-size: 0.8rem;
+        color: #2a5a76;
+        text-align: center;
+    }
 
-#item-platforms-container::-webkit-scrollbar-thumb {
-    background-color: #2a5a76;    /* color of the scroll thumb */
-    border-radius: 0.5rem;       /* roundness of the scroll thumb */
-    border: 0 ;  /* creates padding around scroll thumb */
+    .item-text:active{
+        border: 0 transparent;
+    }
+
+    .item-button{
+        color: #2a5a76;
+        border: 0.2rem solid #2a5a76;
+        border-radius: 0.5rem;
+        font-size: 1rem;
+        font-weight: bold;
+        background-color: #bdcbdd;
+        cursor: pointer;
+    }
+
+    .item-button:active{
+        border-color: #bdcbdd;
+        color: #bdcbdd;
+        background-color: #2a5a76;
+    }
+
+    .item-star{
+        cursor: pointer;
+    }
+
+    #item-favorite, #item-watched, #item-watching, #item-towatch, #item-series, #item-film{
+        cursor: pointer;
+    }
+
+    #item-watched, #item-watching, #item-towatch, #item-series, #item-film{
+        cursor: pointer;
+        opacity: 0.5;
+    }
+
+    #item-series, #item-film{
+        background-color: #bdcbdd;
+        border-radius: 0.2rem;
+    }
+
+    #item-platforms-container{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        background-color: rgb(189, 203, 221);
+        border-radius: 0.5rem;
+        padding: 0.5rem;
+        width: 25%;
+        overflow: auto;
+        align-items: center;
+        flex-wrap: nowrap;
+    }
+
+    #item-platforms-container::-webkit-scrollbar {
+        height: 0.8rem;
+    }
+
+    #item-platforms-container::-webkit-scrollbar-track {
+        background: transparent;        /* color of the tracking area */
+        opacity: 0.5;
+    }
+
+    #item-platforms-container::-webkit-scrollbar-thumb {
+        background-color: #2a5a76;    /* color of the scroll thumb */
+        border-radius: 0.5rem;       /* roundness of the scroll thumb */
+        border: 0 ;  /* creates padding around scroll thumb */
+    }
 }
