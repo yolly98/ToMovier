@@ -255,7 +255,7 @@ class ItemMenu extends Component{
                         <label className="item-label">URL image</label>
                         <input id="item-url" className='item-text' type="text" style={{marginBottom: '1.5rem'}}/>
                         <label className="item-label">Piattaforma</label>
-                        <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', backgroundColor: '#bdcbdd', borderRadius: '0.5rem', padding: '0.5rem', width: '90%', overflow: 'auto', alignItems: 'center'}}>
+                        <div id="item-platforms-container">
                             {
                                 this.state.platforms.map(plat => (
                                     <img 

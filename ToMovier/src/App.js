@@ -23,9 +23,22 @@ import infoAlert from './images/dice.png'
 import warningAlert from './images/dice.png'
 import errorAlert from './images/dice.png'
 
-import noPlat from './images/noPlat.png'
-import netflix from './images/netflix.png'
-import amazon from './images/amazon.png'
+import noPlat from './images/platforms/noPlat.png'
+import netflix from './images/platforms/netflix.png'
+import amazonPrime from './images/platforms/amazonPrime.png'
+import animeUnity from './images/platforms/animeUnity.png'
+import appleTv from './images/platforms/appleTv.png'
+import chili from './images/platforms/chili.png'
+import crunchyroll from './images/platforms/crunchyroll.png'
+import discovery from './images/platforms/discovery+.png'
+import disney from './images/platforms/disney+.png'
+import infinity from './images/platforms/infinity.png'
+import nowTv from './images/platforms/nowTv.png'
+import plutoTv from './images/platforms/plutoTv.png'
+import raiPlay from './images/platforms/raiPlay.png'
+import sky from './images/platforms/sky.png'
+import timVision from './images/platforms/timVision.png'
+import vvvvid from './images/platforms/vvvvid.png'
 
 class App extends Component{
 
@@ -40,9 +53,23 @@ class App extends Component{
       {id:3, name: "EmptyFilm", genre: "cartoon", image: emptyFilm, isFavorite: favorite, isFilm: film, isWatched: watched, platform: netflix, rating: '9/10'}      
     ],
     platforms: [
-      {id: 0, name: "Netflix", image: netflix , state: false},
-      {id: 1, name: "Amazon", image: amazon, state: false},
-      {id: 2, name: "Unknown", image: noPlat, state: false}
+      {id: 0, name: "Amazon Prime", image: amazonPrime , state: false},
+      {id: 1, name: "Anime Unity", image: animeUnity, state: false},
+      {id: 2, name: "Apple TV", image: appleTv, state: false},
+      {id: 3, name: "Chili", image: chili, state: false},
+      {id: 4, name: "Crunchyroll", image: crunchyroll, state: false},
+      {id: 5, name: "Discovery+", image: discovery, state: false},
+      {id: 6, name: "Disney+", image: disney, state: false},
+      {id: 7, name: "Infinity", image: infinity, state: false},
+      {id: 8, name: "Netflix", image: netflix, state: false},
+      {id: 9, name: "Unknown", image: noPlat, state: false},
+      {id: 10, name: "Now TV", image: nowTv, state: false},
+      {id: 11, name: "Pluto TV", image: plutoTv, state: false},
+      {id: 12, name: "Rai PLay", image: raiPlay, state: false},
+      {id: 13, name: "Sky", image: sky, state: false},
+      {id: 14, name: "Tim Vision", image: timVision, state: false},
+      {id: 15, name: "VVVVID", image: vvvvid, state: false},
+
     ],
     genres: [
       {id: 0, state: false, name: "Action"},

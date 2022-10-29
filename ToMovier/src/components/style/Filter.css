@@ -37,7 +37,7 @@
     color: #2a5a76;
     border: 0.2rem solid #2a5a76;
     border-radius: 0.5rem;
-    font-size: 1rem;
+    font-size: 1.3rem;
     font-weight: bold;
     background-color: #bdcbdd;
     cursor: pointer;
@@ -62,7 +62,6 @@
 }
 
 .filter-platform{
-    background-color: #bdcbdd;
     border-radius: 0.2rem;
     opacity: 0.5;
     cursor: pointer;
@@ -77,4 +76,32 @@
     opacity: 0.5;
     cursor: pointer;
     font-weight: bold;
+}
+
+#item-platforms-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    background-color: rgb(189, 203, 221);
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    width: 30rem;
+    overflow: auto;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+#item-platforms-container::-webkit-scrollbar {
+    height: 0.8rem;
+}
+  
+#item-platforms-container::-webkit-scrollbar-track {
+    background: transparent;        /* color of the tracking area */
+    opacity: 0.5;
+}
+
+#item-platforms-container::-webkit-scrollbar-thumb {
+background-color: #2a5a76;    /* color of the scroll thumb */
+border-radius: 0.5rem;       /* roundness of the scroll thumb */
+border: 0 ;  /* creates padding around scroll thumb */
 }
