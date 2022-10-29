@@ -43,6 +43,7 @@ import vvvvid from './images/platforms/vvvvid.png'
 class App extends Component{
 
   state = {
+    ipServer: "localhost",
     itemMenu: -1,
     user: "",
     password: "",
@@ -101,7 +102,7 @@ class App extends Component{
   getItems(user, password){
 
     let json_msg = {"user": user, "passw": password, "type": "get-items"};
-    let url = "http://localhost:80/backend/getItems.php";
+    let url = "http://" + this.state.ipServer + ":80/backend/getItems.php";
     let msg = "body=" + JSON.stringify(json_msg);
     fetch(url, {
         method : "POST",
@@ -170,7 +171,8 @@ class App extends Component{
     }
 
     let json_msg = {"user": user, "passw": password, "type": "login"};
-    let url = "http://localhost:80/backend/login.php";
+    let url = "http://" + this.state.ipServer + ":80/backend/login.php";
+    console.log(url);
     let msg = "body=" + JSON.stringify(json_msg);
     fetch(url, {
         method : "POST",
@@ -209,7 +211,7 @@ class App extends Component{
     }
 
     let json_msg = {"user": user, "passw": password, "type": "signup"};
-    let url = "http://localhost:80/backend/login.php";
+    let url = "http://" + this.state.ipServer + ":80/backend/login.php";
     let msg = "body=" + JSON.stringify(json_msg);
     fetch(url, {
       method : "POST",
@@ -294,7 +296,7 @@ class App extends Component{
     json_msg.passw = this.state.password;
     json_msg.id = card.id;
     //console.log(json_msg);
-    let url = "http://localhost:80/backend/removeItem.php";
+    let url = "http://" + this.state.ipServer + ":80/backend/removeItem.php";
     let msg = "body=" + JSON.stringify(json_msg);
     fetch(url, {
         method : "POST",
@@ -418,7 +420,7 @@ class App extends Component{
     else
       json_msg.type = "update";
     //console.log(json_msg);
-    let url = "http://localhost:80/backend/newUpdateItem.php";
+    let url = "http://" + this.state.ipServer + ":80/backend/newUpdateItem.php";
     let msg = "body=" + JSON.stringify(json_msg);
     fetch(url, {
         method : "POST",

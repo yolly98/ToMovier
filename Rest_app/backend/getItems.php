@@ -1,6 +1,6 @@
 <?php
 
-    header("Access-Control-Allow-Origin: http://localhost:3000");
+    header("Access-Control-Allow-Origin: *");
 
     $IP_ADDR = '172.20.0.11';
     $USER_DB = 'root';
