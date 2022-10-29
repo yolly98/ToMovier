@@ -43,7 +43,7 @@ import vvvvid from './images/platforms/vvvvid.png'
 class App extends Component{
 
   state = {
-    ipServer: "localhost",//"192.168.178.22",
+    ipServer: "localhost",
     itemMenu: -1,
     user: "",
     password: "",
