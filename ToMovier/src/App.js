@@ -415,6 +415,8 @@ class App extends Component{
     }
  
     let cards = [...this.state.cards];
+    if(cards.length == 0)
+      cards.push(card);
     for(let i = 0; i < cards.length; i++){
       if(cards[i].id == card.id){
         cards[i] = card;
