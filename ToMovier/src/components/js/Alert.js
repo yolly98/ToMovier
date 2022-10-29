@@ -13,13 +13,13 @@ class Alert extends Component{
 
     render(){
         return(
-            <div id="alert-container" style={{position: 'fixed', zIndex: '4'}}>
+            <div id="alert-container" style={{zIndex: '5'}}>
                 <div>
-                    <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
+                    <div id="alert-container1">
                         <label id="alert-title">{this.state.title}</label>
                         <img id="alert-cross" onClick={() => this.props.closeAlert()} src={cross}/>
                     </div>
-                    <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: '2rem'}}>
+                    <div id="alert-container2">
                         <img id="alert-image" src={this.state.image}/>
                         <p id="alert-text">{this.state.text}</p>
                     </div>

@@ -648,7 +648,7 @@ class App extends Component{
 
     //page
     if(this.state.user == ""){
-      page = <> <div id="blocker" style={{width: '100%', height: '100%', backgroundColor: 'black', opacity: '0.4', position: 'fixed', top: '0', zIndex: '3', display: "none"}}></div>
+      page = <> <div id="blocker" style={{width: '100%', height: '100%', backgroundColor: 'black', opacity: '0.4', position: 'fixed', top: '0', zIndex: '4', display: "none"}}></div>
                 <Login onLogin = {this.handleLogin} onSignup = {this.handleSignup} />
                 {alert}
              </>
