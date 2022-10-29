@@ -68,7 +68,7 @@
         echo '{"status": "SUCCESS", "msg": '.json_encode($array_data).'}';
     }
     else
-        echo '{"status": "ERROR", "msg": "no elements saved"}';
+        echo '{"status": "SUCCESS", "msg": '.json_encode(array()).'}';
 
     $conn->close(); 
 
