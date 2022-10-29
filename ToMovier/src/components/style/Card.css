@@ -1,97 +1,230 @@
-.card-header{
-    position:absolute;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
-    align-items: center;
-    width: 14rem;
+@media (min-width: 601px){
+
+    .card-col{
+        z-index: 1;
+        margin: 2rem 1rem 0px;
+        display: flex;
+    }
+
+    .card-container{
+        background-color: rgb(42, 90, 118);
+        width: 15rem;
+        padding: 0 0.5rem;
+        border-radius: 1rem;
+    }
+    .card-header{
+        position:absolute;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        align-items: center;
+        width: 14rem;
+    }
+
+    .card-identifier{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .card-body{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        padding: 0.3rem;
+    }
+
+    .card-footer{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        padding: 0.3rem;
+    }
+
+    .image-card{
+        margin-top: 1.5rem;
+        max-width: 13rem;
+        height: 15rem;
+        border-radius: 0.5rem;
+    }
+
+    .img-iswatched{
+        width: 2rem;
+    }
+
+    .img-delete{
+        width: 2rem;
+        cursor: pointer;
+    }
+
+    .img-isfilm{
+        width: 2rem;
+    }
+
+    .img-star{
+        width: 2rem;
+    }
+
+    .img-isfavorited{
+        width: 2rem;
+    }
+
+    .img-platform{
+    height: 2.5rem;
+    }
+
+    .card-rate{
+        color: white;
+        font-weight: bold;
+        font-size: 0.8rem;
+    }
+
+    .card-title{
+        color: white;
+        font-weight: bold;
+        margin: 0;
+        margin-top: 0.3rem;
+        font-size: 1.1rem;
+    }
+
+    .button-open{
+
+        color: #2a5a76;
+        border: 0.2rem solid #2a5a76;
+        border-radius: 0.5rem;
+        font-size: 1.5rem;
+        font-weight: bold;
+        background-color: #bdcbdd;
+        cursor: pointer;
+    }
+
+    .button-open:active{
+        border-color: #bdcbdd;
+        color: #bdcbdd;
+        background-color: #2a5a76;
+    }
+
 }
 
-.card-identifier{
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
-}
 
-.card-body{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: nowrap;
-    flex-direction: row;
-    padding: 0.3rem;
-}
+/***************** for mobile device *****************/
 
-.card-footer{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: nowrap;
-    flex-direction: row;
-    padding: 0.3rem;
-}
+@media (max-width: 600px){
 
-.image-card{
-    margin-top: 1.5rem;
-    max-width: 13rem;
-    height: 15rem;
-    border-radius: 0.5rem;
-}
+    .card-col{
+        z-index: 1;
+        margin: 2rem 1rem 0px;
+        display: flex;
+    }
 
-.img-iswatched{
-    width: 2rem;
-}
+    .card-container{
+        background-color: rgb(42, 90, 118);
+        width: 9rem;
+        padding: 0 0.5rem;
+        border-radius: 0.5rem;
+    }
 
-.img-delete{
-    width: 2rem;
-    cursor: pointer;
-}
+    .card-header{
+        position:absolute;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        align-items: center;
+        width: 8rem;
+    }
 
-.img-isfilm{
-    width: 2rem;
-}
+    .card-identifier{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+    }
 
-.img-star{
-    width: 2rem;
-}
+    .card-body{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        padding: 0.3rem;
+    }
 
-.img-isfavorited{
-    width: 2rem;
-}
+    .card-footer{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        padding: 0.3rem;
+    }
 
-.img-platform{
-   height: 2.5rem;
-}
+    .image-card{
+        margin-top: 1rem;
+        max-width: 6rem;
+        height: 8rem;
+        border-radius: 0.5rem;
+    }
 
-.card-rate{
-    color: white;
-    font-weight: bold;
-    font-size: 0.8rem;
-}
+    .img-iswatched{
+        width: 1.2rem;
+    }
 
-.card-title{
-    color: white;
-    font-weight: bold;
-    margin: 0;
-    margin-top: 0.3rem;
-    font-size: 1.1rem;
-}
+    .img-delete{
+        width: 1.2rem;
+        cursor: pointer;
+    }
 
-.button-open{
+    .img-isfilm{
+        width: 1.2rem;
+    }
 
-    color: #2a5a76;
-    border: 0.2rem solid #2a5a76;
-    border-radius: 0.5rem;
-    font-size: 1.5rem;
-    font-weight: bold;
-    background-color: #bdcbdd;
-    cursor: pointer;
-}
+    .img-star{
+        width: 1.2rem;
+    }
 
-.button-open:active{
-    border-color: #bdcbdd;
-    color: #bdcbdd;
-    background-color: #2a5a76;
+    .img-isfavorited{
+        width: 1.2rem;
+    }
+
+    .img-platform{
+        height: 1.5rem;
+    }
+
+    .card-rate{
+        color: white;
+        font-weight: bold;
+        font-size: 0.5rem;
+    }
+
+    .card-title{
+        color: white;
+        font-weight: bold;
+        margin: 0;
+        margin-top: 0.3rem;
+        font-size: 0.8rem;
+    }
+
+    .button-open{
+
+        color: #2a5a76;
+        border: 0.2rem solid #2a5a76;
+        border-radius: 0.5rem;
+        font-size: 0.8rem;
+        font-weight: bold;
+        background-color: #bdcbdd;
+        cursor: pointer;
+    }
+
+    .button-open:active{
+        border-color: #bdcbdd;
+        color: #bdcbdd;
+        background-color: #2a5a76;
+    }
 }
