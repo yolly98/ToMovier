@@ -43,7 +43,7 @@ import vvvvid from './images/platforms/vvvvid.png'
 class App extends Component{
 
   state = {
-    ipServer: "localhost",
+    ipServer: "192.168.178.22",
     itemMenu: -1,
     user: "",
     password: "",
@@ -73,12 +73,30 @@ class App extends Component{
 
     ],
     genres: [
-      {id: 0, state: false, name: "Action"},
-      {id: 1, state: false, name: "Thriller"},
-      {id: 2, state: false, name: "Anime"},
-      {id: 3, state: false, name: "Animation"},
-      {id: 4, state: false, name: "Horror"},
-      {id: 5, state: false, name: "Other"}
+      {id: 0, state: false, name: "Animazione"},
+      {id: 1, state: false, name: "Anime"},
+      {id: 2, state: false, name: "Avventura"},
+      {id: 3, state: false, name: "Azione"},
+      {id: 4, state: false, name: "Biografico"},
+      {id: 5, state: false, name: "Comico"},
+      {id: 6, state: false, name: "Commedia"},
+      {id: 7, state: false, name: "Demenziale"},
+      {id: 8, state: false, name: "Documentario"},
+      {id: 9, state: false, name: "Dramma"},
+      {id: 10, state: false, name: "Erotico"},
+      {id: 11, state: false, name: "Fantascienza"},
+      {id: 12, state: false, name: "Fantasy"},
+      {id: 13, state: false, name: "Giallo"},
+      {id: 14, state: false, name: "Guerra"},
+      {id: 15, state: false, name: "Horror"},
+      {id: 16, state: false, name: "Musical"},
+      {id: 17, state: false, name: "Romantico"},
+      {id: 18, state: false, name: "Storico"},
+      {id: 19, state: false, name: "Supereroi"},
+      {id: 20, state: false, name: "Teen Drama"},
+      {id: 21, state: false, name: "Thriller"},
+      {id: 22, state: false, name: "Western"},
+      {id: 23, state: false, name: "Altro"}
     ], 
     alert: {
       state: false,
