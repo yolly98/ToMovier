@@ -688,8 +688,8 @@ class App extends Component{
                   genres = {this.state.genres}
                   onApplyFilters = {this.handleApplyFilters}
                 />
-                <img id="rand-item" src={random} onClick={() => this.handleRandomItem()} style={{position: "fixed", right: '1rem', width: '4rem', top: '10rem', cursor: 'pointer', zIndex: '2'}}/>
-                <img id="add-item" src={add} onClick={() => this.handleAddCard()} style={{position: "fixed", right: '1rem', width: '4rem', top: '15rem', cursor: 'pointer', zIndex: '2'}}/>
+                <img id="rand-item" src={random} onClick={() => this.handleRandomItem()} />
+                <img id="add-item" src={add} onClick={() => this.handleAddCard()} />
                 {itemMenu}
                 {alert}
                 <div className='cards-container'>
