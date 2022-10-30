@@ -52,7 +52,7 @@
             
             $newPlat = array(
                 "name" => $row['name'],
-                "path" => $row['path'],
+                "path" => $row['path']
             );
             array_push($array_data,$newPlat);
         }
