@@ -29,6 +29,7 @@ class App extends Component{
 
   state = {
     ipServer: "localhost",
+    login: true,
     itemMenu: -1,
     user: "",
     password: "",
@@ -123,7 +124,7 @@ class App extends Component{
         }
     );
   }
-  
+
   getItems(){
 
     let user = this.state.user;
@@ -178,7 +179,7 @@ class App extends Component{
                     }
                   );
                 }
-                this.setState({cards});
+                this.setState({login: false, cards});
                 //console.log(cards);
             } else {
               console.error(html.msg);
@@ -273,7 +274,7 @@ class App extends Component{
   handleExit = () =>{
     console.log("exit button pressed");
     let cards = [];
-    this.setState({user: "", password: "", cards});
+    this.setState({user: "", password: "", login: true, cards});
   }
 
   handlefilter(){
@@ -672,7 +673,7 @@ class App extends Component{
       alert = <></>
 
     //page
-    if(this.state.user == ""){
+    if(this.state.login == true){
       page = <> <div id="blocker2" style={{width: '100%', height: '100%', backgroundColor: 'black', opacity: '0.4', position: 'fixed', top: '0', zIndex: '5', display: "none"}}></div>
                 <Login onLogin = {this.handleLogin} onSignup = {this.handleSignup} />
                 {alert}
