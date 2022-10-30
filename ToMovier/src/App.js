@@ -18,6 +18,7 @@ import towatch from './images/towatch.png'
 import add from './images/add.png'
 import emptyFilm from './images/emptyFilm.jpg'
 import random from './images/dice.png'
+import refresh from './images/refresh.png'
 
 import infoAlert from './images/dice.png'
 import warningAlert from './images/dice.png'
@@ -658,6 +659,11 @@ class App extends Component{
     );
   }
 
+  handleRefresh(){
+    this.getItems();
+    this.openAlert("SUCCESS", "Elementi ricaricati", infoAlert);
+  }
+
   render(){
     let page;
     let itemMenu;
@@ -717,6 +723,7 @@ class App extends Component{
                 />
                 <img id="rand-item" src={random} onClick={() => this.handleRandomItem()} />
                 <img id="add-item" src={add} onClick={() => this.handleAddCard()} />
+                <img id="refresh" src={refresh} onClick={() => this.handleRefresh()} />
                 {itemMenu}
                 {alert}
                 <div className='cards-container'>
