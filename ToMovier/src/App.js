@@ -455,7 +455,7 @@ class App extends Component{
               this.setState(
                 {itemMenu: -1, cards},
                 function(){
-                  this.openAlert("SUCCESS", "Salvataggio avveuto con successo", infoAlert);
+                  this.openAlert("SUCCESS", "Salvataggio avvenuto con successo", infoAlert);
                 }
               );
               document.getElementsByTagName('body')[0].style.overflow = 'auto';
