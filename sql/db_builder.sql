@@ -24,3 +24,27 @@ create table FILM(
     primary key(id)
 )engine=InnoDB default charset=latin1;
 
+drop table if exists PLATFORM;
+create table PLATFORM(
+    name varchar(100) not null,
+    path varchar(500) not null,
+    primary key(name)
+)engine=InnoDB default charset=latin1; 
+
+INSERT INTO PLATFORM
+VALUES ("Amazon Prime", "./images/platforms/amazonPrime.png"),
+    ("Anime Unity", "./images/platforms/animeUnity.png"),
+    ("Apple TV", "./images/platforms/appleTv.png"),
+    ("Chili", "./images/platforms/chili.png"),
+    ("Crunchyroll", "./images/platforms/crunchyroll.png"),
+    ("Discovery+", "./images/platforms/discovery+.png"),
+    ("Disney+", "./images/platforms/disney+.png"),
+    ("Infinity", "./images/platforms/infinity.png"),
+    ("Netflix", "./images/platforms/netflix.png"),
+    ("Unknown", "./images/platforms/noPlat.png"),
+    ("Now TV", "./images/platforms/nowTv.png"),
+    ("Pluto TV", "./images/platforms/plutoTv.png"),
+    ("Rai PLay", "./images/platforms/raiPlay.png"),
+    ("Sky", "./images/platforms/sky.png"),
+    ("Tim Vision", "./images/platforms/timVision.png"),
+    ("VVVVID", "./images/platforms/vvvvid.png");

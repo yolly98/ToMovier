@@ -24,21 +24,6 @@ import warningAlert from './images/dice.png'
 import errorAlert from './images/dice.png'
 
 import noPlat from './images/platforms/noPlat.png'
-import netflix from './images/platforms/netflix.png'
-import amazonPrime from './images/platforms/amazonPrime.png'
-import animeUnity from './images/platforms/animeUnity.png'
-import appleTv from './images/platforms/appleTv.png'
-import chili from './images/platforms/chili.png'
-import crunchyroll from './images/platforms/crunchyroll.png'
-import discovery from './images/platforms/discovery+.png'
-import disney from './images/platforms/disney+.png'
-import infinity from './images/platforms/infinity.png'
-import nowTv from './images/platforms/nowTv.png'
-import plutoTv from './images/platforms/plutoTv.png'
-import raiPlay from './images/platforms/raiPlay.png'
-import sky from './images/platforms/sky.png'
-import timVision from './images/platforms/timVision.png'
-import vvvvid from './images/platforms/vvvvid.png'
 
 class App extends Component{
 
@@ -47,31 +32,8 @@ class App extends Component{
     itemMenu: -1,
     user: "",
     password: "",
-    cards: [
-      {id:0, name: "EmptyFilm", genre: "cartoon", image: emptyFilm, isFavorite: favorite, isFilm: film, isWatched: watched, platform: netflix, rating: '9/10'},
-      {id:1, name: "EmptyFilm", genre: "cartoon", image: emptyFilm, isFavorite: favorite, isFilm: film, isWatched: watched, platform: netflix, rating: '9/10'},
-      {id:2, name: "EmptyFilm", genre: "cartoon", image: emptyFilm, isFavorite: favorite, isFilm: film, isWatched: watched, platform: netflix, rating: '9/10'},
-      {id:3, name: "EmptyFilm", genre: "cartoon", image: emptyFilm, isFavorite: favorite, isFilm: film, isWatched: watched, platform: netflix, rating: '9/10'}      
-    ],
-    platforms: [
-      {id: 0, name: "Amazon Prime", image: amazonPrime , state: false},
-      {id: 1, name: "Anime Unity", image: animeUnity, state: false},
-      {id: 2, name: "Apple TV", image: appleTv, state: false},
-      {id: 3, name: "Chili", image: chili, state: false},
-      {id: 4, name: "Crunchyroll", image: crunchyroll, state: false},
-      {id: 5, name: "Discovery+", image: discovery, state: false},
-      {id: 6, name: "Disney+", image: disney, state: false},
-      {id: 7, name: "Infinity", image: infinity, state: false},
-      {id: 8, name: "Netflix", image: netflix, state: false},
-      {id: 9, name: "Unknown", image: noPlat, state: false},
-      {id: 10, name: "Now TV", image: nowTv, state: false},
-      {id: 11, name: "Pluto TV", image: plutoTv, state: false},
-      {id: 12, name: "Rai PLay", image: raiPlay, state: false},
-      {id: 13, name: "Sky", image: sky, state: false},
-      {id: 14, name: "Tim Vision", image: timVision, state: false},
-      {id: 15, name: "VVVVID", image: vvvvid, state: false},
-
-    ],
+    cards: [],
+    platforms: [],
     genres: [
       {id: 0, state: false, name: "Animazione"},
       {id: 1, state: false, name: "Anime"},
@@ -100,8 +62,8 @@ class App extends Component{
     ], 
     alert: {
       state: false,
-      title: "esempio",
-      text: "ciao a tutti come state? io bene",
+      title: "example",
+      text: "exmaple text",
       image: infoAlert
     }
   }
@@ -117,8 +79,55 @@ class App extends Component{
     }
   }
 
-  getItems(user, password){
+  getPlatformFromDB(){
+    let user = this.state.user;
+    let password = this.state.password;
+    let json_msg = {"user": user, "passw": password, "type": "get-plats"};
+    let url = "http://" + this.state.ipServer + ":80/backend/getPlatforms.php";
+    let msg = "body=" + JSON.stringify(json_msg);
+    fetch(url, {
+        method : "POST",
+        headers: {
+            'Content-type': 'application/x-www-form-urlencoded',
+            'Accept': 'application/json'
+        },
+        body : msg
+    }).then(
+        response => response.json()
+    ).then(
+        html => {
+            if (html.status == "SUCCESS") {
+                let plats = html.msg;
+                let platforms = [];
+                for(let i = 0; i < plats.length; i++){
+                  let id = i;
+                  let name = plats[i].name;
+                  let image = require('' + plats[i].path + '');
+                  platforms.push(
+                    {
+                      id: id, 
+                      name: name,
+                      image: image,
+                      state: false
+                    }
+                  );
+                }
+                this.setState(
+                  {platforms},
+                  () => {this.getItems()}
+                  );
+            } else {
+              console.error(html.msg);
+              this.openAlert("ERROR", "Caricamento delle piattaforme fallito", errorAlert);
+            }
+        }
+    );
+  }
+  
+  getItems(){
 
+    let user = this.state.user;
+    let password = this.state.password;
     let json_msg = {"user": user, "passw": password, "type": "get-items"};
     let url = "http://" + this.state.ipServer + ":80/backend/getItems.php";
     let msg = "body=" + JSON.stringify(json_msg);
@@ -190,7 +199,6 @@ class App extends Component{
 
     let json_msg = {"user": user, "passw": password, "type": "login"};
     let url = "http://" + this.state.ipServer + ":80/backend/login.php";
-    console.log(url);
     let msg = "body=" + JSON.stringify(json_msg);
     fetch(url, {
         method : "POST",
@@ -205,8 +213,10 @@ class App extends Component{
         html => {
             if (html.status == "SUCCESS") {
                 let password =  html.passw;
-                this.setState({user, password});
-                this.getItems(user, password);
+                this.setState(
+                  {user, password},
+                  () => {this.getPlatformFromDB()}
+                  );
             } else {
               console.error(html.msg);
               let msg = "";
