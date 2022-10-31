@@ -194,7 +194,7 @@ class ItemMenu extends Component{
             <div id="item-section">
                 <div id="item-container1">
                     <div id="item-container2">
-                        <label className="item-label" style={{fontWeight: 'bold'}}>Aggiorna elemento</label>
+                        <label className="item-label" style={{fontWeight: 'bold'}}>Salva elemento</label>
                         <img src={cross} style={{width: '1.5rem', cursor: 'pointer'}} onClick={()=>this.props.onCancel()}/>
                     </div>
                     <div id="item-container3">

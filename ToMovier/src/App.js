@@ -73,9 +73,8 @@ class App extends Component{
 
   componentDidMount(){
 
-    let configFile = require('./config.json');
-    let serverIp = configFile.serverIp;
-    let serverPort = configFile.serverPort;
+    let serverIp = window.SERVER_IP;
+    let serverPort = window.SERVER_PORT;
     this.setState({serverIp, serverPort});
   }
 
