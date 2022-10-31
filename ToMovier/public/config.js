@@ -1,3 +1,3 @@
 
-var SERVER_IP = "localhost";
-var SERVER_PORT = "80";
+var SERVER_IP = "http://localhost";
+var SERVER_PORT = ":80";

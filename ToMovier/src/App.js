@@ -93,7 +93,7 @@ class App extends Component{
     let user = this.state.user;
     let password = this.state.password;
     let json_msg = {"user": user, "passw": password, "type": "get-plats"};
-    let url = "http://" + this.state.serverIp + ":" + this.state.serverPort + "/backend/getPlatforms.php";
+    let url = this.state.serverIp + this.state.serverPort + "/backend/getPlatforms.php";
     let msg = "body=" + JSON.stringify(json_msg);
     fetch(url, {
         method : "POST",
@@ -139,7 +139,7 @@ class App extends Component{
     let user = this.state.user;
     let password = this.state.password;
     let json_msg = {"user": user, "passw": password, "type": "get-items"};
-    let url = "http://" + this.state.serverIp + ":" + this.state.serverPort + "/backend/getItems.php";
+    let url = this.state.serverIp + this.state.serverPort + "/backend/getItems.php";
     let msg = "body=" + JSON.stringify(json_msg);
     fetch(url, {
         method : "POST",
@@ -208,7 +208,7 @@ class App extends Component{
     }
 
     let json_msg = {"user": user, "passw": password, "type": "login"};
-    let url = "http://" + this.state.serverIp + ":" + this.state.serverPort + "/backend/login.php";
+    let url = this.state.serverIp + this.state.serverPort + "/backend/login.php";
     let msg = "body=" + JSON.stringify(json_msg);
     fetch(url, {
         method : "POST",
@@ -249,7 +249,7 @@ class App extends Component{
     }
 
     let json_msg = {"user": user, "passw": password, "type": "signup"};
-    let url = "http://" + this.state.serverIp + ":" + this.state.serverPort + "/backend/login.php";
+    let url = this.state.serverIp + this.state.serverPort + "/backend/login.php";
     let msg = "body=" + JSON.stringify(json_msg);
     fetch(url, {
       method : "POST",
@@ -334,7 +334,7 @@ class App extends Component{
     json_msg.passw = this.state.password;
     json_msg.id = card.id;
     //console.log(json_msg);
-    let url = "http://" + this.state.serverIp + ":" + this.state.serverPort + "/backend/removeItem.php";
+    let url = this.state.serverIp + this.state.serverPort + "/backend/removeItem.php";
     let msg = "body=" + JSON.stringify(json_msg);
     fetch(url, {
         method : "POST",
@@ -455,7 +455,7 @@ class App extends Component{
     else
       json_msg.type = "update";
     //console.log(json_msg);
-    let url = "http://" + this.state.serverIp + ":" + this.state.serverPort +"/backend/newUpdateItem.php";
+    let url = this.state.serverIp + this.state.serverPort +"/backend/newUpdateItem.php";
     let msg = "body=" + JSON.stringify(json_msg);
     fetch(url, {
         method : "POST",
