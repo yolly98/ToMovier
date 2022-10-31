@@ -16,11 +16,13 @@ class Card extends Component{
                     </div>
                     <div className="card-identifier" style={{padding: '0.3rem', border: '0'}}>
                         <img className="image-card" src={this.props.card.image} alt="..." />
-                        <label className="card-title">{this.props.card.name}</label>
+                        <div className="card-title-container">
+                            <label className="card-title">{this.props.card.name}</label>
+                        </div>
                     </div>
                     <div className="card-body" style={{padding: '0.3rem', border: '0'}}>
                         <img className="img-isfilm" src={this.props.card.isFilm} alt="..."/>
-                        <div>
+                        <div className="card-rate-container">
                             <label className='card-rate'>{this.props.card.rating}</label>
                             <img className="img-star" src={star} alt="..."/>
                         </div>

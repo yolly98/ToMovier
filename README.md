@@ -1,6 +1,6 @@
 # ToMovier
 
-ToMovier is a simple web app usefull to keep in mind all series and film that you watched, are watching and want watch in the futere.
+ToMovier is a simple web app usefull to keep in mind all series and film that you watched, are watching and want watch in the future.
 
 ## Technologies
 ### Frontend 
