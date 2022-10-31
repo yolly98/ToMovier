@@ -20,16 +20,17 @@ import emptyFilm from './images/emptyFilm.jpg'
 import random from './images/dice.png'
 import refresh from './images/refresh.png'
 
-import infoAlert from './images/dice.png'
-import warningAlert from './images/dice.png'
-import errorAlert from './images/dice.png'
+import infoAlert from './images/infoAlert.png'
+import warningAlert from './images/warningAlert.png'
+import errorAlert from './images/errorAlert.png'
 
 import noPlat from './images/platforms/noPlat.png'
 
 class App extends Component{
 
   state = {
-    ipServer: "localhost",
+    serverIp: "",
+    serverPort: "",
     login: true,
     itemMenu: -1,
     user: "",
@@ -70,6 +71,14 @@ class App extends Component{
     }
   }
 
+  componentDidMount(){
+
+    let configFile = require('./config.json');
+    let serverIp = configFile.serverIp;
+    let serverPort = configFile.serverPort;
+    this.setState({serverIp, serverPort});
+  }
+
   getPlatform(platformName){
 
     let platforms = this.state.platforms;
@@ -85,7 +94,7 @@ class App extends Component{
     let user = this.state.user;
     let password = this.state.password;
     let json_msg = {"user": user, "passw": password, "type": "get-plats"};
-    let url = "http://" + this.state.ipServer + ":80/backend/getPlatforms.php";
+    let url = "http://" + this.state.serverIp + ":" + this.state.serverPort + "/backend/getPlatforms.php";
     let msg = "body=" + JSON.stringify(json_msg);
     fetch(url, {
         method : "POST",
@@ -131,7 +140,7 @@ class App extends Component{
     let user = this.state.user;
     let password = this.state.password;
     let json_msg = {"user": user, "passw": password, "type": "get-items"};
-    let url = "http://" + this.state.ipServer + ":80/backend/getItems.php";
+    let url = "http://" + this.state.serverIp + ":" + this.state.serverPort + "/backend/getItems.php";
     let msg = "body=" + JSON.stringify(json_msg);
     fetch(url, {
         method : "POST",
@@ -200,7 +209,7 @@ class App extends Component{
     }
 
     let json_msg = {"user": user, "passw": password, "type": "login"};
-    let url = "http://" + this.state.ipServer + ":80/backend/login.php";
+    let url = "http://" + this.state.serverIp + ":" + this.state.serverPort + "/backend/login.php";
     let msg = "body=" + JSON.stringify(json_msg);
     fetch(url, {
         method : "POST",
@@ -241,7 +250,7 @@ class App extends Component{
     }
 
     let json_msg = {"user": user, "passw": password, "type": "signup"};
-    let url = "http://" + this.state.ipServer + ":80/backend/login.php";
+    let url = "http://" + this.state.serverIp + ":" + this.state.serverPort + "/backend/login.php";
     let msg = "body=" + JSON.stringify(json_msg);
     fetch(url, {
       method : "POST",
@@ -326,7 +335,7 @@ class App extends Component{
     json_msg.passw = this.state.password;
     json_msg.id = card.id;
     //console.log(json_msg);
-    let url = "http://" + this.state.ipServer + ":80/backend/removeItem.php";
+    let url = "http://" + this.state.serverIp + ":" + this.state.serverPort + "/backend/removeItem.php";
     let msg = "body=" + JSON.stringify(json_msg);
     fetch(url, {
         method : "POST",
@@ -447,7 +456,7 @@ class App extends Component{
     else
       json_msg.type = "update";
     //console.log(json_msg);
-    let url = "http://" + this.state.ipServer + ":80/backend/newUpdateItem.php";
+    let url = "http://" + this.state.serverIp + ":" + this.state.serverPort +"/backend/newUpdateItem.php";
     let msg = "body=" + JSON.stringify(json_msg);
     fetch(url, {
         method : "POST",
