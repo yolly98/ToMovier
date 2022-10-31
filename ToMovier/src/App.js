@@ -303,7 +303,7 @@ class App extends Component{
     for(let i = 0; i < cards.length; i++){
       if(searchingText == "")
         cards[i].style.display = "flex";
-      else if((cardsState[i].name.toLowerCase()).search(searchingText) == -1)
+      else if((cardsState[i].name.toLowerCase()).search(searchingText.toLowerCase()) == -1)
         cards[i].style.display = "none";
       else
         cards[i].style.display = "flex";
