@@ -27,16 +27,20 @@
             return;
         }
 
-        $passwSHA256=hash('sha256', $passw);
-
-        $sql = "SELECT*FROM USER WHERE user LIKE BINARY ? and passw LIKE BINARY ?;";
+        $sql = "SELECT*FROM USER WHERE user LIKE BINARY ?;";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ss",$user,$passwSHA256);
+        $stmt->bind_param("s",$user);
         $stmt->execute();
         $result = $stmt->get_result();
 
         if($result->num_rows>0){
-            echo '{"status": "SUCCESS", "passw": "'.$passwSHA256.'"}';
+            while($row = $result->fetch_assoc()){
+                $hashedPassw = $row['passw'];
+                if(password_verify($passw, $hashedPassw))
+                    echo '{"status": "SUCCESS", "passw": "'.$hashedPassw.'"}';
+                else
+                    echo '{"status": "ERROR", "msg": "user name or password not correct"}';
+            }
         }
         else{
             echo '{"status": "ERROR", "msg": "user name or password not correct"}';
@@ -78,7 +82,7 @@
 
             $sql="INSERT INTO USER VALUES(?,?)";
             $stmt = $conn->prepare($sql);
-            $passw = hash('sha256', $passw);
+            $passw = password_hash($passw, PASSWORD_DEFAULT);
             $stmt->bind_param("ss",$user,$passw);
             $stmt->execute();
 
