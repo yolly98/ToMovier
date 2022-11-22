@@ -155,6 +155,7 @@ class App extends Component{
             if (html.status == "SUCCESS") {
                 let items = html.msg;
                 let cards = [];
+                //console.log(items);
                 for(let i = 0; i < items.length; i++){
                   let id = items[i].id;
                   let name = items[i].name;
@@ -184,7 +185,8 @@ class App extends Component{
                       isFilm: isFilm, 
                       isWatched: isWatched, 
                       platform: platform,
-                      rating: rating
+                      rating: rating,
+                      display: "flex"
                     }
                   );
                 }
@@ -263,7 +265,7 @@ class App extends Component{
     ).then(
         html => {
             if (html.status == "SUCCESS") {
-              console.log("signup success");
+              //console.log("signup success");
               this.openAlert("SUCCESS", "Registrazione avvenuta con successo", infoAlert);
             }
             else {
@@ -281,13 +283,12 @@ class App extends Component{
   }
 
   handleExit = () =>{
-    console.log("exit button pressed");
+    //console.log("exit button pressed");
     let cards = [];
     this.setState({user: "", password: "", login: true, cards});
   }
 
   handlefilter(){
-    console.log("filter button pressed");
     let filter = document.getElementById('filter-section');
     if(filter.style.display == 'none')
       filter.style.display = 'flex'
@@ -296,23 +297,23 @@ class App extends Component{
   }
 
   handleSearch = inputText => {
-    console.log("search text pressed [" + inputText + "]")
+    //console.log("search text pressed [" + inputText + "]")
     let searchingText = document.getElementById("input-search").value;
-    let cards = document.getElementsByClassName("card-col");
-    let cardsState = [...this.state.cards];
+    let cards = [...this.state.cards];
     for(let i = 0; i < cards.length; i++){
       if(searchingText == "")
-        cards[i].style.display = "flex";
-      else if((cardsState[i].name.toLowerCase()).search(searchingText.toLowerCase()) == -1)
-        cards[i].style.display = "none";
+        cards[i].display = "flex";
+      else if((cards[i].name.toLowerCase()).search(searchingText.toLowerCase()) == -1)
+        cards[i].display = "none";
       else
-        cards[i].style.display = "flex";
+        cards[i].display = "flex";
 
     }
+    this.setState({cards});
   }
 
   handleOpenCard = card => {
-    console.log("open button pressed [" + card.name + "]");
+    //console.log("open button pressed [" + card.name + "]");
     this.setState({itemMenu: this.state.cards.indexOf(card)});
     document.getElementsByTagName('body')[0].style.overflow = 'hidden';
     document.getElementById('blocker1').style.display = 'block';
@@ -320,14 +321,14 @@ class App extends Component{
   }
 
   handleAddCard(){
-    console.log("add card pressed");
+    //console.log("add card pressed");
     this.setState({itemMenu: -2});
     document.getElementsByTagName('body')[0].style.overflow = 'hidden';
     document.getElementById('blocker1').style.display = 'block';
   }
 
   handleDeleteCard = card => {
-    console.log("delete button pressed [" + card.name + "]");
+    //console.log("delete button pressed [" + card.name + "]");
     //html request
     let json_msg = {};
     json_msg.user = this.state.user;
@@ -378,7 +379,7 @@ class App extends Component{
 
     if(!card.hasOwnProperty("id")){
       isNewItem = true;
-      card.id = -3; //TODO: setted it with the id obtained from mysql
+      card.id = -3; 
     }
     item_db.id = card.id;
     
@@ -447,6 +448,7 @@ class App extends Component{
     }
       
     //html request
+    //console.log(item_db);
     let json_msg = item_db;
     json_msg.user = this.state.user;
     json_msg.passw = this.state.password;
@@ -503,7 +505,7 @@ class App extends Component{
       }
 
     }
-    console.log(ordering);
+    //console.log(ordering);
     cards.sort(
       function(a,b){ 
 
@@ -553,7 +555,7 @@ class App extends Component{
               (state.notfavorite && (card.isFavorite == notfavorite))
             )
           )){
-            document.getElementsByClassName("card-col")[i].style.display = "none";
+            cards[i].display = "none";
             continue;
           }
           // wacthing filters
@@ -567,7 +569,7 @@ class App extends Component{
               (state.towatch && (card.isWatched == towatch))
             )
           )){
-            document.getElementsByClassName("card-col")[i].style.display = "none";
+            cards[i].display = "none";
             continue;
           }
           //isfilm filters
@@ -578,7 +580,7 @@ class App extends Component{
               (state.film && (card.isFilm == film))
             )
           )){
-            document.getElementsByClassName("card-col")[i].style.display = "none";
+            cards[i].display = "none";
             continue;
           }
           //Platforms filter
@@ -594,7 +596,7 @@ class App extends Component{
             }
           }
           if(!accepted && counter > 0){
-            document.getElementsByClassName("card-col")[i].style.display = "none";
+            cards[i].display = "none";
             continue;
           }
           //genre filter
@@ -610,15 +612,15 @@ class App extends Component{
             }
           }
           if(!accepted && counter > 0){
-            document.getElementsByClassName("card-col")[i].style.display = "none";
+            cards[i].display = "none";
             continue;
           }
-
-          document.getElementsByClassName("card-col")[i].style.display = "flex";
+          
+          cards[i].display = "flex";
 
         }
         document.getElementById('filter-section').style.display = 'none';
-      
+        this.setState({cards});
       }
     );
 
@@ -628,7 +630,7 @@ class App extends Component{
 
     let filtredCards = [];
     for(let i = 0; i < this.state.cards.length; i++){
-      if(document.getElementsByClassName('card-col')[i].style.display == "flex")
+      if(this.state.cards[i].display == "flex")
         filtredCards.push(i);
     }
 
@@ -738,6 +740,7 @@ class App extends Component{
                   {
                     this.state.cards.map(card => (
                       <Card
+                        display = {card.display}
                         key = {card.id}
                         onOpenCard = {this.handleOpenCard}
                         onDeleteCard = {this.handleDeleteCard}

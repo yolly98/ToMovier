@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
 import '../style/Card.css'
 
-import cross from '../../images/delete.png'
+import cross from '../../images/removeItem.png'
 import star from '../../images/fullstar.png'
 
 class Card extends Component{
 
     render(){
         return(
-            <div className="card-col">
+            <div className="card-col" style={{display: this.props.display}}>
                 <div className="card-container">
                     <div className="card-header" style={{padding: '0.3rem', border: '0'}}>
                         <img className="img-iswatched" src={this.props.card.isWatched} alt="..."/>
