@@ -1,3 +1,3 @@
 
-var SERVER_IP = "http://toMovier.altervista.org";
+var SERVER_IP = "https://toMovier.altervista.org";
 var SERVER_PORT = "";
